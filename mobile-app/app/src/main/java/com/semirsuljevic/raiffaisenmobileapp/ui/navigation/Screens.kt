@@ -1,4 +1,4 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.screens
+package com.semirsuljevic.raiffaisenmobileapp.ui.navigation
 
 sealed  class Screen (val route: String){
     object MoreScreen: Screen(route = "more")
