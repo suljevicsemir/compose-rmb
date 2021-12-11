@@ -3,4 +3,16 @@
     <string name="app_name">Raiffaisen Mobile App</string>
     <string name="more_screen.title">More</string>
     <string name="more_screen.section_tools">Tools</string>
+    <string name="more_screen.item_calculators">Calculators</string>
+    <string name="more_screen_item_currency_list">Currency list</string>
+    <string name="more_screen_item_currency_convertor">Currency convertor</string>
+    <string name="more_screen_item_english">English</string>
+    <string name="more_screen_item_dark_theme">Dark theme</string>
+    <string name="more_screen_item_intro_informatio">Uvodne informacije</string>
+    <string name="more_screen_item_faq">Frequently asked questions</string>
+    <string name="more_screen_item_basic_info">Basic info</string>
+    <string name="more_screen_item_contact">Contact</string>
+    <string name="more_screen_item_follow_us">Follow us</string>
+    <string name="more_screen_section_about_app">About app</string>
+    <string name="more_screen_section_about_bank">About bank</string>
 </resources>

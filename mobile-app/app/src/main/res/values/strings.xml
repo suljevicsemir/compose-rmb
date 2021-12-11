@@ -2,5 +2,17 @@
     <string name="app_name">Raiffaisen Mobile App</string>
     <string name="more_screen.title">Više</string>
     <string name="more_screen.section_tools">Alati</string>
+    <string name="more_screen.item_calculators">Kalkulatori</string>
+    <string name="more_screen_item_currency_list">Kursna lista</string>
+    <string name="more_screen_item_currency_convertor">Konvertor valuta</string>
+    <string name="more_screen_item_english">Engleski</string>
+    <string name="more_screen_item_dark_theme">Tamna tema</string>
+    <string name="more_screen_item_intro_informatio">Uvodne informacije</string>
+    <string name="more_screen_item_faq">Često postavljena pitanja</string>
+    <string name="more_screen_item_basic_info">Osnovni podaci</string>
+    <string name="more_screen_item_contact">Kontakt</string>
+    <string name="more_screen_item_follow_us">Pratite nas</string>
+    <string name="more_screen_section_about_app">O aplikaciji</string>
+    <string name="more_screen_section_about_bank">O banci</string>
 
 </resources>
