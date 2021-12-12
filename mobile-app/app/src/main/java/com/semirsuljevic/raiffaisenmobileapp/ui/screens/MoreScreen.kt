@@ -9,9 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.semirsuljevic.raiffaisenmobileapp.R
-import com.semirsuljevic.raiffaisenmobileapp.RMBListItem
+
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListSectionSeparator
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBListItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ScreenTitle
 
 

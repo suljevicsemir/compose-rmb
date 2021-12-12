@@ -14,5 +14,19 @@
     <string name="more_screen_item_follow_us">Pratite nas</string>
     <string name="more_screen_section_about_app">O aplikaciji</string>
     <string name="more_screen_section_about_bank">O banci</string>
+    <string name="my_profile_screen_title">Moj račun</string>
+    <string name="my_profile_screen_item_communications">Moje poruke</string>
+    <string name="my_profile_screen_item_earned_points">Zarađeni poeni</string>
+    <string name="my_profile_screen_item_products">Proizvodi</string>
+    <string name="my_profile_screen_item_pay_contact">Plati kontaktu</string>
+    <string name="my_profile_screen_item_english">Engleski</string>
+    <string name="my_profile_screen_item_dark_theme">Tamna tema</string>
+    <string name="my_profile_screen_item_hide_balance">Sakrij stanje računa na početnom ekranu</string>
+    <string name="my_profile_screen_item_biometrics">Koristi biometriju</string>
+    <string name="my_profile_screen_item_pin">Promijeni PIN</string>
+    <string name="my_profile_screen_item_log_out">Odjava</string>
+    <string name="my_profile_screen_section_account_package">Moj paket</string>
+    <string name="my_profile_screen_section_settings">Postavke</string>
+    <string name="my_profile_screen_section_log_out">Odjava iz aplikacije</string>
 
 </resources>
