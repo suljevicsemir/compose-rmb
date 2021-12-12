@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.my_profile.MyProfileScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.PaymentsScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.RaiffaisenMobileAppTheme
 
 private object JetNewsRippleTheme : RippleTheme {
@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                     Scaffold (
                         backgroundColor = Color.Black
                     ){
-                        MyProfileScreen()
+                        PaymentsScreen()
                     }
                 }
             }

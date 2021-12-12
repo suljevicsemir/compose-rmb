@@ -28,5 +28,16 @@
     <string name="my_profile_screen_section_account_package">Moj paket</string>
     <string name="my_profile_screen_section_settings">Postavke</string>
     <string name="my_profile_screen_section_log_out">Odjava iz aplikacije</string>
+    <string name="payments_screen_item_country">Plaćanja u zemlji</string>
+    <string name="payments_screen_item_public">Uplata javnih prihoda</string>
+    <string name="payments_screen_item_new_template">Novi trajni nalog</string>
+    <string name="payments_screen_item_pay_contact">Plati kontaktu</string>
+    <string name="payments_screen_item_my_samples">Moji uzorci</string>
+    <string name="payments_screen_item_my_templates">Moji nalozi</string>
+    <string name="payments_screen_item_long_templates">Trajni nalozi</string>
+    <string name="payments_screen_section_standard">Standardna plaćanja</string>
+    <string name="payments_screen_section_fast_payments">Brza plaćanja</string>
+    <string name="payments_screen_section_my_payments">Moja plaćanja</string>
+    <string name="payments_screen_title">Plaćanja</string>
 
 </resources>
