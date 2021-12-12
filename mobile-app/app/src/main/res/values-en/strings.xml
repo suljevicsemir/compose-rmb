@@ -62,4 +62,8 @@
     <string name="contact_us_screen_web_call_description">- free call through desktop and mobile web applications. Free call option available for both, Personal Individuals and Legal Entities.</string>
     <string name="contact_us_screen_title_country">Raiffeisen BANK dd Bosnia and Herzegovina</string>
     <string name="contact_us_screen_contry">Bosnia and Herzegovina</string>
+    <string name="current_account_title">Current account</string>
+    <string name="current_account_description">With debit cards, you always have access to your funds and your business with us is easier and more efficient. We also offer you the possibility to use an overdraft on your debit card account, in case you need additional money. You can opt for the Visa Electron debit card and/or the Mastercard debit card.</string>
+    <string name="current_screen_open_account_online">Open a current account online</string>
+    <string name="current_screen_more_info">More info</string>
 </resources>

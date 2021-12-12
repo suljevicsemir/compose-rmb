@@ -69,5 +69,11 @@
     <string name="contact_us_screen_bh_viber" translatable="false">+38781929292</string>
     <string name="contact_us_screen_abroad_viber" translatable="false">+38733755010</string>
     <string name="contact_us_screen_web_call_link" translatable="false">https://raiffeisenbank.ba/stanovnistvo/raiffeisen-web-call/</string>
+    <string name="current_account_title">Tekući račun</string>
+    <string name="current_account_description">Tekući račun je poseban račun koji Banka otvara domaćem ili stranom punoljetnom fizičkom licu sa stalnim prebivalištem na teritoriji BiH, u svrhu uplata redovnih mjesečnih primanja i obavljanja isplata u visini raspoloživih sredstava na tekućem računu. Sredstvima na tekućem računu možete raspologati putem Visa Electron debitne kartice ili Mastercard debitne kartice. Tekući račun - debitnu karticu realizujte kroz jedan od paket računa.</string>
+    <string name="current_screen_open_account_online">Otvori tekući račun online</string>
+    <string name="current_screen_more_info">Više informacija</string>
+    <string name="current_account_more_info_link" translatable="false">https://raiffeisenbank.ba/stanovnistvo/racuni-i-kartice/tekuci-racun-stanovnistvo</string>
+    <string name="current_screen_open_account_link" translatable="false">https://raiffeisenbank.ba/formular/online-zahtjev-za-debitnu-karticu-i-paket-usluga?utm_source=RMB</string>
 
 </resources>
