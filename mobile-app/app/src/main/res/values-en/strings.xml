@@ -88,4 +88,7 @@
     <string name="digital_services_item6">Direct SMS</string>
     <string name="digital_services_item7">e-Trading</string>
     <string name="digital_services_more_info">More info</string>
+    <string name="savings_screen_title">Savings</string>
+    <string name="savings_screen_description">Saving is a positive habit that allows you to generate additional yields! You have extra money from time to time? You want to deposit that extra money without having to change the final agreement date? This shapeable type of saving allows you to place deposits and withdraw money as often as you like, while signing just one agreement. Saving for the future allows you as a parent to deposit money over time into a specially designed passbook - Raffe the Giraffe - until your child\'s full legal age.</string>
+    <string name="savings_screen_more_info">More info</string>
 </resources>

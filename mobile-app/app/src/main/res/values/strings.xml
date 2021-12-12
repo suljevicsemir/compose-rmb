@@ -104,5 +104,9 @@
     <string name="digital_services_item7">e-Trading</string>
     <string name="digital_services_more_info">Više informacija</string>
     <string name="digital_services_more_info_link" translatable="false">https://raiffeisenbank.ba/en/stanovnistvo/raiffeisen-net-servisi/raiffeisen-mobile-banking</string>
+    <string name="savings_screen_title">Štednja</string>
+    <string name="savings_screen_description">Štednja je pozitivna navika koja Vam omogućava stvaranje dodatnog prinosa polaganjem štednog uloga i oročavanjem na određeni vremenski period. S vremena na vrijeme imate višak sredstava? Želite ih uložiti bez mijenjanja krajnjeg roka dospijeća ugovora? Štednja koju sami oblikujete, omogućava Vam višekratne uplate i isplate uz potpisivanje samo jednog ugovora o oročenom depozitu. Štednja za budućnost Vam omogućava da do punoljetstva djeteta polažete novac na posebno kreirani Rafa žirafa štedni račun.</string>
+    <string name="savings_screen_more_info">Više informacija</string>
+    <string name="savings_screen_more_info_link" translatable="false">https://raiffeisenbank.ba/en/stanovnistvo/stednja-i-ulaganje/term-deposits</string>
 
 </resources>
