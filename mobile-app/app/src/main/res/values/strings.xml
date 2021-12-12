@@ -87,5 +87,11 @@
     <string name="loans_screen_more_info">Više informacija</string>
     <string name="loans_screen_apply_online_link" translatable="false">https://raiffeisenbank.ba/formular/online-zahtjev-za-kredit?utm_source=RMB</string>
     <string name="loans_screen_more_info_link" translatable="false">https://raiffeisenbank.ba/en/stanovnistvo/krediti/non-purpose-loans</string>
+    <string name="account_sets_screen_title">Paketi</string>
+    <string name="account_sets_screen_description">Imate više proizvoda u korištenju? Želite ostvariti dodatne benefite i smanjiti mjesečne troškove? Na pravom ste mjestu! Ispunili smo Vaše želje i kreirali pakete računa prema vašim potrebama. Odaberite paket računa koji Vam najbolje odgovara i koristite široku paletu bankarskih pogodnosti i nebankarskih usluga uz značajne uštede!</string>
+    <string name="account_sets_screen_open_account_set">Otvori paket uz debitnu karticu online</string>
+    <string name="account_sets_screen_more_info">Više informacija</string>
+    <string name="account_sets_screen_open_account_set_link" translatable="false">https://raiffeisenbank.ba/formular/online-zahtjev-za-debitnu-karticu-i-paket-usluga?utm_source=RMB</string>
+    <string name="accounts_sets_screen_more_info_link" translatable="false">https://raiffeisenbank.ba/en/stanovnistvo/racuni-i-kartice/account-set</string>
 
 </resources>

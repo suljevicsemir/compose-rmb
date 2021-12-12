@@ -74,4 +74,8 @@
     <string name="loans_screen_description">Are you thinking about refurbishing your flat ? Are you dreaming of an unforgettable trip with your family ? Or simply, do you need additional cash to do whatever you want with it ? All the things you dream of can be yours with Raiffeisen bank. Easily!</string>
     <string name="loans_screen_apply_online">Apply for a loan online</string>
     <string name="loans_screen_more_info">More info</string>
+    <string name="account_sets_screen_title">Account sets</string>
+    <string name="account_sets_screen_description">To accomodate to your wishes, we have created various account sets. With an account set you can use several products from our offer, while saving costs and using additional benefits. You need a cash advanceor want to buy in installments without any interest or fees? You want to use a credit card? You need peace of mind for unpredictable financial needs? Then opt for the TRENDY PLUS set, which comes with a credit card and extra money always at your fingertips. You can also select a CLASSIC or TRENDY account set.</string>
+    <string name="account_sets_screen_open_account_set">Open an account set with a debit card</string>
+    <string name="account_sets_screen_more_info">More info</string>
 </resources>
