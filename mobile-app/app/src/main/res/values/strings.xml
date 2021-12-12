@@ -108,5 +108,13 @@
     <string name="savings_screen_description">Štednja je pozitivna navika koja Vam omogućava stvaranje dodatnog prinosa polaganjem štednog uloga i oročavanjem na određeni vremenski period. S vremena na vrijeme imate višak sredstava? Želite ih uložiti bez mijenjanja krajnjeg roka dospijeća ugovora? Štednja koju sami oblikujete, omogućava Vam višekratne uplate i isplate uz potpisivanje samo jednog ugovora o oročenom depozitu. Štednja za budućnost Vam omogućava da do punoljetstva djeteta polažete novac na posebno kreirani Rafa žirafa štedni račun.</string>
     <string name="savings_screen_more_info">Više informacija</string>
     <string name="savings_screen_more_info_link" translatable="false">https://raiffeisenbank.ba/en/stanovnistvo/stednja-i-ulaganje/term-deposits</string>
+    <string name="basic_info_title">Osnovni podaci</string>
+    <string name="basic_info_bank_name">Raiffeisen BANK dd Bosna i Hercegovina</string>
+    <string name="basic_info_address" translatable="false">Zmaja od Bosne bb 71 000 Sarajevo, BiH</string>
+    <string name="basic_info_jib">JIB (Jedinstveni identifikacioni broj) 4200344670009</string>
+    <string name="basic_info_vat" translatable="false">VAT: 200344670009</string>
+    <string name="basic_info_swift" translatable="false">SWIFT: RZBABA2S</string>
+    <string name="basic_info_transaction_number">Broj transakcijskog računa: 1610000000000011</string>
+    <string name="basic_info_court_info">Označenje suda i sudski broj: Općinski sud u Sarajevu, 1 - 11629</string>
 
 </resources>
