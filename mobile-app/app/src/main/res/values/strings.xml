@@ -75,5 +75,11 @@
     <string name="current_screen_more_info">Više informacija</string>
     <string name="current_account_more_info_link" translatable="false">https://raiffeisenbank.ba/stanovnistvo/racuni-i-kartice/tekuci-racun-stanovnistvo</string>
     <string name="current_screen_open_account_link" translatable="false">https://raiffeisenbank.ba/formular/online-zahtjev-za-debitnu-karticu-i-paket-usluga?utm_source=RMB</string>
+    <string name="credit_cards_screen_title">Kreditne kartice</string>
+    <string name="credit_cards_screen_description">Naše kreditne kartice prilagođavaju se Vašim željama i potrebama stoga odaberite onu koja Vam najviše odgovara. Izvršite plaćanje na svakom prodajnom mjestu opremljenom POS terminalom. Nudimo Vam rješenje bilo da Vam je potreban keš na rate ili da želite kupovati na rate bez kamata! Možete se odlučiti i za plaćanje minimalno 3% mjesečno od potrošenog iznosa. Imate i mogućnost beskamatne odgode plaćanja do 50 dana.</string>
+    <string name="credit_cards_screen_apply_online">Apliciraj online za kreditnu karticu</string>
+    <string name="credit_cards_screen_more_info">Više informacija</string>
+    <string name="credit_cards_screen_apply_link" translatable="false">https://raiffeisenbank.ba/formular/online-zahtjev-za-kreditne-kartice?utm_source=RMB</string>
+    <string name="credit_cards_screen_more_info_link" translatable="false">https://raiffeisenbank.ba/stanovnistvo/racuni-i-kartice/kreditne-kartice-stanovnistvo</string>
 
 </resources>

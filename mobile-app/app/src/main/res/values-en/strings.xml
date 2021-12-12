@@ -66,4 +66,8 @@
     <string name="current_account_description">With debit cards, you always have access to your funds and your business with us is easier and more efficient. We also offer you the possibility to use an overdraft on your debit card account, in case you need additional money. You can opt for the Visa Electron debit card and/or the Mastercard debit card.</string>
     <string name="current_screen_open_account_online">Open a current account online</string>
     <string name="current_screen_more_info">More info</string>
+    <string name="credit_cards_screen_title">Credit cards</string>
+    <string name="credit_cards_screen_description">Pay at any point of sale with a POS device. We offer you a solution, no matter if you need cash in installments or want to pay in installments free of interest. You can also opt to pay at least 3% monthly of the spent amount. You also have the option to defer payments up to 50 days free-of-interest.</string>
+    <string name="credit_cards_screen_apply_online">Apply for a credit card online</string>
+    <string name="credit_cards_screen_more_info">More info</string>
 </resources>
