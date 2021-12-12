@@ -1,0 +1,14 @@
+egrey: #1a1c19
+
+white text: white
+
+toggle circle on #f7cf29
+
+toggle area on #44400e
+
+icon color: #9c9a9d
+
+tab bar on: #9c9a9d
+
+
+

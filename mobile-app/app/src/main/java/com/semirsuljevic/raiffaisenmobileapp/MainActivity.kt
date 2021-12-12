@@ -14,7 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.WidgetManager
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.FollowUsScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.RaiffaisenMobileAppTheme
 
 private object JetNewsRippleTheme : RippleTheme {
@@ -34,6 +35,8 @@ private object JetNewsRippleTheme : RippleTheme {
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContent {
 //            RaiffaisenMobileAppTheme {
 //                // A surface container using the 'background' color from the theme
@@ -41,6 +44,8 @@ class MainActivity : ComponentActivity() {
 //                    Greeting("Android")
 //                }
 //            }
+            val systemUiController = rememberSystemUiController()
+            systemUiController.setStatusBarColor(color = Color.Black)
             MaterialTheme(
 
             ) {
@@ -50,7 +55,7 @@ class MainActivity : ComponentActivity() {
                     Scaffold (
                         backgroundColor = Color.Black
                     ){
-                        WidgetManager()
+                        FollowUsScreen()
                     }
                 }
             }

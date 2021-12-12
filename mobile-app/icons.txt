@@ -1,0 +1,12 @@
+bottom navbar: home, payments, user, more
+
+home page: settings, close, arrow drop up
+
+payments: credit card, article, receipt long, mobile screen share, feed, feed, feed
+
+user profile: connect without contact, inventory, ballot, mobile screen share, translate, dark mode, visibility off, fingerprint, fiber pin, logout
+
+more: calculate, featured play list, currency exchange, contact support, quiz, (app icon), contact page, subscriptions
+
+
+Products: AccountBalance, CreditCard, Receipt, Inventory2, LeakRemove, Savings

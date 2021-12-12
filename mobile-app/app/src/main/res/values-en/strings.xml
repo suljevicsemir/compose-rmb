@@ -43,4 +43,16 @@
     <string name="widget_manager_screen_title">Widget manager</string>
     <string name="widget_manager_screen_item_transactions">Transactions</string>
     <string name="widget_manager_screen_item_report">My financial report</string>
+    <string name="products_screen_title">Products</string>
+    <string name="products_screen_item_pick_account">Account selection</string>
+    <string name="products_screen_item_credit_cards">Credit cards</string>
+    <string name="products_screen_item_credits">Loans</string>
+    <string name="products_screen_item_packages">Accounts sets</string>
+    <string name="products_screen_item_digital_services">Digital services</string>
+    <string name="products_screen_item_savings">Savings</string>
+    <string name="follow_us_screen_title">Follow us</string>
+    <string name="follow_us_screen_social">Social</string>
+    <string name="follow_us_screen_media">Media</string>
+    <string name="follow_us_screen_list_title">Follow us on social networks:</string>
+    <string name="follow_us_screen_raiffaisen">Raiffaisen</string>
 </resources>
