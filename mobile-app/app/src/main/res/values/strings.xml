@@ -81,5 +81,11 @@
     <string name="credit_cards_screen_more_info">Više informacija</string>
     <string name="credit_cards_screen_apply_link" translatable="false">https://raiffeisenbank.ba/formular/online-zahtjev-za-kreditne-kartice?utm_source=RMB</string>
     <string name="credit_cards_screen_more_info_link" translatable="false">https://raiffeisenbank.ba/stanovnistvo/racuni-i-kartice/kreditne-kartice-stanovnistvo</string>
+    <string name="loans_screen_title">Krediti</string>
+    <string name="loans_screen_description">Razmišljate o renoviranju stana ? Maštate o nezaboravnom putovanju sa porodicom ? Ili Vam je jednsotavno potrebna dodatna gotovina sa kojom možete raspolagati kako Vi želite ? Sa Raiffeisen bankom možete piuštiti sve stvari o kojima sanjate. I to tako lako!</string>
+    <string name="loans_screen_apply_online">Apliciraj online za kredit</string>
+    <string name="loans_screen_more_info">Više informacija</string>
+    <string name="loans_screen_apply_online_link" translatable="false">https://raiffeisenbank.ba/formular/online-zahtjev-za-kredit?utm_source=RMB</string>
+    <string name="loans_screen_more_info_link" translatable="false">https://raiffeisenbank.ba/en/stanovnistvo/krediti/non-purpose-loans</string>
 
 </resources>
