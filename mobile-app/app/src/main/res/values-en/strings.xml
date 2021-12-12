@@ -55,4 +55,11 @@
     <string name="follow_us_screen_media">Media</string>
     <string name="follow_us_screen_list_title">Follow us on social networks:</string>
     <string name="follow_us_screen_raiffaisen">Raiffaisen</string>
+    <string name="contact_us_page_title">Contact</string>
+    <string name="contact_us_screen_bih_calls">For calls from BH:</string>
+    <string name="contact_us_screen_abroad_calls">For calls from abroad:</string>
+    <string name="contact_us_screen_web_call">Raiffeisen Web Call</string>
+    <string name="contact_us_screen_web_call_description">- free call through desktop and mobile web applications. Free call option available for both, Personal Individuals and Legal Entities.</string>
+    <string name="contact_us_screen_title_country">Raiffeisen BANK dd Bosnia and Herzegovina</string>
+    <string name="contact_us_screen_contry">Bosnia and Herzegovina</string>
 </resources>

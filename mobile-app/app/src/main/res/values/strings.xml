@@ -54,5 +54,20 @@
     <string name="follow_us_screen_media">Mreže</string>
     <string name="follow_us_screen_list_title">Pratite nas na društvenim mrežama</string>
     <string name="follow_us_screen_raiffaisen">Raiffaisen</string>
+    <string name="contact_us_page_title">Kontakt</string>
+    <string name="contact_us_screen_bih_calls">Pozivi iz BiH:</string>
+    <string name="contact_us_screen_abroad_calls">Pozivi iz dijaspore:</string>
+    <string name="contact_us_screen_web_call">Raiffeisen Web Poziv</string>
+    <string name="contact_us_screen_web_call_description">- besplatni pozivi na desktop i mobilnim web aplikacijama. Dostupni i za personalne individualne i legalne stranke.</string>
+    <string name="contact_us_screen_title_country">Raiffeisen BANK dd Bosna i Hercegovina</string>
+    <string name="contact_us_screen_address" translatable="false">Zmaja od Bosne bb</string>
+    <string name="contact_us_screen_postal_number" translatable="false">71 000 Sarajevo</string>
+    <string name="contact_us_screen_contry">Bosna i Hercegovina</string>
+    <string name="contact_us_screen_info" translatable="false">info.rbbh@raiffeisengroup.ba</string>
+    <string name="contact_us_screen_phone_number" translatable="false">+387 33 21 38 51</string>
+    <string name="contact_us_screen_swift" translatable="false">SWIFT: IDK</string>
+    <string name="contact_us_screen_bh_viber" translatable="false">+38781929292</string>
+    <string name="contact_us_screen_abroad_viber" translatable="false">+38733755010</string>
+    <string name="contact_us_screen_web_call_link" translatable="false">https://raiffeisenbank.ba/stanovnistvo/raiffeisen-web-call/</string>
 
 </resources>

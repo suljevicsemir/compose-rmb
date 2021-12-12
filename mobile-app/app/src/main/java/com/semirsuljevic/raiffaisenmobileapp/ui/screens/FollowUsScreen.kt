@@ -85,7 +85,7 @@ fun TappableSocialMedia(
     link: String,
     icon: Painter
 ) {
-    val uriHandler = LocalUriHandler.current;
+    val uriHandler = LocalUriHandler.current
     Row (
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth().padding(top = 10.dp).clickable { uriHandler.openUri(link) }
