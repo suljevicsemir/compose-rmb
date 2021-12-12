@@ -93,5 +93,16 @@
     <string name="account_sets_screen_more_info">Više informacija</string>
     <string name="account_sets_screen_open_account_set_link" translatable="false">https://raiffeisenbank.ba/formular/online-zahtjev-za-debitnu-karticu-i-paket-usluga?utm_source=RMB</string>
     <string name="accounts_sets_screen_more_info_link" translatable="false">https://raiffeisenbank.ba/en/stanovnistvo/racuni-i-kartice/account-set</string>
+    <string name="digital_services_screen_title">Digitalni servisi</string>
+    <string name="digital_services_screen_description">Cijenite vaše vrijeme i novac? Poslujte s Bankom brzo i jednostavno bez potrebe odlaska u poslovnicu. Uz digitalne servise Raiffesein banke ste uvijek u pokretu:</string>
+    <string name="digital_services_item1">Internet bankarstvo</string>
+    <string name="digital_services_item2">Mobilno bankarstvo</string>
+    <string name="digital_services_item3">Bankarstvo na Viberu</string>
+    <string name="digital_services_item4">m-Plati</string>
+    <string name="digital_services_item5">Režije na klik</string>
+    <string name="digital_services_item6">Direct SMS</string>
+    <string name="digital_services_item7">e-Trading</string>
+    <string name="digital_services_more_info">Više informacija</string>
+    <string name="digital_services_more_info_link" translatable="false">https://raiffeisenbank.ba/en/stanovnistvo/raiffeisen-net-servisi/raiffeisen-mobile-banking</string>
 
 </resources>
