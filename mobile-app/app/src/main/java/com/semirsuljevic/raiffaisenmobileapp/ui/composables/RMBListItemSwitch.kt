@@ -18,7 +18,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 @Composable
 fun RMBListItemSwitch(
     title: String,
-    icon: ImageVector,
+    icon: ImageVector?,
     onChanged: () -> Unit
 ) {
     var checked by remember {
@@ -30,6 +30,7 @@ fun RMBListItemSwitch(
                 .fillMaxWidth()
                 .padding(all = 12.dp)
         ){
+            if(icon != null)
             Icon(
                 imageVector = icon,
                 contentDescription = title,

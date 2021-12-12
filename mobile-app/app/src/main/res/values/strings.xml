@@ -39,5 +39,8 @@
     <string name="payments_screen_section_fast_payments">Brza plaćanja</string>
     <string name="payments_screen_section_my_payments">Moja plaćanja</string>
     <string name="payments_screen_title">Plaćanja</string>
+    <string name="widget_manager_screen_title">Upravljanje karticama</string>
+    <string name="widget_manager_screen_item_transactions">Transakcije</string>
+    <string name="widget_manager_screen_item_report">Moj finansijski izvještaj</string>
 
 </resources>

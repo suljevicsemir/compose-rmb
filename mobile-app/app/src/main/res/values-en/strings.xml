@@ -40,4 +40,7 @@
     <string name="payments_screen_section_fast_payments">Quick payments</string>
     <string name="payments_screen_section_my_payments">My payments</string>
     <string name="payments_screen_title">Payments</string>
+    <string name="widget_manager_screen_title">Widget manager</string>
+    <string name="widget_manager_screen_item_transactions">Transactions</string>
+    <string name="widget_manager_screen_item_report">My financial report</string>
 </resources>
