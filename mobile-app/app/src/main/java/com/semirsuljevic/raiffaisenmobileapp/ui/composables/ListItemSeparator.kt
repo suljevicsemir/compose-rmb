@@ -7,12 +7,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Grey400
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 
 @Composable
 fun ListItemSeparator() {
     Box (
-        Modifier.height(1.dp).fillMaxWidth().background(color = Grey400)
+        Modifier.height(1.dp).fillMaxWidth().background(color = Gray400)
     ){
 
     }

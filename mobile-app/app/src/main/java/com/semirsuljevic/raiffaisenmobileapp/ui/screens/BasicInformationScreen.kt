@@ -12,15 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 
 @Composable
-fun BasicInformationScreen() {
+fun BasicInformationScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     Column (Modifier.verticalScroll(scrollState)){
-        CenteredTitleAppBar(title = stringResource(id = R.string.basic_info_title))
+        CenteredTitleAppBar(title = stringResource(id = R.string.basic_info_title), navController = navController)
         Spacer(modifier = Modifier.height(25.dp))
         Column (Modifier.padding(horizontal = 20.dp)){
             Text(
@@ -64,6 +65,8 @@ fun BasicInformationScreen() {
                 fontSize = 16.sp,
                 color = White,
             )
+            Spacer(modifier = Modifier.height(60.dp))
+
         }
 
     }

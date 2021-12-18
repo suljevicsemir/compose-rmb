@@ -15,25 +15,29 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Grey200
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 
 @Composable
-fun DigitalScreensScreen() {
+fun DigitalScreensScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     val uriHandler = LocalUriHandler.current
     val moreInfoLink = stringResource(id = R.string.digital_services_more_info_link)
     Column (Modifier.verticalScroll(scrollState)){
-        CenteredTitleAppBar(title = stringResource(id = R.string.digital_services_screen_title))
+        CenteredTitleAppBar(
+            title = stringResource(id = R.string.digital_services_screen_title),
+            navController = navController
+        )
         ListItemSeparator()
         Spacer(modifier = Modifier.height(20.dp))
         Column(Modifier.padding(horizontal = 20.dp)) {
             Text(
                 text = stringResource(id = R.string.digital_services_screen_description),
-                color = Grey200,
+                color = Gray200,
                 textAlign = TextAlign.Justify
             )
             Spacer(modifier = Modifier.height(20.dp))
@@ -73,12 +77,12 @@ fun BulletListItem(text: String) {
             modifier = Modifier
                 .size(5.dp)
                 .clip(RoundedCornerShape(5.dp))
-                .background(Grey200)
+                .background(Gray200)
         )
         Spacer(modifier = Modifier.width(10.dp))
         Text(
             text = text,
-            color = Grey200
+            color = Gray200
         )
     }
 }

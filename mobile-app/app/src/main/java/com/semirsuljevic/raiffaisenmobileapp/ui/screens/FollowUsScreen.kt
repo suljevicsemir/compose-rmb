@@ -16,16 +16,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Grey200
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 
 @Composable
-fun FollowUsScreen() {
+fun FollowUsScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     Column {
-        CenteredTitleAppBar(title = stringResource(id = R.string.follow_us_screen_title))
+        CenteredTitleAppBar(title = stringResource(id = R.string.follow_us_screen_title), navController = navController)
         Column(
             modifier = Modifier
                 .padding(horizontal = 30.dp)
@@ -64,6 +65,7 @@ fun FollowUsScreen() {
                 icon = painterResource(id = R.drawable.ic_instagram),
                 link = "https://www.instagram.com/raiffeisen_bank_bih/"
             )
+            Spacer(modifier = Modifier.height(60.dp))
 
         }
     }
@@ -75,7 +77,7 @@ fun BigText(text: String) {
     Text(
         text = text,
         fontSize = 55.sp,
-        color = Grey200,
+        color = Gray200,
     )
 }
 
@@ -88,12 +90,17 @@ fun TappableSocialMedia(
     val uriHandler = LocalUriHandler.current
     Row (
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().padding(top = 10.dp).clickable { uriHandler.openUri(link) }
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 10.dp)
+            .clickable { uriHandler.openUri(link) }
     ){
         Image(
             painter = icon,
             contentDescription = text,
-            modifier = Modifier.width(35.dp).height(55.dp),
+            modifier = Modifier
+                .width(35.dp)
+                .height(55.dp),
             contentScale = ContentScale.Fit
         )
         Spacer(modifier = Modifier.width(10.dp))

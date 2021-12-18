@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
@@ -29,7 +30,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 
 
 @Composable
-fun ContactUsScreen() {
+fun ContactUsScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     val uriHandler = LocalUriHandler.current
     val webCallUrl = stringResource(id = R.string.contact_us_screen_web_call_link)
@@ -42,7 +43,10 @@ fun ContactUsScreen() {
     Column (
         Modifier.verticalScroll(scrollState)
     ){
-        CenteredTitleAppBar(title = stringResource(id = R.string.contact_us_page_title))
+        CenteredTitleAppBar(
+            title = stringResource(id = R.string.contact_us_page_title),
+            navController = navController
+        )
         Column (
             Modifier.padding(horizontal = 35.dp)
         ){
@@ -98,7 +102,7 @@ fun ContactUsScreen() {
                 }
             )
             Info(text = stringResource(id = R.string.contact_us_screen_swift))
-
+            Spacer(modifier = Modifier.height(60.dp))
 
         }
 

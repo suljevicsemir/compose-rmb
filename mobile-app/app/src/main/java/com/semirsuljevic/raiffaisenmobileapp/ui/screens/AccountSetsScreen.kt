@@ -14,26 +14,30 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Grey200
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 
 @Composable
-fun AccountSetsScreen() {
+fun AccountSetsScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     val uriHandler = LocalUriHandler.current
     val applyLink = stringResource(id = R.string.account_sets_screen_open_account_set_link)
     val moreInfoLink = stringResource(id = R.string.accounts_sets_screen_more_info_link)
     Column(modifier = Modifier.verticalScroll(scrollState)) {
-        CenteredTitleAppBar(title = stringResource(id = R.string.account_sets_screen_title))
+        CenteredTitleAppBar(
+            title = stringResource(id = R.string.account_sets_screen_title),
+            navController = navController
+        )
         ListItemSeparator()
         Spacer(modifier = Modifier.height(20.dp))
         Column(modifier = Modifier.padding(horizontal = 20.dp)) {
             Text(
                 text = stringResource(id = R.string.account_sets_screen_description),
-                color = Grey200,
+                color = Gray200,
                 textAlign = TextAlign.Justify
             )
             Spacer(modifier = Modifier.height(20.dp))

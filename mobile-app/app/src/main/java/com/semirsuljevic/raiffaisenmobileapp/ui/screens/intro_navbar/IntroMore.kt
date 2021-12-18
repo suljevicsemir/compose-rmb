@@ -1,6 +1,8 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.screens
+package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -8,18 +10,14 @@ import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
-
-import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
-import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListSectionSeparator
-import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBListItem
-import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ScreenTitle
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 
-
 @Composable
-fun MoreScreen(navController: NavController) {
+fun IntroMore(navController: NavController) {
     val scrollState = rememberScrollState()
     Column (
         modifier = Modifier.verticalScroll(scrollState)
@@ -47,10 +45,20 @@ fun MoreScreen(navController: NavController) {
             navController = navController,
         )
         ListSectionSeparator(text = stringResource(id = R.string.more_screen_section_about_app))
+        RMBListItemSwitch(
+            title = stringResource(id = R.string.my_profile_screen_item_english),
+            icon = Icons.Outlined.Translate
+        ) {}
+        ListItemSeparator()
+        RMBListItemSwitch(
+            title = stringResource(id = R.string.my_profile_screen_item_dark_theme),
+            icon = Icons.Outlined.DarkMode
+        ) {}
+        ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.more_screen_item_onboarding),
             icon = Icons.Outlined.ContactSupport,
-            route = "Screen.In.route",
+            route = Screen.ErrorScreen.route,
             navController = navController
         )
         ListItemSeparator()
@@ -82,5 +90,6 @@ fun MoreScreen(navController: NavController) {
             navController = navController
         )
         ListItemSeparator()
+        Spacer(modifier = Modifier.height(60.dp))
     }
 }

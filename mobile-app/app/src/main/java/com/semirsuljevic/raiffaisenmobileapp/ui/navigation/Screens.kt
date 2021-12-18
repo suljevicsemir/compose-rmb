@@ -6,6 +6,10 @@ sealed  class Screen (val route: String){
     object PaymentsScreen: Screen(route = "payments")
     object HomeScreen: Screen(route = "home")
 
+    object IntroHome: Screen(route = "intro_home")
+    object IntroLocations : Screen(route = "intro_locations")
+    object IntroProducts : Screen(route = "intro_products")
+    object IntroMore : Screen(route = "intro_more")
 
 
 
@@ -20,6 +24,9 @@ sealed  class Screen (val route: String){
     object AccountSetsScreen: Screen(route = "account_sets")
     object DigitalServicesScreen: Screen(route = "digital_services")
     object SavingsScreen: Screen(route = "savings")
+
+
+    object ErrorScreen: Screen(route = "error")
 
 
 }

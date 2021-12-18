@@ -9,16 +9,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Grey200
+import androidx.navigation.NavController
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 
 @Composable
 fun RMBListItem(
     title: String,
-    icon: ImageVector
+    icon: ImageVector,
+    navController: NavController,
+    route: String
 ) {
     Box(modifier = Modifier.clickable {
-
+        navController.navigate(route = route)
     }) {
         Row (
             Modifier
@@ -29,7 +32,7 @@ fun RMBListItem(
             Icon(
                 imageVector = icon,
                 contentDescription = title,
-                tint = Grey200,
+                tint = Gray200,
                 modifier = Modifier.size(26.dp)
             )
             Spacer(modifier = Modifier.width(10.dp))

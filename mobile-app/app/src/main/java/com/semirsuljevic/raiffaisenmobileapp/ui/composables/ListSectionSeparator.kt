@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Grey400
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 
 @Composable
@@ -18,7 +18,7 @@ fun ListSectionSeparator(text: String) {
             text = text,
             modifier = Modifier
                 .weight(1f)
-                .background(color = Grey400)
+                .background(color = Gray400)
                 .padding(all = 12.dp),
             color = White,
             fontWeight = FontWeight.Bold,

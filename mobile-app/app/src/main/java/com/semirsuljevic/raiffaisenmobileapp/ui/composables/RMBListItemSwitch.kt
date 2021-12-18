@@ -10,7 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Grey200
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
@@ -34,7 +34,7 @@ fun RMBListItemSwitch(
             Icon(
                 imageVector = icon,
                 contentDescription = title,
-                tint = Grey200,
+                tint = Gray200,
                 modifier = Modifier.size(26.dp)
             )
             Spacer(modifier = Modifier.width(10.dp))
@@ -51,7 +51,7 @@ fun RMBListItemSwitch(
                 colors = SwitchDefaults.colors(
                     checkedThumbColor = Yellow400,
                     checkedTrackColor = Yellow200,
-                    uncheckedTrackColor = Grey200,
+                    uncheckedTrackColor = Gray200,
                     uncheckedThumbColor = White,
                 )
             )

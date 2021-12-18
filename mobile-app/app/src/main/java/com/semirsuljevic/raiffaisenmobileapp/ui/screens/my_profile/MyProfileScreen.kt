@@ -11,11 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.*
+import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 
 @Composable
-fun MyProfileScreen() {
+fun MyProfileScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     Column (
         modifier = Modifier.verticalScroll(scrollState)
@@ -24,25 +26,67 @@ fun MyProfileScreen() {
         ListItemSeparator()
         ProfileInfo()
         ListItemSeparator()
-        RMBListItem(title = stringResource(id = R.string.my_profile_screen_item_communications), icon = Icons.Outlined.ConnectWithoutContact )
+        RMBListItem(
+            title = stringResource(id = R.string.my_profile_screen_item_communications),
+            icon = Icons.Outlined.ConnectWithoutContact,
+            route = Screen.ErrorScreen.route,
+            navController = navController
+        )
         ListSectionSeparator(text = stringResource(id = R.string.my_profile_screen_section_account_package))
-        RMBListItem(title = stringResource(id = R.string.my_profile_screen_item_earned_points), icon = Icons.Outlined.Inventory)
+        RMBListItem(
+            title = stringResource(id = R.string.my_profile_screen_item_earned_points),
+            icon = Icons.Outlined.Inventory,
+            route = Screen.ErrorScreen.route,
+            navController = navController
+        )
         ListItemSeparator()
-        RMBListItem(title = stringResource(id = R.string.my_profile_screen_item_products), icon = Icons.Outlined.Ballot)
+        RMBListItem(
+            title = stringResource(id = R.string.my_profile_screen_item_products),
+            icon = Icons.Outlined.Ballot,
+            navController = navController,
+            route = Screen.ErrorScreen.route
+        )
         ListItemSeparator()
-        RMBListItem(title = stringResource(id = R.string.my_profile_screen_item_pay_contact), icon = Icons.Outlined.MobileScreenShare)
+        RMBListItem(
+            title = stringResource(id = R.string.my_profile_screen_item_pay_contact),
+            icon = Icons.Outlined.MobileScreenShare,
+            route = Screen.ErrorScreen.route,
+            navController = navController
+        )
         ListSectionSeparator(text = stringResource(id = R.string.my_profile_screen_section_settings))
-        RMBListItemSwitch(title = stringResource(id = R.string.my_profile_screen_item_english), icon = Icons.Outlined.Translate) {}
+        RMBListItemSwitch(
+            title = stringResource(id = R.string.my_profile_screen_item_english),
+            icon = Icons.Outlined.Translate
+        ) {}
         ListItemSeparator()
-        RMBListItemSwitch(title = stringResource(id = R.string.my_profile_screen_item_dark_theme), icon = Icons.Outlined.DarkMode) {}
+        RMBListItemSwitch(
+            title = stringResource(id = R.string.my_profile_screen_item_dark_theme),
+            icon = Icons.Outlined.DarkMode
+        ) {}
         ListItemSeparator()
-        RMBListItemSwitch(title = stringResource(id = R.string.my_profile_screen_item_hide_balance), icon = Icons.Outlined.VisibilityOff) {}
+        RMBListItemSwitch(
+            title = stringResource(id = R.string.my_profile_screen_item_hide_balance),
+            icon = Icons.Outlined.VisibilityOff
+        ) {}
         ListItemSeparator()
-        RMBListItemSwitch(title = stringResource(id = R.string.my_profile_screen_item_biometrics), icon = Icons.Outlined.Fingerprint) {}
+        RMBListItemSwitch(
+            title = stringResource(id = R.string.my_profile_screen_item_biometrics),
+            icon = Icons.Outlined.Fingerprint
+        ) {}
         ListItemSeparator()
-        RMBListItem(title = stringResource(id = R.string.my_profile_screen_item_pin), icon = Icons.Outlined.FiberPin)
+        RMBListItem(
+            title = stringResource(id = R.string.my_profile_screen_item_pin),
+            icon = Icons.Outlined.FiberPin,
+            route = Screen.ErrorScreen.route,
+            navController = navController
+        )
         ListSectionSeparator(text = stringResource(id = R.string.my_profile_screen_section_log_out))
-        RMBListItem(title = stringResource(id = R.string.my_profile_screen_item_log_out), icon = Icons.Outlined.Logout)
+        RMBListItem(
+            title = stringResource(id = R.string.my_profile_screen_item_log_out),
+            icon = Icons.Outlined.Logout,
+            navController = navController,
+            route = Screen.ErrorScreen.route
+        )
         ListItemSeparator()
         Spacer(modifier = Modifier.height(20.dp))
     }

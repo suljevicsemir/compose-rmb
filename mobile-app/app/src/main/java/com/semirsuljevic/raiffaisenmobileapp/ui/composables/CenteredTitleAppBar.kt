@@ -11,10 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Grey200
+import androidx.navigation.NavController
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 
 @Composable
-fun CenteredTitleAppBar(title: String) {
+fun CenteredTitleAppBar(title: String, navController: NavController) {
     TopAppBar(
         backgroundColor = Color.Transparent,
         elevation = 0.dp,
@@ -25,13 +26,13 @@ fun CenteredTitleAppBar(title: String) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
-                    onClick = { },
+                    onClick = { navController.popBackStack()},
                     enabled = true,
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.ArrowBack,
                         contentDescription = "Back",
-                        tint = Grey200
+                        tint = Gray200
                     )
                 }
             }
