@@ -37,7 +37,7 @@ fun FAQScreen(navController: NavController, viewModel: FAQViewModel) {
     Column (
         Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center)
     ){
-        if(viewModel.items.value == null) {
+        if(viewModel.loading.value) {
             CircularProgressIndicator(
                 color = Yellow400
             )
@@ -55,11 +55,11 @@ fun FAQScreen(navController: NavController, viewModel: FAQViewModel) {
                 Spacer(modifier = Modifier.height(15.dp))
                 TappableURI(icon = painterResource(id = R.drawable.ic_viber), uri = stringResource(id = R.string.faq_screen_number_1)) {}
                 TappableURI(icon = painterResource(id = R.drawable.ic_viber), uri = stringResource(id = R.string.faq_screen_number_2)) {}
-                Spacer(modifier = Modifier.height(25.dp))
-                for (i in viewModel.items.value!!.indices) {
-                    FAQListItem(item = viewModel.items.value!![i], index = i)
+                if(viewModel.items.value != null && viewModel.items.value!!.isNotEmpty()) {
+                    for (i in viewModel.items.value!!.indices) {
+                        FAQListItem(item = viewModel.items.value!![i], index = i)
+                    }
                 }
-
                 Spacer(modifier = Modifier.height(65.dp))
             }
 
@@ -102,11 +102,10 @@ fun FAQListItem(item: FAQItem, index: Int) {
                 .clickable(
                     interactionSource = interactionSource,
                     indication = null
-
                 ) {
                     tapped = !tapped
                 }
-                .animateContentSize { initialValue, targetValue -> }
+                .animateContentSize { _, _ -> }
                 .background(color = Gray400)
                 .fillMaxWidth()
                 .padding(vertical = 10.dp, horizontal = 10.dp)
