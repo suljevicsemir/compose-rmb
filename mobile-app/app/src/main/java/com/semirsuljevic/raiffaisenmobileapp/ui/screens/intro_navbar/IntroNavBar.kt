@@ -1,5 +1,8 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -10,21 +13,27 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.outlined.Inventory2
 import androidx.compose.material.icons.outlined.More
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.semirsuljevic.raiffaisenmobileapp.RetrofitInstance
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Navigator
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
+import kotlinx.coroutines.launch
+import java.io.IOException
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun IntroNavbar() {
     val navController = rememberNavController()
+    val coroutineScope = rememberCoroutineScope()
     Scaffold (
         backgroundColor = Color.Black,
         bottomBar = {
@@ -49,6 +58,22 @@ fun IntroNavbar() {
                 ),
                 navController = navController,
                 onItemClick = {
+
+                    coroutineScope.launch {
+                        val response = try {
+                            RetrofitInstance.api.getFAQ()
+                        } catch (e: IOException) {
+                            Log.e("NE VALJA", e.toString())
+                            return@launch
+                        }
+                        if(response.isSuccessful && response.body() != null) {
+                            val list = response.body()
+                            list?.forEach { e ->
+                                Log.d("TODOOOOOOOO", e.question)
+                            }
+                        }
+                    }
+
                     navController.navigate(it.route) {
                         popUpTo(navController.graph.findStartDestination().id)
                         launchSingleTop = false

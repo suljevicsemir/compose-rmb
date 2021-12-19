@@ -26,7 +26,7 @@ fun Navigator(navController: NavHostController) {
         startDestination = Screen.IntroHome.route
     ) {
         composable(Screen.IntroHome.route) {
-            IntroHome()
+            IntroHome(navController = navController)
         }
         composable(Screen.IntroProducts.route) {
             ProductsScreen(navController = navController)
@@ -63,6 +63,10 @@ fun Navigator(navController: NavHostController) {
         }
         composable(Screen.FollowUsScreen.route) {
             FollowUsScreen(navController = navController)
+        }
+
+        composable(Screen.HomeScreen.route) {
+            LoansScreen(navController = navController)
         }
 
         composable(Screen.ErrorScreen.route) {

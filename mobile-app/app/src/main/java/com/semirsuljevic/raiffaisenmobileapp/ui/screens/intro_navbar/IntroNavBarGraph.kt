@@ -9,7 +9,7 @@ import androidx.navigation.compose.composable
 fun IntroNavBarGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = IntroNavBarScreen.IntroHome.route) {
         composable(route = IntroNavBarScreen.IntroHome.route) {
-            IntroHome()
+            IntroHome(navController = navController)
         }
         composable(route = IntroNavBarScreen.IntroLocations.route) {
             IntroLocations()
