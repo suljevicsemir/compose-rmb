@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/rmb-keystore-dev.jks
+keystore.properties

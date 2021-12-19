@@ -1,6 +1,7 @@
 package com.semirsuljevic.raiffaisenmobileapp
 
 import com.semirsuljevic.raiffaisenmobileapp.models.FAQItem
+import com.semirsuljevic.raiffaisenmobileapp.models.Location
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -10,6 +11,8 @@ interface TodoApi {
 
     @GET("Faq")
     suspend fun getFAQ(): Response<List<FAQItem>>
+    @GET("Location")
+    suspend fun getLocations(): Response<List<Location>>
 
 
 }

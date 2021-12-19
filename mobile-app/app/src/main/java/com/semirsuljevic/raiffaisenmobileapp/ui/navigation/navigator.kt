@@ -19,11 +19,13 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroLocati
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroMore
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
+import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LocationsViewModel
 
 @Composable
 fun Navigator(navController: NavHostController) {
 
     val faqViewModel = FAQViewModel()
+    val locationsViewModel = LocationsViewModel()
 
     NavHost(
         navController = navController,
@@ -39,7 +41,11 @@ fun Navigator(navController: NavHostController) {
             IntroLocations()
         }
         composable(Screen.IntroMore.route) {
-            IntroMore(navController = navController, faqViewModel = faqViewModel)
+            IntroMore(
+                navController = navController,
+                faqViewModel = faqViewModel,
+                locationsViewModel = locationsViewModel
+            )
         }
         composable(Screen.CurrentAccountScreen.route) {
             CurrentAccountScreen(navController = navController)
@@ -75,6 +81,10 @@ fun Navigator(navController: NavHostController) {
 
         composable(Screen.FAQScreen.route) {
             FAQScreen(navController = navController, viewModel = faqViewModel)
+        }
+
+        composable(Screen.LocationsScreen.route) {
+            Locations(viewModel = locationsViewModel)
         }
 
         composable(Screen.ErrorScreen.route) {
