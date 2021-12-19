@@ -34,30 +34,37 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 @Composable
 fun FAQScreen(navController: NavController, viewModel: FAQViewModel) {
     val scrollState = rememberScrollState()
-    Column {
-        CenteredTitleAppBar(title = stringResource(id = R.string.faq_screen_title), navController = navController)
-        Column (
-            modifier = Modifier
-                .padding(horizontal = 30.dp)
-                .verticalScroll(scrollState)
-        ){
-            FirstDescription(text = stringResource(id = R.string.faq_screen_desc_1))
-            Spacer(modifier = Modifier.height(15.dp))
-            SecondDescription(text = stringResource(id = R.string.faq_screen_desc_2))
-            Spacer(modifier = Modifier.height(15.dp))
-            TappableURI(icon = painterResource(id = R.drawable.ic_viber), uri = stringResource(id = R.string.faq_screen_number_1)) {}
-            TappableURI(icon = painterResource(id = R.drawable.ic_viber), uri = stringResource(id = R.string.faq_screen_number_2)) {}
-            Spacer(modifier = Modifier.height(25.dp))
-            if(viewModel.items.value == null) {
-                CircularProgressIndicator()
-            }
-            else {
+    Column (
+        Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center)
+    ){
+        if(viewModel.items.value == null) {
+            CircularProgressIndicator(
+                color = Yellow400
+            )
+        }
+        else {
+            CenteredTitleAppBar(title = stringResource(id = R.string.faq_screen_title), navController = navController)
+            Column (
+                modifier = Modifier
+                    .padding(horizontal = 30.dp)
+                    .verticalScroll(scrollState)
+            ){
+                FirstDescription(text = stringResource(id = R.string.faq_screen_desc_1))
+                Spacer(modifier = Modifier.height(15.dp))
+                SecondDescription(text = stringResource(id = R.string.faq_screen_desc_2))
+                Spacer(modifier = Modifier.height(15.dp))
+                TappableURI(icon = painterResource(id = R.drawable.ic_viber), uri = stringResource(id = R.string.faq_screen_number_1)) {}
+                TappableURI(icon = painterResource(id = R.drawable.ic_viber), uri = stringResource(id = R.string.faq_screen_number_2)) {}
+                Spacer(modifier = Modifier.height(25.dp))
                 for (i in viewModel.items.value!!.indices) {
                     FAQListItem(item = viewModel.items.value!![i], index = i)
                 }
+
+                Spacer(modifier = Modifier.height(65.dp))
             }
-            Spacer(modifier = Modifier.height(65.dp))
+
         }
+
     }
 }
 
@@ -109,7 +116,7 @@ fun FAQListItem(item: FAQItem, index: Int) {
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Text(
-                    text = (index + 1).toString() + ". " + item.question,
+                    text = (index + 1).toString() + ". " + item.questionEn,
                     color = White,
                     modifier = Modifier.weight(1f)
                 )
@@ -122,7 +129,7 @@ fun FAQListItem(item: FAQItem, index: Int) {
             }
             if(tapped) {
                 Spacer(modifier = Modifier.height(10.dp))
-                Text(text = item.answer, color = White)
+                Text(text = item.answerEn, color = White)
             }
 
         }
