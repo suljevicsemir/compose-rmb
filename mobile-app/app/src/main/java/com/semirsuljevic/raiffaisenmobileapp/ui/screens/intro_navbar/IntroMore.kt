@@ -15,9 +15,10 @@ import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
+import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 
 @Composable
-fun IntroMore(navController: NavController) {
+fun IntroMore(navController: NavController, faqViewModel: FAQViewModel) {
     val scrollState = rememberScrollState()
     Column (
         modifier = Modifier.verticalScroll(scrollState)
@@ -70,7 +71,7 @@ fun IntroMore(navController: NavController) {
             title = stringResource(id = R.string.more_screen_item_faq),
             icon = Icons.Outlined.Quiz,
             onPressed = {
-                //RetrofitInstance.api.getFAQ()
+                faqViewModel.fetch()
                 navController.navigate(Screen.FAQScreen.route)
             }
         )

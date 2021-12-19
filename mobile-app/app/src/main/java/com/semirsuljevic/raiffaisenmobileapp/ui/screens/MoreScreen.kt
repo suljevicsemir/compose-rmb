@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
-
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListSectionSeparator
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBListItem

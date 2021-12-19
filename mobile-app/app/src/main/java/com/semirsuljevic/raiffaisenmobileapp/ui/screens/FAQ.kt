@@ -1,25 +1,38 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowDownward
+import androidx.compose.material.icons.outlined.ArrowUpward
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.models.FAQItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
+import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 
 @Composable
-fun FAQScreen(navController: NavController) {
+fun FAQScreen(navController: NavController, viewModel: FAQViewModel) {
     val scrollState = rememberScrollState()
     Column {
         CenteredTitleAppBar(title = stringResource(id = R.string.faq_screen_title), navController = navController)
@@ -34,6 +47,16 @@ fun FAQScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(15.dp))
             TappableURI(icon = painterResource(id = R.drawable.ic_viber), uri = stringResource(id = R.string.faq_screen_number_1)) {}
             TappableURI(icon = painterResource(id = R.drawable.ic_viber), uri = stringResource(id = R.string.faq_screen_number_2)) {}
+            Spacer(modifier = Modifier.height(25.dp))
+            if(viewModel.items.value == null) {
+                CircularProgressIndicator()
+            }
+            else {
+                for (i in viewModel.items.value!!.indices) {
+                    FAQListItem(item = viewModel.items.value!![i], index = i)
+                }
+            }
+            Spacer(modifier = Modifier.height(65.dp))
         }
     }
 }
@@ -54,4 +77,56 @@ fun SecondDescription(text: String) {
         color = White,
         fontSize = 16.sp
     )
+}
+
+@Composable
+fun FAQListItem(item: FAQItem, index: Int) {
+    var tapped by remember {
+        mutableStateOf(false)
+    }
+    val interactionSource = remember { MutableInteractionSource() }
+    Box(
+        Modifier
+            .padding(vertical = 10.dp)
+            .clip(shape = RoundedCornerShape(8.dp))
+    ) {
+        Column (
+            modifier = Modifier
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null
+
+                ) {
+                    tapped = !tapped
+                }
+                .animateContentSize { initialValue, targetValue -> }
+                .background(color = Gray400)
+                .fillMaxWidth()
+                .padding(vertical = 10.dp, horizontal = 10.dp)
+        ){
+            Row (
+                Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Text(
+                    text = (index + 1).toString() + ". " + item.question,
+                    color = White,
+                    modifier = Modifier.weight(1f)
+                )
+                if(!tapped) {
+                    Icon(imageVector = Icons.Outlined.ArrowDownward, contentDescription = "icon downward", tint = Yellow400)
+                }
+                else {
+                    Icon(imageVector = Icons.Outlined.ArrowUpward, contentDescription = "icon upward", tint = Yellow400)
+                }
+            }
+            if(tapped) {
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(text = item.answer, color = White)
+            }
+
+        }
+    }
+
+
 }
