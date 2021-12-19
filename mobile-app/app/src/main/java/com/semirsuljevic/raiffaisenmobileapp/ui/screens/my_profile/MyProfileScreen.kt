@@ -29,29 +29,33 @@ fun MyProfileScreen(navController: NavController) {
         RMBListItem(
             title = stringResource(id = R.string.my_profile_screen_item_communications),
             icon = Icons.Outlined.ConnectWithoutContact,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListSectionSeparator(text = stringResource(id = R.string.my_profile_screen_section_account_package))
         RMBListItem(
             title = stringResource(id = R.string.my_profile_screen_item_earned_points),
             icon = Icons.Outlined.Inventory,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.my_profile_screen_item_products),
             icon = Icons.Outlined.Ballot,
-            navController = navController,
-            route = Screen.ErrorScreen.route
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.my_profile_screen_item_pay_contact),
             icon = Icons.Outlined.MobileScreenShare,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListSectionSeparator(text = stringResource(id = R.string.my_profile_screen_section_settings))
         RMBListItemSwitch(
@@ -77,15 +81,17 @@ fun MyProfileScreen(navController: NavController) {
         RMBListItem(
             title = stringResource(id = R.string.my_profile_screen_item_pin),
             icon = Icons.Outlined.FiberPin,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListSectionSeparator(text = stringResource(id = R.string.my_profile_screen_section_log_out))
         RMBListItem(
             title = stringResource(id = R.string.my_profile_screen_item_log_out),
             icon = Icons.Outlined.Logout,
-            navController = navController,
-            route = Screen.ErrorScreen.route
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListItemSeparator()
         Spacer(modifier = Modifier.height(20.dp))

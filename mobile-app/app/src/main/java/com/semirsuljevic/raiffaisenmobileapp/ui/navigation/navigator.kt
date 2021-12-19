@@ -69,6 +69,10 @@ fun Navigator(navController: NavHostController) {
             LoansScreen(navController = navController)
         }
 
+        composable(Screen.FAQScreen.route) {
+            FAQScreen(navController = navController)
+        }
+
         composable(Screen.ErrorScreen.route) {
             val scrollState = rememberScrollState()
 

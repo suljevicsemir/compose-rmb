@@ -25,6 +25,7 @@ sealed  class Screen (val route: String){
     object DigitalServicesScreen: Screen(route = "digital_services")
     object SavingsScreen: Screen(route = "savings")
 
+    object FAQScreen: Screen(route = "faq")
 
     object ErrorScreen: Screen(route = "error")
 

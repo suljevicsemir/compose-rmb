@@ -116,5 +116,10 @@
     <string name="basic_info_swift" translatable="false">SWIFT: RZBABA2S</string>
     <string name="basic_info_transaction_number">Broj transakcijskog računa: 1610000000000011</string>
     <string name="basic_info_court_info">Označenje suda i sudski broj: Općinski sud u Sarajevu, 1 - 11629</string>
+    <string name="faq_screen_title">Često postavljena pitanja</string>
+    <string name="faq_screen_desc_1">Najčešće postavljena pitanja vezana za korištenje Raiffeisen mobilnog bankarstva</string>
+    <string name="faq_screen_desc_2">Ukoliko imate dodatna pitanja na koja nismo dali odgovor u nastavku ili su vam potrebne dodatne informacije slobodno pozovite naš kontakt centar na broj:</string>
+    <string name="faq_screen_number_1" translatable="false">+387 81 92 92 92</string>
+    <string name="faq_screen_number_2" translatable="false">+387 33 75 50 10</string>
 
 </resources>

@@ -27,50 +27,57 @@ fun PaymentsScreen(navController: NavController) {
         RMBListItem(
             title = stringResource(id = R.string.payments_screen_item_country),
             icon = Icons.Outlined.CreditCard,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.payments_screen_item_public),
             icon = Icons.Outlined.Article,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.payments_screen_item_new_template),
             icon = Icons.Outlined.ReceiptLong,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListSectionSeparator(text = stringResource(id = R.string.payments_screen_section_fast_payments))
         RMBListItem(
             title = stringResource(id = R.string.my_profile_screen_item_pay_contact),
             icon = Icons.Outlined.MobileScreenShare,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListSectionSeparator(text = stringResource(id = R.string.payments_screen_section_my_payments))
         RMBListItem(
             title = stringResource(id = R.string.payments_screen_item_my_templates),
             icon = Icons.Outlined.Feed,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.payments_screen_section_my_payments),
             icon = Icons.Outlined.Feed,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.payments_screen_item_long_templates),
             icon = Icons.Outlined.Feed,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListItemSeparator()
     }

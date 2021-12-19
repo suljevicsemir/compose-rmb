@@ -9,7 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 
@@ -17,11 +16,10 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 fun RMBListItem(
     title: String,
     icon: ImageVector,
-    navController: NavController,
-    route: String
+    onPressed: () -> Unit
 ) {
     Box(modifier = Modifier.clickable {
-        navController.navigate(route = route)
+        onPressed()
     }) {
         Row (
             Modifier

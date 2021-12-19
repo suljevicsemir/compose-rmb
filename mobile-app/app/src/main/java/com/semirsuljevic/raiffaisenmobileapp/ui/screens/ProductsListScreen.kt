@@ -26,43 +26,49 @@ fun ProductsScreen(navController: NavController) {
         RMBListItem(
             title = stringResource(id = R.string.products_screen_item_pick_account),
             icon = Icons.Outlined.AccountBalance,
-            route =  Screen.CurrentAccountScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.CurrentAccountScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.products_screen_item_credit_cards),
             icon = Icons.Outlined.CreditCard,
-            route = Screen.CreditCardsScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.CreditCardsScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.products_screen_item_credits),
             icon = Icons.Outlined.Receipt,
-            route = Screen.LoansScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.LoansScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.products_screen_item_packages),
             icon = Icons.Outlined.Inventory2,
-            navController = navController,
-            route = Screen.AccountSetsScreen.route
+            onPressed = {
+                navController.navigate(Screen.AccountSetsScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.products_screen_item_digital_services),
             icon = Icons.Outlined.LeakRemove,
-            navController = navController,
-            route = Screen.DigitalServicesScreen.route
+            onPressed = {
+                navController.navigate(Screen.DigitalServicesScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.products_screen_item_savings),
             icon = Icons.Outlined.Savings,
-            navController = navController,
-            route = Screen.SavingsScreen.route
+            onPressed = {
+                navController.navigate(Screen.SavingsScreen.route)
+            }
         )
         ListItemSeparator()
     }

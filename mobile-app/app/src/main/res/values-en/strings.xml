@@ -96,4 +96,7 @@
     <string name="basic_info_jib">JIB (Unique Identicitaion Number) : 4200344670009</string>
     <string name="basic_info_transaction_number">Transcation account number: 1610000000000011</string>
     <string name="basic_info_court_info">Court designation and court number: Municipal court in Sarajevo, 1 - 11629</string>
+    <string name="faq_screen_title">FAQ</string>
+    <string name="faq_screen_desc_1">FAQ about the use of Raiffeisen Mobile Banking</string>
+    <string name="faq_screen_desc_2">"If your question is not listed in the FAQs below or if you need additional information, please call our Contact Centre at: "</string>
 </resources>

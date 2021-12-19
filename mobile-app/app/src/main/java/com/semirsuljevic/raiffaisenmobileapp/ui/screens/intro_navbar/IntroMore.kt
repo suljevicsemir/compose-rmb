@@ -27,22 +27,25 @@ fun IntroMore(navController: NavController) {
         RMBListItem(
             title = stringResource(id = R.string.more_screen_item_calculators),
             icon = Icons.Outlined.Calculate,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.more_screen_item_currency_list),
             icon = Icons.Outlined.FeaturedPlayList,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.more_screen_item_currency_convertor),
             icon = Icons.Outlined.Money,
-            route = Screen.ErrorScreen.route,
-            navController = navController,
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListSectionSeparator(text = stringResource(id = R.string.more_screen_section_about_app))
         RMBListItemSwitch(
@@ -58,36 +61,42 @@ fun IntroMore(navController: NavController) {
         RMBListItem(
             title = stringResource(id = R.string.more_screen_item_onboarding),
             icon = Icons.Outlined.ContactSupport,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ErrorScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.more_screen_item_faq),
             icon = Icons.Outlined.Quiz,
-            route = Screen.ErrorScreen.route,
-            navController = navController
+            onPressed = {
+                //RetrofitInstance.api.getFAQ()
+                navController.navigate(Screen.FAQScreen.route)
+            }
         )
         ListSectionSeparator(text = stringResource(id = R.string.more_screen_section_about_bank))
         RMBListItem(
             title = stringResource(id = R.string.more_screen_item_basic_info),
             icon = Icons.Outlined.Quiz,
-            route = Screen.BasicInformationScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.BasicInformationScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.more_screen_item_contact),
             icon = Icons.Outlined.ContactPage,
-            route = Screen.ContactUsScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.ContactUsScreen.route)
+            }
         )
         ListItemSeparator()
         RMBListItem(
             title = stringResource(id = R.string.more_screen_item_follow_us),
             icon = Icons.Outlined.Subscriptions,
-            route = Screen.FollowUsScreen.route,
-            navController = navController
+            onPressed = {
+                navController.navigate(Screen.FollowUsScreen.route)
+            }
         )
         ListItemSeparator()
         Spacer(modifier = Modifier.height(60.dp))

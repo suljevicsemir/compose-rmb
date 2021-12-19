@@ -128,7 +128,7 @@ fun TappableURI(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .clickable { onTapped }
-            .padding(vertical = 10.dp)
+            .padding(bottom = 8.dp)
     ){
         Image(
             painter = icon,
