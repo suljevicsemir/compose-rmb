@@ -22,7 +22,7 @@ fun IntroHome(navController: NavController) {
             text = "OE ĆE BIT LOGIN",
             color = Color.White,
             modifier = Modifier.clickable {
-                navController.popCurrentAndPush(Screen.LoansScreen.route)
+                navController.popCurrentAndPush(Screen.LocationsSearchScreen.route)
             }
         )
     }

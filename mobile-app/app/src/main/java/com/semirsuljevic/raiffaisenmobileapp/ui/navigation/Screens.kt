@@ -29,6 +29,9 @@ sealed  class Screen (val route: String){
 
     object LocationsScreen: Screen(route = "locations")
 
+    object LocationsSearchScreen: Screen(route = "locations_search")
+
+
     object ErrorScreen: Screen(route = "error")
 
 

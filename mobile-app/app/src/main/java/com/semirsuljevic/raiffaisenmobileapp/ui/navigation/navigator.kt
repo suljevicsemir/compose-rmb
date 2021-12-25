@@ -17,6 +17,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroHome
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroLocations
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroMore
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LocationsViewModel
@@ -85,6 +86,10 @@ fun Navigator(navController: NavHostController) {
 
         composable(Screen.LocationsScreen.route) {
             Locations(viewModel = locationsViewModel)
+        }
+
+        composable(Screen.LocationsSearchScreen.route) {
+            LocationsFilterScreen(navController = navController)
         }
 
         composable(Screen.ErrorScreen.route) {

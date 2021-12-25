@@ -99,4 +99,15 @@
     <string name="faq_screen_title">FAQ</string>
     <string name="faq_screen_desc_1">FAQ about the use of Raiffeisen Mobile Banking</string>
     <string name="faq_screen_desc_2">"If your question is not listed in the FAQs below or if you need additional information, please call our Contact Centre at: "</string>
+    <string name="locations_filter_title">Filter</string>
+    <string name="locations_filter_clear_label">Clear filter</string>
+    <string name="locations_filter_distance_label">Search by</string>
+    <string name="locations_filter_branch_search">Search by branch type</string>
+    <string name="locations_filter_service_search">Search by service</string>
+    <string name="locations_filter_atm_search">Search by ATM type</string>
+    <string name="locations_filter_atm_service_search">Search ATM by service</string>
+    <string name="locations_filter_apply_filters">Apply filters</string>
+    <string name="locations_filter_distance_closest">NEAREST</string>
+    <string name="locations_filter_distance_radius">RADIUS</string>
+    <string name="locations_filter_distance_city">TOWN</string>
 </resources>

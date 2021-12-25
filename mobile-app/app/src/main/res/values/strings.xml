@@ -121,5 +121,16 @@
     <string name="faq_screen_desc_2">Ukoliko imate dodatna pitanja na koja nismo dali odgovor u nastavku ili su vam potrebne dodatne informacije slobodno pozovite naš kontakt centar na broj:</string>
     <string name="faq_screen_number_1" translatable="false">+387 81 92 92 92</string>
     <string name="faq_screen_number_2" translatable="false">+387 33 75 50 10</string>
+    <string name="locations_filter_title">Filteri</string>
+    <string name="locations_filter_clear_label">Resetuj pretragu</string>
+    <string name="locations_filter_distance_label">Pretraga po</string>
+    <string name="locations_filter_branch_search">Pretraga po vrsti poslovnice</string>
+    <string name="locations_filter_service_search">Pretraga poslovnica po servisu</string>
+    <string name="locations_filter_atm_search">Pretraga po vrsti bankomata</string>
+    <string name="locations_filter_atm_service_search">Pretraga bankomata po servisu</string>
+    <string name="locations_filter_apply_filters">Primijeni filtere</string>
+    <string name="locations_filter_distance_closest">NAJBLIŽE</string>
+    <string name="locations_filter_distance_radius">RADIUS</string>
+    <string name="locations_filter_distance_city">GRAD</string>
 
 </resources>
