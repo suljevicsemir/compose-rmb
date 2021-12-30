@@ -1,5 +1,6 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -16,6 +17,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroBottom
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroBottomBarItem
 
 
+@ExperimentalMaterialApi
 @Composable
 fun HomeNavBar() {
     val navController = rememberNavController()

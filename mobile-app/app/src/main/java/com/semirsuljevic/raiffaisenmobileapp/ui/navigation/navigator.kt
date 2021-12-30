@@ -22,6 +22,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LocationsViewModel
 
+
 @Composable
 fun Navigator(navController: NavHostController) {
 
