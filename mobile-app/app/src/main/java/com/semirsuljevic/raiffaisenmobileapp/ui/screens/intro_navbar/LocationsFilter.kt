@@ -14,13 +14,16 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.*
 
+@ExperimentalMaterialApi
 @Composable
 fun LocationsFilterScreen(navController: NavController) {
     val scrollState = rememberScrollState()
@@ -41,6 +44,7 @@ fun LocationsFilterScreen(navController: NavController) {
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
 fun LocationsFilterContainer(
     title: String,
@@ -65,7 +69,7 @@ fun LocationsFilterContainer(
         Spacer(modifier = Modifier.height(14.dp))
         content()
         Spacer(modifier = Modifier.height(24.dp))
-        DistanceRadius()
+        DistanceCity()
 
     }
 }
@@ -111,7 +115,7 @@ fun DistanceFilterButton(title: String) {
 @Composable
 fun DistanceRadius() {
     var slideValue by remember {
-        mutableStateOf<Int>(1)
+        mutableStateOf(1)
     }
     Column (
         Modifier.padding(horizontal = 10.dp)
@@ -181,4 +185,71 @@ fun DistanceRadius() {
             )
         }
     }
+}
+
+
+@ExperimentalMaterialApi
+@Composable
+fun DistanceCity() {
+    var expanded  by remember {
+        mutableStateOf(false)
+    }
+    var selectedOptionText by remember {
+        mutableStateOf("")
+    }
+
+    val options = listOf("Option 1", "Option 2", "Option 3", "Option 4", "Option 5")
+
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = {
+            expanded = !expanded
+        },
+        modifier = Modifier.padding(horizontal = 10.dp).fillMaxWidth(1f)
+    ) {
+        TextField(
+            readOnly = true,
+            value = selectedOptionText,
+            onValueChange = { },
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(
+                    expanded = expanded
+                )
+            },
+            colors = ExposedDropdownMenuDefaults.textFieldColors(),
+            textStyle = TextStyle(
+                color = Gray200
+            )
+        )
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = {
+                expanded = false
+            },
+            modifier = Modifier.padding(vertical = 0.dp, horizontal = 0.dp).background(color = Black)
+        ) {
+            options.forEach { selectionOption ->
+                DropdownMenuItem(
+                    onClick = {
+                        selectedOptionText = selectionOption
+                        expanded = false
+                    },
+                    modifier = Modifier
+                        .background(color = Black)
+                        .padding(horizontal = 10.dp)
+                ) {
+                    Text(
+                        text = selectionOption,
+                        color = Gray200,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.W600
+                    )
+                }
+            }
+        }
+
+
+    }
+
+
 }

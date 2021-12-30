@@ -17,7 +17,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.semirsuljevic.raiffaisenmobileapp"
+        applicationId "com.raiffaisenmobileapp.dev"
         minSdk 23
         targetSdk 31
         versionCode 1
@@ -63,7 +63,7 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion '1.5.31'
+        kotlinCompilerVersion '1.6.0'
     }
     packagingOptions {
         resources {
@@ -89,7 +89,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
-    implementation "androidx.navigation:navigation-compose:2.4.0-beta02"
+    implementation "androidx.navigation:navigation-compose:2.4.0-rc01"
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.21.4-beta"
 
     //Retrofit
