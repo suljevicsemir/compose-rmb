@@ -12,7 +12,7 @@ object RetrofitInstance {
         .create()
     val api: TodoApi by lazy {
         Retrofit.Builder()
-            .baseUrl("http://rmbcloneapi.azurewebsites.net/")
+            .baseUrl("http://rmbcloneapi.azurewebsites.net/api/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

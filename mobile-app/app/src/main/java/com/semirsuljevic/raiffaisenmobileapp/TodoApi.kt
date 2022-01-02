@@ -2,11 +2,12 @@ package com.semirsuljevic.raiffaisenmobileapp
 
 import com.semirsuljevic.raiffaisenmobileapp.models.FAQItem
 import com.semirsuljevic.raiffaisenmobileapp.models.Location
+import com.semirsuljevic.raiffaisenmobileapp.models.user.LoginCredentials
+import com.semirsuljevic.raiffaisenmobileapp.models.user.TokenPair
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface TodoApi {
     @GET("/todos")
@@ -17,12 +18,13 @@ interface TodoApi {
     @GET("Location")
     suspend fun getLocations(): Response<List<Location>>
 
-    @POST(value = "token")
-    @Headers("Content-Type: text/plain; charset=UTF-8")
-    suspend fun getToken(
-        @Query("email") email: String,
-        @Query("password") password: String
-    ): Response<String>
+    @POST(value = "Token")
+    suspend fun getTokenPair(
+        @Body loginCredentials: LoginCredentials
+    ): Response<TokenPair>
+
+
+
 
 }
 

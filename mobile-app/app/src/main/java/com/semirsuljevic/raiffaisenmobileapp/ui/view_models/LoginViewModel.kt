@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.semirsuljevic.raiffaisenmobileapp.RetrofitInstance
+import com.semirsuljevic.raiffaisenmobileapp.models.user.LoginCredentials
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -30,22 +31,12 @@ class LoginViewModel: ViewModel() {
 
         viewModelScope.launch {
             val response = try {
-                RetrofitInstance.api.getToken(
-                    email = _email.value!!,
-                    password = _password.value!!
-                )
+                RetrofitInstance.api.getTokenPair(LoginCredentials(email = _email.value!!, password = _password.value!!))
             }
             catch (e: IOException) {
-                Log.e("MAJKU", e.toString())
                 return@launch
             }
-            Log.d("HELLO", "YE")
-            if(response.isSuccessful && response.body() != null) {
-                Log.d("TOKEN_ENDED", response.body()!!)
-            }
-            else {
-                Log.e("ERROR", response.message())
-            }
+
         }
     }
 

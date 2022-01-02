@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.CounterManager
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -58,9 +59,10 @@ fun IntroHome(navController: NavController) {
             Spacer(modifier = Modifier.weight(1f))
             Button(
                 onClick = {
-                    scope.launch {
-                        dataStore.setCounter(counterValue = 12)
-                    }
+                          navController.navigate(Screen.LoginScreen.route)
+//                    scope.launch {
+//                        dataStore.setCounter(counterValue = 12)
+//                    }
                 },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Yellow400
