@@ -31,6 +31,8 @@ sealed  class Screen (val route: String){
 
     object LocationsSearchScreen: Screen(route = "locations_search")
 
+    object LoginScreen: Screen(route = "login")
+
 
     object ErrorScreen: Screen(route = "error")
 

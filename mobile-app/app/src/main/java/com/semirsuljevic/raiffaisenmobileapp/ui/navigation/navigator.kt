@@ -14,13 +14,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroHome
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroLocations
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroMore
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LocationsFilterScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LocationsViewModel
+import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LoginViewModel
 
 
 @Composable
@@ -28,6 +26,7 @@ fun Navigator(navController: NavHostController) {
 
     val faqViewModel = FAQViewModel()
     val locationsViewModel = LocationsViewModel()
+    val loginViewModel = LoginViewModel()
 
     NavHost(
         navController = navController,
@@ -91,6 +90,10 @@ fun Navigator(navController: NavHostController) {
 
         composable(Screen.LocationsSearchScreen.route) {
             LocationsFilterScreen(navController = navController)
+        }
+
+        composable(Screen.LoginScreen.route) {
+            LoginScreen(navController = navController, loginViewModel = loginViewModel)
         }
 
         composable(Screen.ErrorScreen.route) {

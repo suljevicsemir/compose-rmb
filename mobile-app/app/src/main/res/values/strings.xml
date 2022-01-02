@@ -132,5 +132,7 @@
     <string name="locations_filter_distance_closest">NAJBLIŽE</string>
     <string name="locations_filter_distance_radius">RADIUS</string>
     <string name="locations_filter_distance_city">GRAD</string>
+    <string name="intro_home_button">Prijava</string>
+    <string name="login_screen_headline">Prijava</string>
 
 </resources>

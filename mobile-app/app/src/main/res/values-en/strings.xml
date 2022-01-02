@@ -110,4 +110,6 @@
     <string name="locations_filter_distance_closest">NEAREST</string>
     <string name="locations_filter_distance_radius">RADIUS</string>
     <string name="locations_filter_distance_city">TOWN</string>
+    <string name="intro_home_button">Login</string>
+    <string name="login_screen_headline">Login</string>
 </resources>
