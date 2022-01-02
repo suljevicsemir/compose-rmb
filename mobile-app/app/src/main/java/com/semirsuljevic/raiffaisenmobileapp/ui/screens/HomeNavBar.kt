@@ -15,8 +15,10 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Navigator
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroBottomBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroBottomBarItem
+import kotlinx.coroutines.InternalCoroutinesApi
 
 
+@InternalCoroutinesApi
 @ExperimentalMaterialApi
 @Composable
 fun HomeNavBar() {

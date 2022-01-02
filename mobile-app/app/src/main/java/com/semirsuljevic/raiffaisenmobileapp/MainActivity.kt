@@ -15,6 +15,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
+import kotlinx.coroutines.InternalCoroutinesApi
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -36,10 +37,14 @@ class MainActivity : ComponentActivity() {
 
 
 
+    @OptIn(InternalCoroutinesApi::class)
     @RequiresApi(Build.VERSION_CODES.N)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
+
         setContent {
             val systemUiController = rememberSystemUiController()
             systemUiController.setStatusBarColor(color = Color.Black)

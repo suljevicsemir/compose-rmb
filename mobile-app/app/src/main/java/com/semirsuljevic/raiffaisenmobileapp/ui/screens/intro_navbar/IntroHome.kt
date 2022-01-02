@@ -7,20 +7,47 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.semirsuljevic.raiffaisenmobileapp.CounterManager
 import com.semirsuljevic.raiffaisenmobileapp.R
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
+
+@InternalCoroutinesApi
 @Composable
 fun IntroHome(navController: NavController) {
+
+    var counter: Int by remember {
+        mutableStateOf(0)
+    }
+
 
     var tokenValue by remember {
         mutableStateOf("Čekaj nije još")
     }
+    //context
+    val context = LocalContext.current
+    // a coroutine scope
+    val scope = rememberCoroutineScope()
+    val dataStore = CounterManager(context = context)
+
+
+    LaunchedEffect(key1 = "semir") {
+        scope.launch {
+            dataStore.counter.collect { c ->
+                counter = c
+            }
+        }
+    }
+
 
     Box(
         modifier = Modifier
@@ -31,7 +58,9 @@ fun IntroHome(navController: NavController) {
             Spacer(modifier = Modifier.weight(1f))
             Button(
                 onClick = {
-                    navController.navigate(Screen.LoginScreen.route)
+                    scope.launch {
+                        dataStore.setCounter(counterValue = 12)
+                    }
                 },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Yellow400
@@ -46,6 +75,7 @@ fun IntroHome(navController: NavController) {
                     fontWeight = FontWeight.W600
                 )
             }
+            Text(text = counter.toString(), color = White)
             Spacer(Modifier.height(100.dp))
 //            Text(
 //                text = "OE ĆE BIT LOGIN",

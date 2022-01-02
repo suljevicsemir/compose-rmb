@@ -6,12 +6,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.semirsuljevic.raiffaisenmobileapp.CounterManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.*
@@ -19,14 +22,26 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LocationsViewModel
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LoginViewModel
+import kotlinx.coroutines.InternalCoroutinesApi
 
 
+@InternalCoroutinesApi
 @Composable
 fun Navigator(navController: NavHostController) {
 
     val faqViewModel = FAQViewModel()
     val locationsViewModel = LocationsViewModel()
     val loginViewModel = LoginViewModel()
+
+
+    val context = LocalContext.current
+    // a coroutine scope
+    val scope = rememberCoroutineScope()
+    val dataStore = CounterManager(context = context)
+
+
+
+
 
     NavHost(
         navController = navController,
