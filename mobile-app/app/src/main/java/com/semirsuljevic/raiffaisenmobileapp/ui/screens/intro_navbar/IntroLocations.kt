@@ -81,7 +81,6 @@ fun IntroLocations() {
 @ExperimentalPagerApi
 @Composable
 fun Tabs(pagerState: PagerState) {
-    var list = listOf(stringResource(id = R.string.locations_map_button), stringResource(id = R.string.locations_list_button))
     var scope = rememberCoroutineScope()
     Box(modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp)) {
         Surface(
@@ -91,8 +90,6 @@ fun Tabs(pagerState: PagerState) {
         ) {
             Row(
                 modifier = Modifier
-                    //.clip(shape = RoundedCornerShape(8.dp))
-                    //.border(width = 1.dp, color = Yellow400)
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
@@ -124,37 +121,6 @@ fun Tabs(pagerState: PagerState) {
                         .weight(1f)
                         .padding(vertical = 4.dp)
                 )
-//            Button(
-//                shape = RoundedCornerShape(0.dp),
-//                modifier = Modifier
-//                    .background(color = if (pagerState.currentPage == 0) Yellow400 else Black),
-//                onClick = {
-//                    scope.launch {
-//                        pagerState.animateScrollToPage(0)
-//                    }
-//                },
-//            ) {
-//                Text(
-//                    text = stringResource(id = R.string.locations_map_button),
-//                    color = if(pagerState.currentPage == 0) Black else Yellow400
-//                )
-//            }
-//            Button(
-//                modifier = Modifier
-//                    .background(color = if (pagerState.currentPage == 1) Yellow400 else Black),
-//                onClick = {
-//                    scope.launch {
-//                        pagerState.animateScrollToPage(1)
-//                    }
-//                },
-//            ) {
-//                Text(
-//                    text = stringResource(id = R.string.locations_list_button),
-//                    color = if(pagerState.currentPage == 1) Black else Yellow400
-//                )
-//            }
-
-
             }
         }
     }
