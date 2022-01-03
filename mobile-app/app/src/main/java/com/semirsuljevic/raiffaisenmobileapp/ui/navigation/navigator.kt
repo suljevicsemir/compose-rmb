@@ -1,5 +1,6 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.navigation
 
+import android.app.Application
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -14,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.semirsuljevic.raiffaisenmobileapp.CounterManager
+import com.semirsuljevic.raiffaisenmobileapp.StorageManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.*
@@ -31,13 +32,13 @@ fun Navigator(navController: NavHostController) {
 
     val faqViewModel = FAQViewModel()
     val locationsViewModel = LocationsViewModel()
-    val loginViewModel = LoginViewModel()
+    val loginViewModel = LoginViewModel(LocalContext.current.applicationContext as Application)
 
 
     val context = LocalContext.current
     // a coroutine scope
     val scope = rememberCoroutineScope()
-    val dataStore = CounterManager(context = context)
+    val dataStore = StorageManager(context = context)
 
 
 

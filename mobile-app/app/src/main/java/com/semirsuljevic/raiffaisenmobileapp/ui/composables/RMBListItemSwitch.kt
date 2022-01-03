@@ -7,9 +7,11 @@ import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow200
@@ -26,7 +28,8 @@ fun RMBListItemSwitch(
     }
     Box(modifier = Modifier.clickable { }) {
         Row (
-            Modifier
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(all = 12.dp)
         ){
@@ -41,20 +44,24 @@ fun RMBListItemSwitch(
             Text(
                 text = title,
                 color = White,
-                modifier = Modifier.size(26.dp).weight(1f)
+                fontSize = 17.sp,
             )
-            Switch(
-                checked = checked,
-                onCheckedChange = {
-                    checked = it
-                },
-                colors = SwitchDefaults.colors(
-                    checkedThumbColor = Yellow400,
-                    checkedTrackColor = Yellow200,
-                    uncheckedTrackColor = Gray200,
-                    uncheckedThumbColor = White,
+            Spacer(modifier = Modifier.weight(1f))
+            Box(modifier = Modifier.height(25.dp)) {
+                Switch(
+                    checked = checked,
+                    onCheckedChange = {
+                        checked = it
+                    },
+                    modifier = Modifier.padding(all = 0.dp),
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = Yellow400,
+                        checkedTrackColor = Yellow200,
+                        uncheckedTrackColor = Gray200,
+                        uncheckedThumbColor = White,
+                    )
                 )
-            )
+            }
 
         }
     }

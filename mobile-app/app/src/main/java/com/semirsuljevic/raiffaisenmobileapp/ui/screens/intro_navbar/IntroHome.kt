@@ -12,14 +12,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.semirsuljevic.raiffaisenmobileapp.CounterManager
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.StorageManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 
 @InternalCoroutinesApi
@@ -38,16 +36,16 @@ fun IntroHome(navController: NavController) {
     val context = LocalContext.current
     // a coroutine scope
     val scope = rememberCoroutineScope()
-    val dataStore = CounterManager(context = context)
+    val dataStore = StorageManager(context = context)
 
 
-    LaunchedEffect(key1 = "semir") {
+    /*LaunchedEffect(key1 = "semir") {
         scope.launch {
             dataStore.counter.collect { c ->
                 counter = c
             }
         }
-    }
+    }*/
 
 
     Box(

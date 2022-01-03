@@ -1,10 +1,10 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
@@ -18,28 +18,28 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LoginViewModel
 
 
 @Composable
 fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel) {
-
-
     Column (
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
+            .padding(horizontal = 20.dp)
+
     ){
         Spacer(Modifier.weight(1f ))
         Text(
@@ -73,28 +73,32 @@ fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel) {
 
 @Composable
 fun LoginSection(loginViewModel: LoginViewModel) {
-
     val email by loginViewModel.email.observeAsState("")
     val password by loginViewModel.password.observeAsState("")
     Column (
-
         modifier = Modifier
+            .clip(shape = Shapes.medium)
             .background(color = Gray400)
             .padding(all = 40.dp)
             .fillMaxWidth()
+
     ){
         LoginTextField(
             value = email,
             onValueChange = {
                 loginViewModel.onEmailChanged(it)
-            }
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            visualTransformation = VisualTransformation.None
         )
         Spacer(modifier = Modifier.height(30.dp))
         LoginTextField(
             value = password,
             onValueChange = {
                 loginViewModel.onPasswordChanged(it)
-            }
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = PasswordVisualTransformation()
         )
     }
 }
@@ -104,8 +108,10 @@ fun LoginSection(loginViewModel: LoginViewModel) {
 fun LoginTextField(
     value: String,
     onValueChange: (text: String) -> Unit,
+    keyboardOptions: KeyboardOptions,
+    visualTransformation: VisualTransformation
 ) {
-    Log.d("VALUE_VALUE", value)
+
     BasicTextField(
         value = value,
         onValueChange = {
@@ -119,13 +125,14 @@ fun LoginTextField(
             .clip(shape = RoundedCornerShape(size = 6.dp))
             .background(color = Black)
             .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 60.dp),
+            .padding(vertical = 8.dp, horizontal = 0.dp),
         cursorBrush = Brush.verticalGradient(
             0.0f to Yellow400,
             1.0f to Yellow400,
             startY = 0.0f,
             endY = 100.0f
-        )
+        ),
+        visualTransformation = visualTransformation,
+        keyboardOptions = keyboardOptions
     )
-
 }

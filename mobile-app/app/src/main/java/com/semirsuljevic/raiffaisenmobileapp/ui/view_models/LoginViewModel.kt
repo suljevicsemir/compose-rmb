@@ -1,19 +1,19 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.view_models
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.semirsuljevic.raiffaisenmobileapp.RetrofitInstance
+import com.semirsuljevic.raiffaisenmobileapp.StorageManager
 import com.semirsuljevic.raiffaisenmobileapp.models.user.LoginCredentials
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class LoginViewModel: ViewModel() {
+class LoginViewModel(application: Application): AndroidViewModel(application) {
     private val _email: MutableLiveData<String> = MutableLiveData<String>("")
     private val _password: MutableLiveData<String> = MutableLiveData<String>("")
 
+    val dataStore = StorageManager(context = application)
 
     fun onEmailChanged(newEmail: String) {
         Log.d("EMAIL_CHANGED", newEmail)
@@ -25,10 +25,6 @@ class LoginViewModel: ViewModel() {
     }
 
     fun onLogin() {
-        Log.d("ON_LOGIN", "CALLED")
-        Log.d("EMAIL", _email.value!!)
-        Log.d("PASSWORD", _password.value!!)
-
         viewModelScope.launch {
             val response = try {
                 RetrofitInstance.api.getTokenPair(LoginCredentials(email = _email.value!!, password = _password.value!!))
@@ -36,6 +32,12 @@ class LoginViewModel: ViewModel() {
             catch (e: IOException) {
                 return@launch
             }
+            if(response.isSuccessful && response.body() != null) {
+                Log.d("SUCCESS", response.body().toString())
+                dataStore.setTokenPair(response.body()!!)
+            }
+
+
 
         }
     }
