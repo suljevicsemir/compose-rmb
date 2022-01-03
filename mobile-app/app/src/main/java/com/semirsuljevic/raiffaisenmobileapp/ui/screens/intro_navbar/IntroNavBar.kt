@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Navigator
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
@@ -27,6 +28,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import kotlinx.coroutines.InternalCoroutinesApi
 
 
+@OptIn(ExperimentalPagerApi::class)
 @InternalCoroutinesApi
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable

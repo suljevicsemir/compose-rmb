@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Navigator
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroBottomBar
@@ -18,6 +19,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroBottom
 import kotlinx.coroutines.InternalCoroutinesApi
 
 
+@OptIn(ExperimentalPagerApi::class)
 @InternalCoroutinesApi
 @ExperimentalMaterialApi
 @Composable

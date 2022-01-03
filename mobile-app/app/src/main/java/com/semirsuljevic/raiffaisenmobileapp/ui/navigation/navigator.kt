@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.StorageManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
@@ -26,6 +27,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LoginViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 
 
+@ExperimentalPagerApi
 @InternalCoroutinesApi
 @Composable
 fun Navigator(navController: NavHostController) {

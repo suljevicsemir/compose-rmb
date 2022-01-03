@@ -112,4 +112,7 @@
     <string name="locations_filter_distance_city">TOWN</string>
     <string name="intro_home_button">Login</string>
     <string name="login_screen_headline">Login</string>
+    <string name="locations_title">Locations</string>
+    <string name="locations_map_button">Map</string>
+    <string name="locations_list_button">List</string>
 </resources>

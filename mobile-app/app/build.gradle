@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 
@@ -117,4 +118,12 @@ dependencies {
     implementation "androidx.datastore:datastore:1.0.0"
 
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    implementation 'com.google.android.gms:play-services-maps:18.0.1'
+
+    implementation 'androidx.paging:paging-compose:1.0.0-alpha14'
+
+    implementation "com.google.accompanist:accompanist-pager:0.13.0"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.13.0"
+
 }
