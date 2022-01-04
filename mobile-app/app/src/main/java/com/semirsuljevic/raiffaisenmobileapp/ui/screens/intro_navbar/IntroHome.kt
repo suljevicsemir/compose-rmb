@@ -24,8 +24,8 @@ import kotlinx.coroutines.InternalCoroutinesApi
 @Composable
 fun IntroHome(navController: NavController) {
 
-    var counter: Int by remember {
-        mutableStateOf(0)
+    var counter: String by remember {
+        mutableStateOf("0")
     }
 
 
@@ -39,13 +39,15 @@ fun IntroHome(navController: NavController) {
     val dataStore = StorageManager(context = context)
 
 
-    /*LaunchedEffect(key1 = "semir") {
-        scope.launch {
-            dataStore.counter.collect { c ->
-                counter = c
-            }
-        }
-    }*/
+//    LaunchedEffect(key1 = "semir") {
+//        scope.launch {
+//            dataStore.tokenPair.collect {
+//                if(it != null) {
+//                    counter = it.accessToken.toString()
+//                }
+//            }
+//        }
+//    }
 
 
     Box(

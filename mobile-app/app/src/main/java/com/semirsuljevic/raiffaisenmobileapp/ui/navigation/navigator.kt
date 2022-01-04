@@ -57,7 +57,7 @@ fun Navigator(navController: NavHostController) {
             ProductsScreen(navController = navController)
         }
         composable(Screen.IntroLocations.route) {
-            IntroLocations()
+            IntroLocations(navController = navController)
         }
         composable(Screen.IntroMore.route) {
             IntroMore(
