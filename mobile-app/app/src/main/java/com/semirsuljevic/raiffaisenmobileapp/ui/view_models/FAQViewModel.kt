@@ -1,5 +1,6 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.view_models
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,6 +28,8 @@ class FAQViewModel: ViewModel() {
                 return@launch
             }
             if(response.isSuccessful && response.body() != null) {
+                Log.d("SemirKonj", response.body().toString())
+
                 loading.value = false
                 items.value = response.body()
             }

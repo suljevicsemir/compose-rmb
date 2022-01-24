@@ -16,13 +16,12 @@ import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
-import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LocationsViewModel
+
 
 @Composable
 fun IntroMore(
     navController: NavController,
-    faqViewModel: FAQViewModel,
-    locationsViewModel: LocationsViewModel
+    faqViewModel: FAQViewModel
 ) {
     val scrollState = rememberScrollState()
     Column (
@@ -68,7 +67,7 @@ fun IntroMore(
             title = stringResource(id = R.string.more_screen_item_onboarding),
             icon = Icons.Outlined.ContactSupport,
             onPressed = {
-                locationsViewModel.fetch()
+                //locationsViewModel.fetch()
                 navController.navigate(Screen.LocationsScreen.route)
                // navController.navigate(Screen.ErrorScreen.route)
             }

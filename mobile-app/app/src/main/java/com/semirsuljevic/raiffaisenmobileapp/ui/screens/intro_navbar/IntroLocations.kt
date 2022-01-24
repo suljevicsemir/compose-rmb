@@ -42,7 +42,8 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
-import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LocationsFilterViewModel
+
+import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
@@ -50,7 +51,6 @@ import kotlinx.coroutines.launch
 fun IntroLocations(navController: NavController) {
 
     val pagerState = rememberPagerState(pageCount = 2)
-
     val viewModel = LocationsFilterViewModel()
 
     Column (

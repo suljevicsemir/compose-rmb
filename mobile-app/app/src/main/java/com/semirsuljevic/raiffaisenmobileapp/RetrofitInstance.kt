@@ -3,19 +3,18 @@ package com.semirsuljevic.raiffaisenmobileapp
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 
 
 object RetrofitInstance {
     var gson = GsonBuilder()
         .setLenient()
         .create()
-    val api: TodoApi by lazy {
+    val api: RMBAPI by lazy {
         Retrofit.Builder()
             .baseUrl("http://rmbcloneapi.azurewebsites.net/api/")
-            .addConverterFactory(ScalarsConverterFactory.create())
+            //.addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(TodoApi::class.java)
+            .create(RMBAPI::class.java)
     }
 }

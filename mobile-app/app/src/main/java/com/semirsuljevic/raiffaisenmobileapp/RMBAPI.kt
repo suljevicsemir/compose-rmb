@@ -1,5 +1,6 @@
 package com.semirsuljevic.raiffaisenmobileapp
 
+import com.semirsuljevic.raiffaisenmobileapp.models.City
 import com.semirsuljevic.raiffaisenmobileapp.models.FAQItem
 import com.semirsuljevic.raiffaisenmobileapp.models.Location
 import com.semirsuljevic.raiffaisenmobileapp.models.user.LoginCredentials
@@ -9,10 +10,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface TodoApi {
-    @GET("/todos")
-    suspend fun getTodos(): Response<List<Todo>>
-
+interface RMBAPI {
     @GET("Faq")
     suspend fun getFAQ(): Response<List<FAQItem>>
     @GET("Location")
@@ -23,15 +21,11 @@ interface TodoApi {
         @Body loginCredentials: LoginCredentials
     ): Response<TokenPair>
 
+    @GET(value = "City")
+    suspend fun getCities(): Response<List<City>>
+
 
 
 
 }
 
-
-data class Todo(
-    val completed: Boolean,
-    val id: Int,
-    val title: String,
-    val userId: Int
-)

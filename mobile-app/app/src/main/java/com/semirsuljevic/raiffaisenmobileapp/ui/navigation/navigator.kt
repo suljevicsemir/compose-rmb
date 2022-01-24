@@ -22,8 +22,8 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
-import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LocationsViewModel
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LoginViewModel
+import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 
 
@@ -33,7 +33,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 fun Navigator(navController: NavHostController) {
 
     val faqViewModel = FAQViewModel()
-    val locationsViewModel = LocationsViewModel()
+    val locationsFilterViewModel = LocationsFilterViewModel()
     val loginViewModel = LoginViewModel(LocalContext.current.applicationContext as Application)
 
 
@@ -62,8 +62,7 @@ fun Navigator(navController: NavHostController) {
         composable(Screen.IntroMore.route) {
             IntroMore(
                 navController = navController,
-                faqViewModel = faqViewModel,
-                locationsViewModel = locationsViewModel
+                faqViewModel = faqViewModel
             )
         }
         composable(Screen.CurrentAccountScreen.route) {
@@ -103,7 +102,7 @@ fun Navigator(navController: NavHostController) {
         }
 
         composable(Screen.LocationsScreen.route) {
-            Locations(viewModel = locationsViewModel)
+            Locations()
         }
 
         composable(Screen.LocationsSearchScreen.route) {

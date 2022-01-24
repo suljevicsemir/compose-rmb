@@ -22,34 +22,69 @@ import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.*
+import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
+import com.semirsuljevic.raiffaisenmobileapp.view_models.SearchBy
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun LocationsFilterScreen(navController: NavController) {
+fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilterViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
     val scrollState = rememberScrollState()
-    Column {
-        CenteredTitleAppBar(title = stringResource(id = R.string.locations_filter_title), navController = navController)
-        Column (
-            Modifier.padding(horizontal = 10.dp)
-        ){
-            Spacer(modifier = Modifier.height(20.dp))
-            LocationsFilterContainer(
-                title = stringResource(id = R.string.locations_filter_distance_label),
-                content = {
-                    DistanceFilterRow()
-                }
-            )
+    val scope = rememberCoroutineScope()
 
+    LaunchedEffect(Unit) {
+        viewModel.getCities()
+    }
+
+
+    if(viewModel.loading.value) {
+        CircularProgressIndicator(color = Yellow400)
+    }
+    else {
+        Column {
+            CenteredTitleAppBar(title = stringResource(id = R.string.locations_filter_title), navController = navController)
+            Column (
+                Modifier.padding(horizontal = 10.dp)
+            ){
+                Spacer(modifier = Modifier.height(20.dp))
+                LocationsFilterContainer(
+                    title = stringResource(id = R.string.locations_filter_distance_label),
+                    topContent = {
+                        DistanceFilterRow(viewModel)
+                    },
+                    bottomContent = {
+                        when(viewModel.selectedSearch.value) {
+                            SearchBy.Radius -> DistanceRadius()
+                            SearchBy.City -> DistanceCity(viewModel = viewModel)
+                            else -> {}
+                        }
+                    }
+                )
+                Button(
+                    onClick = {
+                        scope.launch {
+                            viewModel.getCities()
+                        }
+
+                    }
+                ) {
+
+                }
+
+            }
         }
     }
+
+
 }
 
 @ExperimentalMaterialApi
 @Composable
 fun LocationsFilterContainer(
     title: String,
-    content: @Composable() () -> Unit
+    topContent: @Composable() () -> Unit,
+    bottomContent: @Composable() () -> Unit
 ) {
     Column(
         Modifier
@@ -68,33 +103,51 @@ fun LocationsFilterContainer(
             thickness = 1.dp,
         )
         Spacer(modifier = Modifier.height(14.dp))
-        content()
+        topContent()
         Spacer(modifier = Modifier.height(24.dp))
-        DistanceCity()
+        bottomContent()
 
     }
 }
 
 @Composable
-fun DistanceFilterRow() {
+fun DistanceFilterRow(viewModel: LocationsFilterViewModel) {
     Row (
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 10.dp)
     ){
-        DistanceFilterButton(title = stringResource(id = R.string.locations_filter_distance_closest))
-        DistanceFilterButton(title = stringResource(id = R.string.locations_filter_distance_radius))
-        DistanceFilterButton(title = stringResource(id = R.string.locations_filter_distance_city))
+        DistanceFilterButton(
+            title = stringResource(id = R.string.locations_filter_distance_closest),
+            selected = viewModel.selectedSearch.value == SearchBy.Closest,
+            onClick = {
+                viewModel.setSearch(SearchBy.Closest)
+            }
+        )
+        DistanceFilterButton(
+            title = stringResource(id = R.string.locations_filter_distance_radius),
+            selected = viewModel.selectedSearch.value == SearchBy.Radius,
+            onClick = {
+                viewModel.setSearch(SearchBy.Radius)
+            }
+        )
+        DistanceFilterButton(
+            title = stringResource(id = R.string.locations_filter_distance_city),
+            selected = viewModel.selectedSearch.value == SearchBy.City,
+            onClick = {
+                viewModel.setSearch(SearchBy.City)
+            }
+        )
     }
 }
 
 @Composable
-fun DistanceFilterButton(title: String) {
+fun DistanceFilterButton(title: String, selected: Boolean, onClick: () -> Unit) {
     val width = LocalConfiguration.current.screenWidthDp * 0.28
     Button(
         onClick = {
-
+            onClick()
         },
         modifier = Modifier
             .height(45.dp)
@@ -102,7 +155,7 @@ fun DistanceFilterButton(title: String) {
             .clip(shape = RoundedCornerShape(size = 12.dp)),
         contentPadding = PaddingValues(horizontal = 0.dp, vertical = 0.dp),
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = Yellow400
+            backgroundColor = if(selected) Yellow400 else White
         )
     ) {
         Text(
@@ -160,9 +213,6 @@ fun DistanceRadius() {
             onValueChange = {
                 slideValue = it.toInt()
             },
-            onValueChangeFinished = {
-
-            },
             value = slideValue.toFloat(),
             valueRange = 1f..100f,
             steps = 100,
@@ -191,66 +241,72 @@ fun DistanceRadius() {
 
 @ExperimentalMaterialApi
 @Composable
-fun DistanceCity() {
+fun DistanceCity(viewModel: LocationsFilterViewModel) {
+
     var expanded  by remember {
         mutableStateOf(false)
     }
     var selectedOptionText by remember {
-        mutableStateOf("")
+        mutableStateOf(viewModel.cities.value!![0].name)
     }
 
-    val options = listOf("Option 1", "Option 2", "Option 3", "Option 4", "Option 5")
-
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = {
-            expanded = !expanded
-        },
-        modifier = Modifier.padding(horizontal = 10.dp).fillMaxWidth(1f)
-    ) {
-        TextField(
-            readOnly = true,
-            value = selectedOptionText,
-            onValueChange = { },
-            trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(
-                    expanded = expanded
-                )
-            },
-            colors = ExposedDropdownMenuDefaults.textFieldColors(),
-            textStyle = TextStyle(
-                color = Gray200
-            )
-        )
-        ExposedDropdownMenu(
+        ExposedDropdownMenuBox(
             expanded = expanded,
-            onDismissRequest = {
-                expanded = false
+            onExpandedChange = {
+                expanded = !expanded
             },
-            modifier = Modifier.padding(vertical = 0.dp, horizontal = 0.dp).background(color = Black)
+            modifier = Modifier
+                .padding(horizontal = 10.dp)
+                .fillMaxWidth(1f)
         ) {
-            options.forEach { selectionOption ->
-                DropdownMenuItem(
-                    onClick = {
-                        selectedOptionText = selectionOption
-                        expanded = false
-                    },
-                    modifier = Modifier
-                        .background(color = Black)
-                        .padding(horizontal = 10.dp)
-                ) {
-                    Text(
-                        text = selectionOption,
-                        color = Gray200,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.W600
+            TextField(
+                readOnly = true,
+                value = selectedOptionText,
+                onValueChange = { },
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(
+                        expanded = expanded
                     )
+                },
+                colors = ExposedDropdownMenuDefaults.textFieldColors(),
+                textStyle = TextStyle(
+                    color = Gray200
+                )
+            )
+            ExposedDropdownMenu(
+                expanded = expanded,
+                onDismissRequest = {
+                    expanded = false
+                },
+                modifier = Modifier
+                    .padding(vertical = 0.dp, horizontal = 0.dp)
+                    .background(color = Black)
+            ) {
+                viewModel.cities.value!!.forEach { selectionOption ->
+                    DropdownMenuItem(
+                        onClick = {
+                            selectedOptionText = selectionOption.name
+                            expanded = false
+                        },
+                        modifier = Modifier
+                            .background(color = Black)
+                            .padding(horizontal = 10.dp)
+                    ) {
+                        Text(
+                            text = selectionOption.name,
+                            color = Gray200,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.W600
+                        )
+                    }
                 }
             }
         }
 
 
-    }
+
+
+
 
 
 }
