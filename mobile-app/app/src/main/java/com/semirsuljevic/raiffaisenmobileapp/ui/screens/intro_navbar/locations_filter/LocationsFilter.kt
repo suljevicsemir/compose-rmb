@@ -1,10 +1,12 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar
+package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -14,9 +16,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.DistanceFilterRow
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.DistanceRadius
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.FilterContainer
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
@@ -37,13 +36,13 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
 
 
     if(viewModel.loading.value) {
-        CircularProgressIndicator(color = Yellow400)
+        CircularProgressIndicator(color = Yellow400, modifier = Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center))
     }
     else {
         Column {
             CenteredTitleAppBar(title = stringResource(id = R.string.locations_filter_title), navController = navController)
             Column (
-                Modifier.padding(horizontal = 10.dp)
+                Modifier.padding(horizontal = 10.dp).verticalScroll(scrollState)
             ){
                 Spacer(modifier = Modifier.height(20.dp))
                 FilterContainer(

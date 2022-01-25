@@ -20,6 +20,7 @@ import com.semirsuljevic.raiffaisenmobileapp.StorageManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.*
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LoginViewModel
