@@ -1,7 +1,6 @@
 package com.semirsuljevic.raiffaisenmobileapp.view_models
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,6 +23,14 @@ class LocationsFilterViewModel: ViewModel() {
     var agenciesToggle = mutableStateOf(true)
     var atmsToggle = mutableStateOf(true)
 
+    var slideValue = mutableStateOf(value = 1)
+    var dropdownExpanded = mutableStateOf(false)
+
+    val selectedCity: MutableLiveData<City> by lazy {
+        MutableLiveData<City>()
+    }
+
+
 
     fun getCities() {
         viewModelScope.launch {
@@ -41,8 +48,18 @@ class LocationsFilterViewModel: ViewModel() {
         }
     }
 
+    fun selectCity(city: City) {
+        selectedCity.value = city
+    }
 
 
+    fun toggleDropdown() {
+        dropdownExpanded.value = !dropdownExpanded.value
+    }
+
+    fun dropdownOff() {
+        dropdownExpanded.value = false
+    }
 
     fun toggleAgencies() {
         agenciesToggle.value = !agenciesToggle.value
