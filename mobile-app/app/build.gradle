@@ -46,11 +46,13 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.sign
+            buildConfigField("String", "BUILD_TIME", "\"" + System.currentTimeMillis().toString() + "\"")
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.sign
+            buildConfigField("String", "BUILD_TIME", "\"" + System.currentTimeMillis().toString() + "\"")
         }
     }
     compileOptions {

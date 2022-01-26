@@ -159,5 +159,22 @@
     <string name="intro_help_lang_item2">Nakon sto se logujete u aplikaciju - odaberite opciju Moj profil, te u dijelu Postavke ukljucite opciju English.</string>
     <string name="intro_help_lang_info1">Koristenje aplikacije na engleskom jeziku ukljucujete / iskljucujete dodirom tastera pored opcije Engleski.</string>
     <string name="intro_help_lang_info2">Jezik mozete promijeniti u svakom trenutku, bez obzira da li ste prijavljeni u aplikaciju ili ne.</string>
+    <string name="intro_help_security_title">Sigurnost</string>
+    <string name="intro_help_security_headline">U cilju Vaše sigurnosti, molimo Vas da poštujete principe u nastavku:</string>
+    <string name="intro_help_security_item1">Izbjegavajte postavljanje jednostavnih PIN kodova (kao što su 0000, 1234 i sl.)</string>
+    <string name="intro_help_security_item2">Nemojte dijeliti i zapisivati svoj PIN kod</string>
+    <string name="intro_help_security_item3">Odjavite se iz aplikacije nakon što završite njeno korištenje</string>
+    <string name="intro_help_security_item4">Koristite internet putem sigurne Wi-Fi konekcije ili putem konekcije mobilnih operatera</string>
+    <string name="intro_help_security_item5">Obavezno obrišite aplikaciju sa pametnog telefona koji više ne koristite</string>
+    <string name="intro_help_security_item6">Redovno ažurirajte verziju operativnog sistema na svom telefonu</string>
+    <string name="intro_help_security_item7">Preuzimajte samo certificirane i provjerene aplikacije sa Play Store za Android, odnosno App store za iOS mobilni uređaj</string>
+    <string name="intro_help_security_item8">Redovno ažurirajte vašu RMB aplikaciju tako što ćete preuzeti nove verzije</string>
+    <string name="intro_help_details_title">Tehnički detalji</string>
+    <string name="intro_help_details_headline">Za ispravan rada aplikacije i pripadajućih funkcionalnosti aplikacija Raiffeisen mobilno bankarstvo zahtjeva sljedeća dopuštenja:</string>
+    <string name="intro_help_details_item1">Internet konekcija</string>
+    <string name="intro_help_details_item2">GPS - pristup lokacijama (za prikaz najbliže poslovnice, ATM i sl.)</string>
+    <string name="intro_help_details_item3">Pristup imeniku (Za korištenje funkcionalnosti Plati kontaktu)</string>
+    <string name="intro_help_details_version">Verzija:</string>
+    <string name="intro_help_details_version_date">Datum verzije:</string>
 
 </resources>

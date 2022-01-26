@@ -19,10 +19,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.StorageManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.IntroHelpLanguage
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.IntroHelpLogin
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.IntroHelpScreen
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.IntroHelpSettings
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroHome
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroLocations
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroMore
@@ -134,6 +131,9 @@ fun Navigator(navController: NavHostController) {
         }
         composable(Screen.InfoHelpLanguage.route) {
             IntroHelpLanguage(navController = navController)
+        }
+        composable(Screen.InfoHelpSecurity.route) {
+            IntroHelpSecurity(navController = navController)
         }
 
         composable(Screen.ErrorScreen.route) {
