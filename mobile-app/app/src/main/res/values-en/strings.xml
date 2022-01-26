@@ -148,10 +148,10 @@
     <string name="intro_help_security_item7">Download only certified and verified applications from the Play Store for Android, or App Store for your iOS mobile device</string>
     <string name="intro_help_security_item8">Update your RMB application regularly by downloading new versions</string>
     <string name="intro_help_details_title">Tehnical details</string>
-    <string name="intro_help_details_version">Version</string>
+    <string name="intro_help_details_version">Version: </string>
     <string name="intro_help_details_headline">For the correct functioning of certain functionalities, the Mobile banking application requires the following permissions:</string>
     <string name="intro_help_details_item1">Internet connection</string>
     <string name="intro_help_details_item2">GPS - access to locations (to view the nearest branch office, ATM etc.)</string>
     <string name="intro_help_details_item3">Access to address book (to use the Pay to contact fuctionality)</string>
-    <string name="intro_help_details_version_date">Version date</string>
+    <string name="intro_help_details_version_date">Version date: </string>
 </resources>

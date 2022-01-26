@@ -135,6 +135,9 @@ fun Navigator(navController: NavHostController) {
         composable(Screen.InfoHelpSecurity.route) {
             IntroHelpSecurity(navController = navController)
         }
+        composable(Screen.InfoHelpDetails.route) {
+            IntroHelpDetails(navController = navController)
+        }
 
         composable(Screen.ErrorScreen.route) {
             val scrollState = rememberScrollState()

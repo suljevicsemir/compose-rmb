@@ -174,7 +174,7 @@
     <string name="intro_help_details_item1">Internet konekcija</string>
     <string name="intro_help_details_item2">GPS - pristup lokacijama (za prikaz najbliže poslovnice, ATM i sl.)</string>
     <string name="intro_help_details_item3">Pristup imeniku (Za korištenje funkcionalnosti Plati kontaktu)</string>
-    <string name="intro_help_details_version">Verzija:</string>
-    <string name="intro_help_details_version_date">Datum verzije:</string>
+    <string name="intro_help_details_version">Verzija: </string>
+    <string name="intro_help_details_version_date">Datum verzije: </string>
 
 </resources>
