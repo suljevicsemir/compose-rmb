@@ -19,10 +19,14 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.StorageManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.IntroHelpLanguage
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.IntroHelpLogin
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.IntroHelpScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.IntroHelpSettings
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.*
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroHome
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroLocations
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroMore
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
@@ -127,6 +131,9 @@ fun Navigator(navController: NavHostController) {
         }
         composable(Screen.InfoHelpSettings.route) {
             IntroHelpSettings(navController = navController)
+        }
+        composable(Screen.InfoHelpLanguage.route) {
+            IntroHelpLanguage(navController = navController)
         }
 
         composable(Screen.ErrorScreen.route) {
