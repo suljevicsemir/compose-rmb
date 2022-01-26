@@ -154,4 +154,5 @@
     <string name="intro_help_details_item2">GPS - access to locations (to view the nearest branch office, ATM etc.)</string>
     <string name="intro_help_details_item3">Access to address book (to use the Pay to contact functionality)</string>
     <string name="intro_help_details_version_date">Version date: </string>
+    <string name="onboarding_cancel">Cancel</string>
 </resources>

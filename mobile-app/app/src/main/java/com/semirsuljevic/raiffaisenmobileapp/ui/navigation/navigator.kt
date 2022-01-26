@@ -1,6 +1,8 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.navigation
 
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -24,6 +26,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroHome
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroLocations
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroMore
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.OnBoardingScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
@@ -32,6 +35,7 @@ import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewMode
 import kotlinx.coroutines.InternalCoroutinesApi
 
 
+@RequiresApi(Build.VERSION_CODES.N)
 @ExperimentalPagerApi
 @InternalCoroutinesApi
 @Composable
@@ -137,6 +141,10 @@ fun Navigator(navController: NavHostController) {
         }
         composable(Screen.InfoHelpDetails.route) {
             IntroHelpDetails(navController = navController)
+        }
+
+        composable(Screen.OnBoardingScreen.route) {
+            OnBoardingScreen(navController = navController)
         }
 
         composable(Screen.ErrorScreen.route) {

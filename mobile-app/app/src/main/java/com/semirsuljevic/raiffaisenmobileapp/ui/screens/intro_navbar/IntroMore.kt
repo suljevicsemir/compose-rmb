@@ -67,9 +67,7 @@ fun IntroMore(
             title = stringResource(id = R.string.more_screen_item_onboarding),
             icon = Icons.Outlined.ContactSupport,
             onPressed = {
-                //locationsViewModel.fetch()
-                navController.navigate(Screen.LocationsScreen.route)
-               // navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(Screen.OnBoardingScreen.route)
             }
         )
         ListItemSeparator()

@@ -40,6 +40,8 @@ sealed  class Screen (val route: String){
     object InfoHelpSecurity: Screen(route = "info_help_security")
     object InfoHelpDetails: Screen(route = "info_help_details")
 
+    object OnBoardingScreen: Screen(route = "onboarding")
+
     object ErrorScreen: Screen(route = "error")
 
 

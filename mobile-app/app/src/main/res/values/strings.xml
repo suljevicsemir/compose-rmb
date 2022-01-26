@@ -176,5 +176,6 @@
     <string name="intro_help_details_item3">Pristup imeniku (Za korištenje funkcionalnosti Plati kontaktu)</string>
     <string name="intro_help_details_version">Verzija: </string>
     <string name="intro_help_details_version_date">Datum verzije: </string>
+    <string name="onboarding_cancel">Odustani</string>
 
 </resources>
