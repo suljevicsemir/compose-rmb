@@ -122,7 +122,7 @@
     <string name="intro_help_screen_settings">Settings</string>
     <string name="intro_help_screen_lang">Language</string>
     <string name="intro_help_screen_security">Security</string>
-    <string name="intro_help_screen_tehnical">Tehnical details</string>
+    <string name="intro_help_screen_tehnical">Technical details</string>
     <string name="intro_help_login_title">Login</string>
     <string name="intro_help_login_desc">You can log into the application by entering PIN you created or via biometrics (if your device supports this option). You set PIN and / or biometrics as part of the service activation process, which can be changed later in the application.</string>
     <string name="intro_help_settings_title">Settings</string>
@@ -147,11 +147,11 @@
     <string name="intro_help_security_item6">Make regular updates of your phone\'s operating system version</string>
     <string name="intro_help_security_item7">Download only certified and verified applications from the Play Store for Android, or App Store for your iOS mobile device</string>
     <string name="intro_help_security_item8">Update your RMB application regularly by downloading new versions</string>
-    <string name="intro_help_details_title">Tehnical details</string>
+    <string name="intro_help_details_title">Technical details</string>
     <string name="intro_help_details_version">Version: </string>
     <string name="intro_help_details_headline">For the correct functioning of certain functionalities, the Mobile banking application requires the following permissions:</string>
     <string name="intro_help_details_item1">Internet connection</string>
     <string name="intro_help_details_item2">GPS - access to locations (to view the nearest branch office, ATM etc.)</string>
-    <string name="intro_help_details_item3">Access to address book (to use the Pay to contact fuctionality)</string>
+    <string name="intro_help_details_item3">Access to address book (to use the Pay to contact functionality)</string>
     <string name="intro_help_details_version_date">Version date: </string>
 </resources>
