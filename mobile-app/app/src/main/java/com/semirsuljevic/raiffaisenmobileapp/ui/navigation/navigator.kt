@@ -19,6 +19,9 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.StorageManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.IntroHelpLogin
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.IntroHelpScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.IntroHelpSettings
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
@@ -112,6 +115,18 @@ fun Navigator(navController: NavHostController) {
 
         composable(Screen.LoginScreen.route) {
             LoginScreen(navController = navController, loginViewModel = loginViewModel)
+        }
+
+        composable(Screen.InfoHelp.route) {
+            IntroHelpScreen(navController = navController)
+        }
+
+        //Home - IntroHelp - screens
+        composable(Screen.InfoHelpLogin.route) {
+            IntroHelpLogin(navController = navController)
+        }
+        composable(Screen.InfoHelpSettings.route) {
+            IntroHelpSettings(navController = navController)
         }
 
         composable(Screen.ErrorScreen.route) {

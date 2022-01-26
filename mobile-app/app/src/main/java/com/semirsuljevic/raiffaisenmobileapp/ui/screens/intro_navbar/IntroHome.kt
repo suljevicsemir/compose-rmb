@@ -1,12 +1,17 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -15,6 +20,7 @@ import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.StorageManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -56,6 +62,27 @@ fun IntroHome(navController: NavController) {
         contentAlignment = Alignment.Center
     ) {
         Column {
+            Box(
+                modifier = Modifier.fillMaxWidth().wrapContentSize(align = Alignment.TopEnd)
+            ) {
+
+                IconButton(
+                    modifier = Modifier.fillMaxWidth().wrapContentSize(align = Alignment.TopEnd),
+                    onClick = {
+                        navController.navigate(Screen.InfoHelp.route)
+                    },
+                    enabled = true,
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Info,
+                        contentDescription = "Home Info",
+                        tint = White,
+                    )
+                }
+
+
+            }
+
             Spacer(modifier = Modifier.weight(1f))
             Button(
                 onClick = {

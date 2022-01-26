@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.BulletListItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
@@ -66,23 +67,3 @@ fun DigitalServicesList() {
     }
 }
 
-
-
-@Composable
-fun BulletListItem(text: String) {
-    Row (
-        verticalAlignment = Alignment.CenterVertically
-    ){
-        Box(
-            modifier = Modifier
-                .size(5.dp)
-                .clip(RoundedCornerShape(5.dp))
-                .background(Gray200)
-        )
-        Spacer(modifier = Modifier.width(10.dp))
-        Text(
-            text = text,
-            color = Gray200
-        )
-    }
-}

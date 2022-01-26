@@ -115,4 +115,26 @@
     <string name="locations_title">Locations</string>
     <string name="locations_map_button">Map</string>
     <string name="locations_list_button">List</string>
+    <string name="intro_help_screen_title">Help</string>
+    <string name="intro_help_screen_desc1">With the Raiffeisen Mobile Banking application you can bank with us via your smartphone, any time and anywhere around the world.</string>
+    <string name="intro_help_screen_desc2">To use the application it is essential that you have access to the Internet - Wi-Fi or mobile data. This application encompasses a wide range of advanced online banking functionalities, and some of them are also available to customers who are not registered.</string>
+    <string name="intro_help_screen_login">Login</string>
+    <string name="intro_help_screen_settings">Settings</string>
+    <string name="intro_help_screen_lang">Language</string>
+    <string name="intro_help_screen_security">Security</string>
+    <string name="intro_help_screen_tehnical">Tehnical details</string>
+    <string name="intro_help_login_title">Login</string>
+    <string name="intro_help_login_desc">You can log into the application by entering PIN you created or via biometrics (if your device supports this option). You set PIN and / or biometrics as part of the service activation process, which can be changed later in the application.</string>
+    <string name="intro_help_settings_title">Settings</string>
+    <string name="intro_help_settings_desc1">In the section My Profile, you can find Settings that allow you to: Change the application langauge and the application theme; set biometrics identification (if you have not set it up during your registration); change your PIN and other application settings.</string>
+    <string name="intro_help_settings_desc2">The basic application settings are as follows:</string>
+    <string name="intro_help_settings_1">The application, in the background, is active up to 60 seconds</string>
+    <string name="intro_help_settings_2">The maximum working time in the application is 20 minutes</string>
+    <string name="intro_help_settings_3">The Account widget on the Dashboard is always active, but you can hide the balance of your account</string>
+    <string name="intro_help_lang_title">Language</string>
+    <string name="intro_help_lang_desc1">The application is set by default to the language of your device. If your device is set to a local language, the application will be in the same language after installation. If another language is set on the device then the application will be in English. If English is not default language and you want to use it, you can make the change as follows:</string>
+    <string name="intro_help_lang_item1">Before you log in to the application - select the More option, and in the About the app section, turn on English</string>
+    <string name="intro_help_lang_item2">After you are logged in to the application - select the My Profile option and in the Settings section, turn on English.</string>
+    <string name="intro_help_lang_info1">Turn on / off the English language by tapping the toggle next to English.</string>
+    <string name="intro_help_lang_info2">You can change the language any time, regardless of whether you are logged into the application or not.</string>
 </resources>

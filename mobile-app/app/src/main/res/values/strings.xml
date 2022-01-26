@@ -137,5 +137,27 @@
     <string name="locations_title">Lokacije</string>
     <string name="locations_map_button">Mapa</string>
     <string name="locations_list_button">Lista</string>
+    <string name="intro_help_screen_title">Pomoc</string>
+    <string name="intro_help_screen_desc1">Aplikacija Raiffeisen mobilno bankarstvo omogucava da putem svog pametnog telefona poslujete s Bankom, bilo kada i sa bilo kojeg mjesta.</string>
+    <string name="intro_help_screen_desc2">Da biste koristili aplikaciju neophodno je da imate pristup internetu - bezicno ili putem mobilnih podataka Vaseg operatera. Ova aplikacija obuhvata sirok spektar naprednih funkcionalnosti online bankarstva, a neke od njih dostupne su i klijentima koji nisu registrovani.</string>
+    <string name="intro_help_screen_login">Prijava</string>
+    <string name="intro_help_screen_settings">Postavke</string>
+    <string name="intro_help_screen_lang">Jezik</string>
+    <string name="intro_help_screen_security">Sigurnost</string>
+    <string name="intro_help_screen_tehnical">Tehnicki detalji</string>
+    <string name="intro_help_login_title">Prijava u aplikaciju</string>
+    <string name="intro_help_login_desc">Prijavu u aplikaciju mozete izvrsiti unosom PIN-a koji ste kreirali ili putem biometrije (ukoliko Vas uredaj podrzava ovu opciju). Postavke PIN-a i/ili biometrije vrsite u okviru procesa aktivacije usluge, a iste je moguce naknadno promijeniti u samoj aplikaciji.</string>
+    <string name="intro_help_settings_title">Postavke</string>
+    <string name="intro_help_settings_desc1">U dijelu aplikacije Moj profile dosutpne su Vam Postavke u okviru kojih mozete: promijeniti jezik na kojem koristite aplikaciju, temu aplikacije, ukljuciti identifikaciju putem biometrije (ukoliko to niste uradili prilikom prve prijave  u aplikaciju), promijeniti PIN kao i ostale postavke na nivou aplikacije.</string>
+    <string name="intro_help_settings_desc2">Osnovne postavke aplikacije su sljedece:</string>
+    <string name="intro_help_settings_1">Aplikacija u pozadini je aktivna maksimalno 60 sekundi</string>
+    <string name="intro_help_settings_2">Maksimalno trajanje rada u aplikaciji je 20 minuta</string>
+    <string name="intro_help_settings_3">Pregled Vasih racuna na Pocetnoj strani je uvijek aktivan, iako mozete sakriti prikaz stanja Vaseg racuna</string>
+    <string name="intro_help_lang_title">Jezik</string>
+    <string name="intro_help_lang_desc1">Aplikacija je primarno postavljena na jezik vaseg uredaja. Ukoliko je Vas uredaj podesen na lokalni jezik i aplikacija ce nakon instalacije biti na istom jeziku. Ukoliko je na uredaju postavljen neki drugi jezik onda ce aplikacija biti na engleskom jeziku. Ukoliko engleski jezik nije primarno postavljen, a zelite ga koristiti, promjenu mozete uraditi na sljedeci nacin:</string>
+    <string name="intro_help_lang_item1">Prije nego sto se logujete u aplikaciju - odaberite opciju Vise, te u dijelu O aplikaciji ukljucite opciju Engleski</string>
+    <string name="intro_help_lang_item2">Nakon sto se logujete u aplikaciju - odaberite opciju Moj profil, te u dijelu Postavke ukljucite opciju English.</string>
+    <string name="intro_help_lang_info1">Koristenje aplikacije na engleskom jeziku ukljucujete / iskljucujete dodirom tastera pored opcije Engleski.</string>
+    <string name="intro_help_lang_info2">Jezik mozete promijeniti u svakom trenutku, bez obzira da li ste prijavljeni u aplikaciju ili ne.</string>
 
 </resources>
