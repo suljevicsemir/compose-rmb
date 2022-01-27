@@ -69,6 +69,8 @@ fun OnBoardingTabs(
     val resources = LocalContext.current.resources
     resources.updateConfiguration(configuration, resources.displayMetrics)
 
+    //TODO try context.createConfigChange, load app check whats going the f on
+
 
 
 
