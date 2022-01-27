@@ -36,7 +36,7 @@ fun OnBoardingScreen(
     navController: NavController,
     viewModel: OnBoardingViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-    val pagerState = rememberPagerState(pageCount = 5)
+    val pagerState = rememberPagerState(pageCount = 6)
     OnBoardingTabs(pagerState = pagerState, navController = navController, viewModel = viewModel)
 
 }
@@ -51,7 +51,13 @@ fun OnBoardingTabs(
 
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
-            viewModel.setIndex(page)
+            if(page == 5) {
+                navController.popBackStack()
+            }
+            else {
+                viewModel.setIndex(page)
+            }
+
         }
     }
     Column (
