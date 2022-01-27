@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.outlined.Inventory2
 import androidx.compose.material.icons.outlined.More
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -38,34 +39,40 @@ fun IntroNavbar() {
     Scaffold (
         backgroundColor = Color.Black,
         bottomBar = {
-            IntroBottomBar(
-                items = listOf(
-                    IntroBottomBarItem(
-                        route = Screen.IntroHome.route,
-                        icon = Icons.Default.Home
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentRoute = navBackStackEntry?.destination?.route
+            if(currentRoute != Screen.OnBoardingScreen.route) {
+                IntroBottomBar(
+                    items = listOf(
+                        IntroBottomBarItem(
+                            route = Screen.IntroHome.route,
+                            icon = Icons.Default.Home
+                        ),
+                        IntroBottomBarItem(
+                            route = Screen.IntroLocations.route,
+                            icon = Icons.Filled.LocationOn
+                        ),
+                        IntroBottomBarItem(
+                            route = Screen.IntroProducts.route,
+                            icon = Icons.Outlined.Inventory2
+                        ),
+                        IntroBottomBarItem(
+                            route = Screen.IntroMore.route,
+                            icon = Icons.Outlined.More
+                        )
                     ),
-                    IntroBottomBarItem(
-                        route = Screen.IntroLocations.route,
-                        icon = Icons.Filled.LocationOn
-                    ),
-                    IntroBottomBarItem(
-                        route = Screen.IntroProducts.route,
-                        icon = Icons.Outlined.Inventory2
-                    ),
-                    IntroBottomBarItem(
-                        route = Screen.IntroMore.route,
-                        icon = Icons.Outlined.More
-                    )
-                ),
-                navController = navController,
-                onItemClick = {
+                    navController = navController,
+                    onItemClick = {
 
-                    navController.navigate(it.route) {
-                        popUpTo(navController.graph.findStartDestination().id)
-                        launchSingleTop = false
+                        navController.navigate(it.route) {
+                            popUpTo(navController.graph.findStartDestination().id)
+                            launchSingleTop = false
+                        }
                     }
-                }
-            )
+                )
+            }
+
+
         }
     ) {
         Navigator(navController = navController)

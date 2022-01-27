@@ -177,5 +177,15 @@
     <string name="intro_help_details_version">Verzija: </string>
     <string name="intro_help_details_version_date">Datum verzije: </string>
     <string name="onboarding_cancel">Odustani</string>
+    <string name="onboarding_item1_title">Svi racuni na jednom mjestu</string>
+    <string name="onboarding_item1_desc">Jednim pokretom provjeri stanje na svim svojim racunima</string>
+    <string name="onboarding_item2_title">Transkacije u dzepu</string>
+    <string name="onboarding_item2_desc">Koristeci filter pregledaj transakcije u skladu sa svojim zeljama i potrebama</string>
+    <string name="onboarding_item3_title">Placanja u sekundi</string>
+    <string name="onboarding_item3_desc">Transkacije u 24/7 i to u samo nekoliko klikova</string>
+    <string name="onboarding_item4_title">Tema aplikacije po tvojoj zelji</string>
+    <string name="onboarding_item4_desc">Svijetlo ili tamno? Ti biras.</string>
+    <string name="onboarding_item5_title">Svajpaj za dodatne opcije</string>
+    <string name="onboarding_item5_desc">Pokretom lijevo ili desno na listama otvarate nove opcije</string>
 
 </resources>

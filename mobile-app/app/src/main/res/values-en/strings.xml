@@ -155,4 +155,14 @@
     <string name="intro_help_details_item3">Access to address book (to use the Pay to contact functionality)</string>
     <string name="intro_help_details_version_date">Version date: </string>
     <string name="onboarding_cancel">Cancel</string>
+    <string name="onboarding_item1_title">All accounts in just one app</string>
+    <string name="onboarding_item1_desc">Check all your accounts\' balances with a simple swipe</string>
+    <string name="onboarding_item2_title">Transactions in your pocket</string>
+    <string name="onboarding_item2_desc">Use filters to get an overview of your transactions and orders</string>
+    <string name="onboarding_item3_title">Instantaneous payments</string>
+    <string name="onboarding_item3_desc">24/7 transactions with just a few clicks</string>
+    <string name="onboarding_item4_title">Makeup according to your wishes</string>
+    <string name="onboarding_item4_desc">Light or dark? It\'s your choice.</string>
+    <string name="onboarding_item5_title">Swipe for more options</string>
+    <string name="onboarding_item5_desc">Swiping left or right opens new options</string>
 </resources>
