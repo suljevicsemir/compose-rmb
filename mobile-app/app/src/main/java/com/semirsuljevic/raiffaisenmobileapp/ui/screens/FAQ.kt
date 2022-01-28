@@ -60,7 +60,7 @@ fun FAQScreen(navController: NavController, viewModel: FAQViewModel) {
             CenteredTitleAppBar(title = stringResource(id = R.string.faq_screen_title), navController = navController)
             Column (
                 modifier = Modifier
-                    .padding(horizontal = 30.dp)
+                    .padding(horizontal = 20.dp)
                     .verticalScroll(scrollState)
             ){
                 FirstDescription(text = stringResource(id = R.string.faq_screen_desc_1))
