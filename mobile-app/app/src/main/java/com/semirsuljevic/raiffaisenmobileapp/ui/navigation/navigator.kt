@@ -26,6 +26,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroHome
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroLocations
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroMore
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.FAQScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.OnBoardingScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200

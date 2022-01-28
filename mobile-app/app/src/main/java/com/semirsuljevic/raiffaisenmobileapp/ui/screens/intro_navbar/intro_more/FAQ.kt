@@ -1,4 +1,4 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.screens
+package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more
 
 import android.content.Intent
 import android.net.Uri
@@ -29,6 +29,7 @@ import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.models.FAQItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.TappableURI
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400

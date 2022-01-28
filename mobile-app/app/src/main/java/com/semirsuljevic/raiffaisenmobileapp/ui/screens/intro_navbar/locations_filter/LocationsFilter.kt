@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBCheckbox
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
@@ -32,17 +33,23 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
 
     LaunchedEffect(Unit) {
         viewModel.getCities()
+        viewModel.getBranchTypes()
+        viewModel.getBranchServices()
     }
 
 
     if(viewModel.loading.value) {
-        CircularProgressIndicator(color = Yellow400, modifier = Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center))
+        CircularProgressIndicator(color = Yellow400, modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(align = Alignment.Center))
     }
     else {
         Column {
             CenteredTitleAppBar(title = stringResource(id = R.string.locations_filter_title), navController = navController)
             Column (
-                Modifier.padding(horizontal = 10.dp).verticalScroll(scrollState)
+                Modifier
+                    .padding(horizontal = 10.dp)
+                    .verticalScroll(scrollState)
             ){
                 Spacer(modifier = Modifier.height(20.dp))
                 FilterContainer(
@@ -54,10 +61,48 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
                         when(viewModel.selectedSearch.value) {
                             SearchBy.Radius -> DistanceRadius(viewModel = viewModel)
                             SearchBy.City -> DistanceCity(viewModel = viewModel)
-                            else -> {}
+                            SearchBy.Closest -> null
                         }
                     }
                 )
+                Spacer(modifier = Modifier.height(30.dp))
+                FilterContainer(
+                    title = stringResource(id = R.string.locations_filter_branch_search),
+                    topContent = {
+                        SearchBranchType(viewModel = viewModel)
+                    },
+                )
+                Spacer(modifier = Modifier.height(30.dp))
+                FilterContainer(
+                    title = stringResource(id = R.string.locations_filter_service_search),
+                    topContent = {
+                        SearchBranchService(viewModel = viewModel)
+                    }
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                FilterContainer(
+                    title = stringResource(id = R.string.locations_filter_atm_search),
+                    topContent = {
+                        Column {
+                            RMBCheckbox(
+                                checked = viewModel.outsideAtm.value,
+                                onCheckedChange = {
+                                    viewModel.outsideAtm.value = it
+                                },
+                                text = "Unutrašnji"
+                            )
+                            Spacer(Modifier.height(10.dp))
+                            RMBCheckbox(
+                                checked = viewModel.insideAtm.value,
+                                onCheckedChange = {
+                                    viewModel.insideAtm.value = it
+                                },
+                                text = "Vanjski"
+                            )
+                        }
+                    }
+                )
+                Spacer(modifier = Modifier.height(65.dp))
             }
         }
     }
@@ -65,8 +110,146 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
 
 }
 
+@ExperimentalMaterialApi
+@Composable
+fun SearchBranchService(viewModel: LocationsFilterViewModel) {
 
+    var selectedOptionText by remember {
+        mutableStateOf("All branch services")
+    }
 
+    ExposedDropdownMenuBox(
+        expanded = viewModel.branchServiceExpanded.value,
+        onExpandedChange = {
+            viewModel.toggleBranchServiceDropdown()
+        },
+        modifier = Modifier
+            .fillMaxWidth(1f)
+            .padding(horizontal = 10.dp)
+
+    ) {
+        OutlinedTextField(
+            readOnly = true,
+            value = selectedOptionText,
+            onValueChange = { },
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(
+                    expanded = viewModel.branchServiceExpanded.value,
+                )
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                backgroundColor = Gray400,
+                trailingIconColor = Gray200,
+                focusedBorderColor = Yellow400,
+                unfocusedBorderColor = Yellow400
+
+            ),
+            textStyle = TextStyle(
+                color = Gray200
+            ),
+            modifier = Modifier.fillMaxWidth(1f)
+        )
+        ExposedDropdownMenu(
+            expanded = viewModel.branchServiceExpanded.value,
+            onDismissRequest = {
+                viewModel.branchServiceDropdownOff()
+            },
+            modifier = Modifier
+                .padding(vertical = 0.dp, horizontal = 0.dp)
+                .background(color = Black)
+        ) {
+            viewModel.branchServices.value!!.forEach { selectionOption ->
+                DropdownMenuItem(
+                    onClick = {
+                        viewModel.selectBranchService(selectionOption)
+                        selectedOptionText = selectionOption.nameBj
+                        viewModel.branchServiceDropdownOff()
+                    },
+                    modifier = Modifier
+                        .background(color = Black)
+                        .padding(horizontal = 10.dp)
+                ) {
+                    Text(
+                        text = selectionOption.nameBj,
+                        color = Gray200,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.W600
+                    )
+                }
+            }
+        }
+    }
+}
+
+@ExperimentalMaterialApi
+@Composable
+fun SearchBranchType(viewModel: LocationsFilterViewModel) {
+    var selectedOptionText by remember {
+        mutableStateOf("All branch types")
+    }
+
+    ExposedDropdownMenuBox(
+        expanded = viewModel.branchTypeExpanded.value,
+        onExpandedChange = {
+            viewModel.toggleBranchTypeDropdown()
+        },
+        modifier = Modifier
+            .fillMaxWidth(1f)
+            .padding(horizontal = 10.dp)
+
+    ) {
+        OutlinedTextField(
+            readOnly = true,
+            value = selectedOptionText,
+            onValueChange = { },
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(
+                    expanded = viewModel.branchTypeExpanded.value,
+                )
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                backgroundColor = Gray400,
+                trailingIconColor = Gray200,
+                focusedBorderColor = Yellow400,
+                unfocusedBorderColor = Yellow400
+
+            ),
+            textStyle = TextStyle(
+                color = Gray200
+            ),
+            modifier = Modifier.fillMaxWidth(1f)
+        )
+        ExposedDropdownMenu(
+            expanded = viewModel.branchTypeExpanded.value,
+            onDismissRequest = {
+                viewModel.branchTypeDropdownOff()
+            },
+            modifier = Modifier
+                .padding(vertical = 0.dp, horizontal = 0.dp)
+                .background(color = Black)
+        ) {
+            viewModel.branchTypes.value!!.forEach { selectionOption ->
+                DropdownMenuItem(
+                    onClick = {
+                        viewModel.selectBranchType(selectionOption)
+                        selectedOptionText = selectionOption.nameBj
+                        viewModel.branchTypeDropdownOff()
+                    },
+                    modifier = Modifier
+                        .background(color = Black)
+                        .padding(horizontal = 10.dp)
+                ) {
+                    Text(
+                        text = selectionOption.nameBj,
+                        color = Gray200,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.W600
+                    )
+                }
+            }
+        }
+    }
+}
 
 
 @ExperimentalMaterialApi
@@ -81,7 +264,7 @@ fun DistanceCity(viewModel: LocationsFilterViewModel) {
     ExposedDropdownMenuBox(
         expanded = viewModel.dropdownExpanded.value,
         onExpandedChange = {
-            viewModel.toggleDropdown()
+            viewModel.toggleDistanceDropdown()
         },
         modifier = Modifier
             .fillMaxWidth(1f)
@@ -112,7 +295,7 @@ fun DistanceCity(viewModel: LocationsFilterViewModel) {
         ExposedDropdownMenu(
             expanded = viewModel.dropdownExpanded.value,
             onDismissRequest = {
-                viewModel.dropdownOff()
+                viewModel.distanceDropdownOff()
             },
             modifier = Modifier
                 .padding(vertical = 0.dp, horizontal = 0.dp)
@@ -123,7 +306,7 @@ fun DistanceCity(viewModel: LocationsFilterViewModel) {
                     onClick = {
                         viewModel.selectCity(selectionOption)
                         selectedOptionText = selectionOption.name
-                        viewModel.dropdownOff()
+                        viewModel.distanceDropdownOff()
                     },
                     modifier = Modifier
                         .background(color = Black)

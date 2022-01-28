@@ -18,8 +18,8 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 @Composable
 fun FilterContainer(
     title: String,
-    topContent: @Composable() () -> Unit,
-    bottomContent: @Composable() () -> Unit
+    topContent: @Composable () -> Unit,
+    bottomContent: @Composable (() -> Unit)? = null
 ) {
     Column(
         Modifier
@@ -39,7 +39,12 @@ fun FilterContainer(
         )
         Spacer(modifier = Modifier.height(14.dp))
         topContent()
-        Spacer(modifier = Modifier.height(24.dp))
-        bottomContent()
+        if(bottomContent == null || bottomContent == {}) {
+            Spacer(modifier = Modifier.height(0.dp))
+        }
+        else {
+            Spacer(modifier = Modifier.height(24.dp))
+        }
+        bottomContent?.invoke()
     }
 }
