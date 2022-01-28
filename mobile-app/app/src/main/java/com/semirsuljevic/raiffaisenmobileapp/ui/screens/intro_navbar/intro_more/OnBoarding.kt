@@ -1,8 +1,7 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more
 
-import android.content.Context
-import android.content.ContextWrapper
-import androidx.appcompat.app.AppCompatActivity
+
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -31,7 +30,6 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.view_models.OnBoardingViewModel
 import kotlinx.coroutines.flow.collect
-import java.util.*
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -45,17 +43,6 @@ fun OnBoardingScreen(
 }
 
 
-fun Context.getActivity(): AppCompatActivity? {
-    var currentContext = this
-    while (currentContext is ContextWrapper) {
-        if (currentContext is AppCompatActivity) {
-            return currentContext
-        }
-        currentContext = currentContext.baseContext
-    }
-    return null
-}
-
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnBoardingTabs(
@@ -63,16 +50,6 @@ fun OnBoardingTabs(
     navController: NavController,
     viewModel: OnBoardingViewModel
 ) {
-
-    val configuration = LocalConfiguration.current
-    configuration.setLocale(Locale("en"))
-    val resources = LocalContext.current.resources
-    resources.updateConfiguration(configuration, resources.displayMetrics)
-
-    //TODO try context.createConfigChange, load app check whats going the f on
-
-
-
 
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
@@ -82,7 +59,6 @@ fun OnBoardingTabs(
             else {
                 viewModel.setIndex(page)
             }
-
         }
     }
     Column (
@@ -98,29 +74,32 @@ fun OnBoardingTabs(
                 0 -> OnBoardingTabItem(
                         title = stringResource(id = R.string.onboarding_item1_title),
                         description = stringResource(id = R.string.onboarding_item1_desc),
-                        navController = navController
+                        navController = navController,
+                        image = R.drawable.onboarding_item1
                     )
                 1 -> OnBoardingTabItem(
                         title = stringResource(id = R.string.onboarding_item2_title),
                         description = stringResource(id = R.string.onboarding_item2_desc),
-                        navController = navController
+                        navController = navController,
+                    image = R.drawable.onboarding_item2
                     )
                 2 -> OnBoardingTabItem(
                         title = stringResource(id = R.string.onboarding_item3_title),
                         description = stringResource(id = R.string.onboarding_item3_desc),
-                        navController = navController
+                        navController = navController,
+                        image = R.drawable.onboarding_item3
                     )
-
                 3 -> OnBoardingTabItem(
                         title = stringResource(id = R.string.onboarding_item4_title),
                         description = stringResource(id = R.string.onboarding_item4_desc),
-                        navController = navController
+                        navController = navController,
+                        image = R.drawable.onboarding_item4
                     )
-                4 ->
-                    OnBoardingTabItem(
+                4 -> OnBoardingTabItem(
                         title = stringResource(id = R.string.onboarding_item5_title),
                         description = stringResource(id = R.string.onboarding_item5_desc),
-                        navController = navController
+                        navController = navController,
+                        image = R.drawable.onboarding_item5
                     )
             }
         }
@@ -130,7 +109,12 @@ fun OnBoardingTabs(
 }
 
 @Composable
-fun OnBoardingTabItem(title: String, description: String, navController: NavController) {
+fun OnBoardingTabItem(
+    title: String,
+    description: String,
+    navController: NavController,
+    image: Int
+) {
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp
     val screenWidth = configuration.screenWidthDp
@@ -149,6 +133,15 @@ fun OnBoardingTabItem(title: String, description: String, navController: NavCont
                 .height((screenHeight - 50).dp)
                 .width((screenWidth - 42).dp)
                 .background(color = Gray400)) {
+            Image(
+                painter = painterResource(id = image),
+                contentDescription = title,
+                modifier = Modifier
+                    .padding(top = 50.dp)
+                    .clip(RoundedCornerShape(20.dp))
+                    .height(200.dp)
+                    .weight(1f)
+            )
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 title,
@@ -162,20 +155,25 @@ fun OnBoardingTabItem(title: String, description: String, navController: NavCont
                 color = White,
                 textAlign = TextAlign.Center
             )
-            TextButton(
-                onClick = {
-                    navController.popBackStack()
-                }
-            ) {
-                Text(
-                    stringResource(id = R.string.onboarding_cancel),
-                    color = White
-                )
-            }
+            OnBoardingCancelButton(navController = navController)
             Spacer(modifier = Modifier.height(3.dp))
         }
         Spacer(modifier = Modifier.width(6.dp))
         OnBoardingPageSeparator()
+    }
+}
+
+@Composable
+fun OnBoardingCancelButton(navController: NavController) {
+    TextButton(
+        onClick = {
+            navController.popBackStack()
+        }
+    ) {
+        Text(
+            stringResource(id = R.string.onboarding_cancel),
+            color = White
+        )
     }
 }
 
