@@ -45,6 +45,7 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
 
+
         setContent {
             val systemUiController = rememberSystemUiController()
             systemUiController.setStatusBarColor(color = Color.Black)

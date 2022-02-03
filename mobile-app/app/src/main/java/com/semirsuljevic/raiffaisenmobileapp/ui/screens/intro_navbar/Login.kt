@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,11 +28,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.*
-import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LoginViewModel
+import com.semirsuljevic.raiffaisenmobileapp.view_models.LoginViewModel
+import kotlinx.coroutines.launch
 
 
 @Composable
 fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel) {
+    val coroutineScope = rememberCoroutineScope()
     Column (
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -52,7 +55,9 @@ fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel) {
         Spacer(Modifier.weight(1f ))
         Button(
             onClick = {
-                loginViewModel.onLogin()
+                coroutineScope.launch {
+                    loginViewModel.onLogin()
+                }
             },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Yellow400

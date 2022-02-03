@@ -21,6 +21,7 @@ fun RMBCheckbox(
     onCheckedChange: (Boolean) -> Unit,
     text: String
 ) {
+
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -34,7 +35,9 @@ fun RMBCheckbox(
                 checkedColor = Yellow400,
                 uncheckedColor = Yellow400
             ),
-            modifier = Modifier.clip(RoundedCornerShape(40.dp)).size(40.dp)
+            modifier = Modifier
+                .clip(RoundedCornerShape(40.dp))
+                .size(40.dp)
         )
         Text(
           text,

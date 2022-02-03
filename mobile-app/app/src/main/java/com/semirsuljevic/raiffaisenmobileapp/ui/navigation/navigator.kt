@@ -9,7 +9,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -18,7 +17,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.semirsuljevic.raiffaisenmobileapp.StorageManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
@@ -31,8 +29,8 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
-import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.LoginViewModel
-import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
+import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.SecureSharedPref
+import com.semirsuljevic.raiffaisenmobileapp.view_models.LoginViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 
 
@@ -43,22 +41,18 @@ import kotlinx.coroutines.InternalCoroutinesApi
 fun Navigator(navController: NavHostController) {
 
     val faqViewModel = FAQViewModel()
-    val locationsFilterViewModel = LocationsFilterViewModel()
-    val loginViewModel = LoginViewModel(LocalContext.current.applicationContext as Application)
+
+    val secureSharedPref: SecureSharedPref = SecureSharedPref(LocalContext.current)
+    val loginViewModel = LoginViewModel(LocalContext.current.applicationContext as Application, secureSharedPref = secureSharedPref)
+
+    val accessToken = secureSharedPref.getAccessToken()
 
 
     val context = LocalContext.current
-    // a coroutine scope
-    val scope = rememberCoroutineScope()
-    val dataStore = StorageManager(context = context)
-
-
-
-
 
     NavHost(
         navController = navController,
-        startDestination = Screen.IntroHome.route
+        startDestination = if(accessToken != null)  Screen.IntroHome.route else Screen.LoginScreen.route
     ) {
         composable(Screen.IntroHome.route) {
             IntroHome(navController = navController)
