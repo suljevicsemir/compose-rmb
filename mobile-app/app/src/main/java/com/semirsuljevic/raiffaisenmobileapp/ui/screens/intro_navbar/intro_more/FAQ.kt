@@ -1,7 +1,5 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more
 
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowDownward
@@ -20,7 +19,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -29,61 +27,69 @@ import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.models.FAQItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.TappableURI
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.LaunchablePhoneNumber
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 
 @Composable
-fun FAQScreen(navController: NavController, viewModel: FAQViewModel) {
+fun FAQScreen(
+    navController: NavController,
+    viewModel: FAQViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+) {
+    LaunchedEffect(Unit) {
+        viewModel.fetch()
+    }
     val scrollState = rememberScrollState()
-    val context = LocalContext.current
-    val firstNumber = stringResource(id = R.string.faq_screen_number_1)
-    val secondNumber = stringResource(id = R.string.faq_screen_number_2)
-    val firstNumberIntent = remember {
-        Intent(Intent.ACTION_DIAL, Uri.parse("tel:$firstNumber"))
-    }
-    val secondNumberIntent = remember {
-        Intent(Intent.ACTION_DIAL, Uri.parse("tel:$secondNumber"))
-    }
-    Column (
-        Modifier
-            .fillMaxSize()
-            .wrapContentSize(align = Alignment.Center)
-    ){
-        if(viewModel.loading.value) {
-            CircularProgressIndicator(
-                color = Yellow400
-            )
-        }
-        else {
+
+    Scaffold (
+        backgroundColor = Black,
+        topBar = {
             CenteredTitleAppBar(title = stringResource(id = R.string.faq_screen_title), navController = navController)
-            Column (
-                modifier = Modifier
-                    .padding(horizontal = 20.dp)
-                    .verticalScroll(scrollState)
-            ){
-                FirstDescription(text = stringResource(id = R.string.faq_screen_desc_1))
-                Spacer(modifier = Modifier.height(15.dp))
-                SecondDescription(text = stringResource(id = R.string.faq_screen_desc_2))
-                Spacer(modifier = Modifier.height(15.dp))
-                TappableURI(icon = painterResource(id = R.drawable.ic_viber), uri = stringResource(id = R.string.faq_screen_number_1), ) {
-                    context.startActivity(firstNumberIntent)
-                }
-                TappableURI(icon = painterResource(id = R.drawable.ic_viber), uri = stringResource(id = R.string.faq_screen_number_2)) {
-                    context.startActivity(secondNumberIntent)
-                }
-                if(viewModel.items.value != null && viewModel.items.value!!.isNotEmpty()) {
-                    for (i in viewModel.items.value!!.indices) {
-                        FAQListItem(item = viewModel.items.value!![i], index = i)
+        },
+        modifier = Modifier.fillMaxSize()
+    ){
+        Column (
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            if(viewModel.loading.value) {
+                CircularProgressIndicator(
+                    color = Yellow400,
+                )
+            }
+            else {
+                Column (
+                    modifier = Modifier.padding(horizontal = 20.dp)
+                ){
+                    FirstDescription(text = stringResource(id = R.string.faq_screen_desc_1))
+                    Spacer(modifier = Modifier.height(15.dp))
+                    SecondDescription(text = stringResource(id = R.string.faq_screen_desc_2))
+                    Spacer(modifier = Modifier.height(15.dp))
+                    LaunchablePhoneNumber(
+                        icon = painterResource(id = R.drawable.ic_viber),
+                        phoneNumber = stringResource(id = R.string.faq_screen_number_1),
+                    )
+                    LaunchablePhoneNumber(
+                        icon = painterResource(id = R.drawable.ic_viber),
+                        phoneNumber = stringResource(id = R.string.faq_screen_number_2),
+                    )
+                    if(viewModel.items.value != null && viewModel.items.value!!.isNotEmpty()) {
+                        for (i in viewModel.items.value!!.indices) {
+                            FAQListItem(item = viewModel.items.value!![i], index = i)
+                        }
                     }
+                    Spacer(modifier = Modifier.height(65.dp))
                 }
-                Spacer(modifier = Modifier.height(65.dp))
+
             }
 
         }
-
     }
 }
 

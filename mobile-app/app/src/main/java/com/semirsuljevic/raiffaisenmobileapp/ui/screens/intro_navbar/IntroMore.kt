@@ -11,18 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
-import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 
 
 @Composable
 fun IntroMore(
-    navController: NavController,
-    faqViewModel: FAQViewModel = viewModel()
+    navController: NavController
 ) {
     val scrollState = rememberScrollState()
     Column (
@@ -76,7 +73,6 @@ fun IntroMore(
             title = stringResource(id = R.string.more_screen_item_faq),
             icon = Icons.Outlined.Quiz,
             onPressed = {
-                faqViewModel.fetch()
                 navController.navigate(Screen.FAQScreen.route)
             }
         )

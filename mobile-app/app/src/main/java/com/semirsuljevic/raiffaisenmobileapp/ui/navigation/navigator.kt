@@ -22,11 +22,9 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.FAQScreen
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.OnBoardingScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
-import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.SecureSharedPref
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LoginViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -38,15 +36,9 @@ import kotlinx.coroutines.InternalCoroutinesApi
 @Composable
 fun Navigator(navController: NavHostController) {
 
-    val faqViewModel = FAQViewModel()
-
     val secureSharedPref: SecureSharedPref = SecureSharedPref(LocalContext.current)
     val loginViewModel = LoginViewModel(LocalContext.current.applicationContext as Application, secureSharedPref = secureSharedPref)
 
-    val accessToken = secureSharedPref.getAccessToken()
-
-
-    val context = LocalContext.current
 
     NavHost(
         navController = navController,
@@ -89,7 +81,7 @@ fun Navigator(navController: NavHostController) {
         }
 
         composable(Screen.FAQScreen.route) {
-            FAQScreen(navController = navController, viewModel = faqViewModel)
+            FAQScreen(navController = navController)
         }
 
         composable(Screen.LocationsScreen.route) {
