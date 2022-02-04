@@ -20,15 +20,11 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.CurrentAccountScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.Locations
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.SavingsScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.*
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.AccountSetsScreen
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.CreditCardsScreen
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.DigitalScreensScreen
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.LoansScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.SecureSharedPref
