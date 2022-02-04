@@ -1,4 +1,4 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.screens
+package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -24,17 +24,17 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 
 @Composable
-fun LoansScreen(navController: NavController) {
+fun CreditCardsScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     val uriHandler = LocalUriHandler.current
-    val applyLink = stringResource(id = R.string.loans_screen_apply_online_link)
-    val moreInfoLink = stringResource(id = R.string.loans_screen_more_info_link)
+    val applyLink = stringResource(id = R.string.credit_cards_screen_apply_link)
+    val moreInfoLink = stringResource(id = R.string.credit_cards_screen_more_info_link)
 
     Scaffold (
         backgroundColor = Black,
         topBar = {
             CenteredTitleAppBar(
-                title = stringResource(id = R.string.loans_screen_title),
+                title = stringResource(id = R.string.credit_cards_screen_title),
                 navController = navController
             )
         }
@@ -48,19 +48,19 @@ fun LoansScreen(navController: NavController) {
                 modifier = Modifier.padding(horizontal = 20.dp)
             ){
                 Text(
-                    text = stringResource(id = R.string.loans_screen_description),
+                    text = stringResource(id = R.string.credit_cards_screen_description),
                     color = Gray200,
                     textAlign = TextAlign.Justify
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = stringResource(id = R.string.loans_screen_apply_online),
+                    text = stringResource(id = R.string.credit_cards_screen_apply_online),
                     color = Yellow400,
                     modifier = Modifier.clickable { uriHandler.openUri(applyLink) }
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = stringResource(id = R.string.loans_screen_more_info),
+                    text = stringResource(id = R.string.credit_cards_screen_more_info),
                     color = Yellow400,
                     modifier = Modifier.clickable { uriHandler.openUri(moreInfoLink) }
                 )
