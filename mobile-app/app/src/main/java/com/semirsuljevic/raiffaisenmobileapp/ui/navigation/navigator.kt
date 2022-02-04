@@ -18,11 +18,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.CurrentAccountScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.DigitalScreensScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.Locations
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.SavingsScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.*
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.AccountSetsScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.CreditCardsScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.LoansScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
