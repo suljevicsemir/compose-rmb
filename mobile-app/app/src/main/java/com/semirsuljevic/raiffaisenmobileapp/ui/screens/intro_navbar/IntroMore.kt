@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.*
@@ -21,7 +22,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 @Composable
 fun IntroMore(
     navController: NavController,
-    faqViewModel: FAQViewModel
+    faqViewModel: FAQViewModel = viewModel()
 ) {
     val scrollState = rememberScrollState()
     Column (

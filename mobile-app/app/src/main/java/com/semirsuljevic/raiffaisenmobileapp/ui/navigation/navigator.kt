@@ -20,9 +20,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroHome
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroLocations
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroMore
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.FAQScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.OnBoardingScreen
@@ -52,23 +50,12 @@ fun Navigator(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = if(accessToken != null)  Screen.IntroHome.route else Screen.LoginScreen.route
+        startDestination = Screen.IntroHome.route
     ) {
         composable(Screen.IntroHome.route) {
-            IntroHome(navController = navController)
+            IntroNavbar(navController = navController)
         }
-        composable(Screen.IntroProducts.route) {
-            ProductsScreen(navController = navController)
-        }
-        composable(Screen.IntroLocations.route) {
-            IntroLocations(navController = navController)
-        }
-        composable(Screen.IntroMore.route) {
-            IntroMore(
-                navController = navController,
-                faqViewModel = faqViewModel
-            )
-        }
+
         composable(Screen.CurrentAccountScreen.route) {
             CurrentAccountScreen(navController = navController)
         }

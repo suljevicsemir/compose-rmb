@@ -13,8 +13,10 @@ import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
+import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Navigator
 import kotlinx.coroutines.InternalCoroutinesApi
 import retrofit2.Call
 import retrofit2.http.GET
@@ -33,7 +35,9 @@ private object JetNewsRippleTheme : RippleTheme {
         lightTheme = !isSystemInDarkTheme()
     )
 }
+@ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
+
 
 
 
@@ -41,21 +45,18 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
-
-
         setContent {
             val systemUiController = rememberSystemUiController()
             systemUiController.setStatusBarColor(color = Color.Black)
+            val navController = rememberNavController()
             MaterialTheme(
 
             ) {
                 CompositionLocalProvider(
                     LocalRippleTheme provides JetNewsRippleTheme
                 ) {
-                    IntroNavbar()
+                    Navigator(navController = navController)
                 }
             }
         }

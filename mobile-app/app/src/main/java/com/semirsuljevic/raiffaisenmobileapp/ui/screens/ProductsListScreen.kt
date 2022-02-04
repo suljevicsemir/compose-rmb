@@ -16,7 +16,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ScreenTitle
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 
 @Composable
-fun ProductsScreen(navController: NavController) {
+fun IntroProductsScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     Column (
         modifier = Modifier.verticalScroll(scrollState)
