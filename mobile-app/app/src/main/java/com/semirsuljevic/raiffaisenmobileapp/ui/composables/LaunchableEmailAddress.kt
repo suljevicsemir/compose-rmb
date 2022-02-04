@@ -22,14 +22,16 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 @Composable
 fun LaunchableEmailAddress(
     icon: Painter,
-    emailAddress: String
+    emailAddress: String,
+    subject: String = "",
+    text: String = ""
 ) {
     val context = LocalContext.current
     val numberIntent = remember {
         Intent(Intent.ACTION_VIEW, Uri.parse("mailto:$emailAddress"))
     }
-    numberIntent.putExtra(Intent.EXTRA_SUBJECT, "")
-    numberIntent.putExtra(Intent.EXTRA_TEXT, "")
+    numberIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
+    numberIntent.putExtra(Intent.EXTRA_TEXT, text)
 
     Row (
         verticalAlignment = Alignment.CenterVertically,
