@@ -1,6 +1,8 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -19,7 +21,8 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 fun IntroProductsScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     Column (
-        modifier = Modifier.verticalScroll(scrollState)
+        modifier = Modifier.fillMaxSize().verticalScroll(scrollState),
+        verticalArrangement = Arrangement.Top
     ){
         ScreenTitle(text = stringResource(id = R.string.products_screen_title))
         ListItemSeparator()
