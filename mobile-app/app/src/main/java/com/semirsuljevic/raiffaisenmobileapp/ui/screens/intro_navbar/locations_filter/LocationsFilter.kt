@@ -38,71 +38,80 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
     }
 
 
-    if(viewModel.loading.value) {
-        CircularProgressIndicator(color = Yellow400, modifier = Modifier
-            .fillMaxSize()
-            .wrapContentSize(align = Alignment.Center))
-    }
-    else {
-        Column {
-            CenteredTitleAppBar(title = stringResource(id = R.string.locations_filter_title), navController = navController)
-            Column (
-                Modifier
-                    .padding(horizontal = 10.dp)
-                    .verticalScroll(scrollState)
-            ){
-                Spacer(modifier = Modifier.height(20.dp))
-                FilterContainer(
-                    title = stringResource(id = R.string.locations_filter_distance_label),
-                    topContent = {
-                        DistanceFilterRow(viewModel)
-                    },
-                    bottomContent = {
-                        when(viewModel.selectedSearch.value) {
-                            SearchBy.Radius -> DistanceRadius(viewModel = viewModel)
-                            SearchBy.City -> DistanceCity(viewModel = viewModel)
-                            SearchBy.Closest -> null
+    Scaffold (
+        backgroundColor = Black,
+        topBar = {
+            CenteredTitleAppBar(
+                title = stringResource(id = R.string.locations_filter_title),
+                navController = navController
+            )
+        }
+    ){
+        if(viewModel.loading.value) {
+            CircularProgressIndicator(color = Yellow400, modifier = Modifier
+                .fillMaxSize()
+                .wrapContentSize(align = Alignment.Center))
+        }
+        else {
+            Column {
+                Column (
+                    Modifier
+                        .padding(horizontal = 10.dp)
+                        .verticalScroll(scrollState)
+                ){
+                    Spacer(modifier = Modifier.height(20.dp))
+                    FilterContainer(
+                        title = stringResource(id = R.string.locations_filter_distance_label),
+                        topContent = {
+                            DistanceFilterRow(viewModel)
+                        },
+                        bottomContent = {
+                            when(viewModel.selectedSearch.value) {
+                                SearchBy.Radius -> DistanceRadius(viewModel = viewModel)
+                                SearchBy.City -> DistanceCity(viewModel = viewModel)
+                                SearchBy.Closest -> null
+                            }
                         }
-                    }
-                )
-                Spacer(modifier = Modifier.height(30.dp))
-                FilterContainer(
-                    title = stringResource(id = R.string.locations_filter_branch_search),
-                    topContent = {
-                        SearchBranchType(viewModel = viewModel)
-                    },
-                )
-                Spacer(modifier = Modifier.height(30.dp))
-                FilterContainer(
-                    title = stringResource(id = R.string.locations_filter_service_search),
-                    topContent = {
-                        SearchBranchService(viewModel = viewModel)
-                    }
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                FilterContainer(
-                    title = stringResource(id = R.string.locations_filter_atm_search),
-                    topContent = {
-                        Column {
-                            RMBCheckbox(
-                                checked = viewModel.outsideAtm.value,
-                                onCheckedChange = {
-                                    viewModel.outsideAtm.value = it
-                                },
-                                text = "Unutrašnji"
-                            )
-                            Spacer(Modifier.height(10.dp))
-                            RMBCheckbox(
-                                checked = viewModel.insideAtm.value,
-                                onCheckedChange = {
-                                    viewModel.insideAtm.value = it
-                                },
-                                text = "Vanjski"
-                            )
+                    )
+                    Spacer(modifier = Modifier.height(30.dp))
+                    FilterContainer(
+                        title = stringResource(id = R.string.locations_filter_branch_search),
+                        topContent = {
+                            SearchBranchType(viewModel = viewModel)
+                        },
+                    )
+                    Spacer(modifier = Modifier.height(30.dp))
+                    FilterContainer(
+                        title = stringResource(id = R.string.locations_filter_service_search),
+                        topContent = {
+                            SearchBranchService(viewModel = viewModel)
                         }
-                    }
-                )
-                Spacer(modifier = Modifier.height(65.dp))
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
+                    FilterContainer(
+                        title = stringResource(id = R.string.locations_filter_atm_search),
+                        topContent = {
+                            Column {
+                                RMBCheckbox(
+                                    checked = viewModel.outsideAtm.value,
+                                    onCheckedChange = {
+                                        viewModel.outsideAtm.value = it
+                                    },
+                                    text = "Unutrašnji"
+                                )
+                                Spacer(Modifier.height(10.dp))
+                                RMBCheckbox(
+                                    checked = viewModel.insideAtm.value,
+                                    onCheckedChange = {
+                                        viewModel.insideAtm.value = it
+                                    },
+                                    text = "Vanjski"
+                                )
+                            }
+                        }
+                    )
+                    Spacer(modifier = Modifier.height(65.dp))
+                }
             }
         }
     }
