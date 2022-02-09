@@ -199,5 +199,8 @@
     <string name="follow_us_screen_instagram_url" translatable="false">https://www.instagram.com/raiffeisen_bank_bih/</string>
     <string name="locations_filter_atm_indoor">Unutrašnji</string>
     <string name="locations_filter_atm_outdoor">Vanjski</string>
+    <string name="login_screen_title">Prijava</string>
+    <string name="login_screen_email" translatable="false">Email</string>
+    <string name="login_screen_password">Lozinka</string>
 
 </resources>

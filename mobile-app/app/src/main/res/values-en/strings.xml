@@ -167,4 +167,6 @@
     <string name="onboarding_item5_desc">Swiping left or right opens new options</string>
     <string name="locations_filter_atm_indoor">Indoor</string>
     <string name="locations_filter_atm_outdoor">Outdoor</string>
+    <string name="login_screen_title">Login</string>
+    <string name="login_screen_password">Password</string>
 </resources>

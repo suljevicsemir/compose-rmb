@@ -106,9 +106,6 @@ fun IntroHome(navController: NavController) {
 
             }
 
-
-
-
             Column (Modifier.align(alignment = Alignment.BottomCenter)){
                 Button(
                     onClick = {

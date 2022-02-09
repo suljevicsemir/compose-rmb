@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.*
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LoginViewModel
 import kotlinx.coroutines.launch
@@ -35,44 +37,51 @@ import kotlinx.coroutines.launch
 @Composable
 fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel) {
     val coroutineScope = rememberCoroutineScope()
-    Column (
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-            .padding(horizontal = 20.dp)
-
-    ){
-        Spacer(Modifier.weight(1f ))
-        Text(
-            stringResource(id = R.string.login_screen_headline),
-            color = White,
-            fontSize = 30.sp
-        )
-        Spacer(modifier = Modifier.height(30.dp))
-        LoginSection(loginViewModel = loginViewModel)
-        Spacer(Modifier.weight(1f ))
-        Button(
-            onClick = {
-                coroutineScope.launch {
-                    loginViewModel.onLogin()
-                }
-            },
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = Yellow400
-            ),
+    Scaffold(
+        backgroundColor = Black,
+        topBar = {
+            CenteredTitleAppBar(title = "", navController = navController)
+        }
+    ) {
+        Column (
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp),
-            contentPadding = PaddingValues(vertical = 14.dp)
-        ) {
+                .fillMaxHeight()
+                .padding(horizontal = 20.dp)
+
+        ){
+            Spacer(Modifier.weight(1f ))
             Text(
-                stringResource(id = R.string.intro_home_button),
-                fontWeight = FontWeight.W600
+                stringResource(id = R.string.login_screen_headline),
+                color = White,
+                fontSize = 30.sp
             )
-        }
-        Spacer(modifier = Modifier.height(100.dp))
+            Spacer(modifier = Modifier.height(20.dp))
+            LoginSection(loginViewModel = loginViewModel)
+            Spacer(Modifier.weight(1f ))
+            Button(
+                onClick = {
+                    coroutineScope.launch {
+                        loginViewModel.onLogin()
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Yellow400
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                contentPadding = PaddingValues(vertical = 14.dp)
+            ) {
+                Text(
+                    stringResource(id = R.string.intro_home_button),
+                    fontWeight = FontWeight.W600
+                )
+            }
+            Spacer(modifier = Modifier.height(80.dp))
+        }    
     }
 }
 
@@ -88,6 +97,11 @@ fun LoginSection(loginViewModel: LoginViewModel) {
             .fillMaxWidth()
 
     ){
+        Text(
+            text = stringResource(id = R.string.login_screen_email),
+            color = White,
+            modifier = Modifier.padding(bottom = 5.dp)
+        )
         LoginTextField(
             value = email,
             onValueChange = {
@@ -97,6 +111,11 @@ fun LoginSection(loginViewModel: LoginViewModel) {
             visualTransformation = VisualTransformation.None
         )
         Spacer(modifier = Modifier.height(30.dp))
+        Text(
+            text = stringResource(id = R.string.login_screen_password),
+            color = White,
+            modifier = Modifier.padding(bottom = 5.dp)
+        )
         LoginTextField(
             value = password,
             onValueChange = {
@@ -138,6 +157,6 @@ fun LoginTextField(
             endY = 100.0f
         ),
         visualTransformation = visualTransformation,
-        keyboardOptions = keyboardOptions
+        keyboardOptions = keyboardOptions,
     )
 }
