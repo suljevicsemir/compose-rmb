@@ -123,11 +123,16 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-maps:18.0.1'
 
+    //pager api
     implementation 'androidx.paging:paging-compose:1.0.0-alpha14'
-
     implementation "com.google.accompanist:accompanist-pager:0.13.0"
     implementation "com.google.accompanist:accompanist-pager-indicators:0.13.0"
 
+    //secure storage
     implementation "androidx.security:security-crypto:1.1.0-alpha03"
+
+    //coil
+    implementation 'io.coil-kt:coil:0.11.0'
+    implementation 'io.coil-kt:coil-gif:0.11.0'
 
 }
