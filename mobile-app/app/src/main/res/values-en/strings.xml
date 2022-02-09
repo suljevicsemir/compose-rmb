@@ -165,4 +165,6 @@
     <string name="onboarding_item4_desc">Light or dark? It\'s your choice.</string>
     <string name="onboarding_item5_title">Swipe for more options</string>
     <string name="onboarding_item5_desc">Swiping left or right opens new options</string>
+    <string name="locations_filter_atm_indoor">Indoor</string>
+    <string name="locations_filter_atm_outdoor">Outdoor</string>
 </resources>

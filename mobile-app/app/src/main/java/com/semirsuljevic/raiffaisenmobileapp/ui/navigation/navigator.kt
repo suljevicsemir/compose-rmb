@@ -18,17 +18,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.*
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.Locations
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroHome
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroLocations
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroMore
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.FAQScreen
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.OnBoardingScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.*
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
-import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.SecureSharedPref
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LoginViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -40,35 +37,18 @@ import kotlinx.coroutines.InternalCoroutinesApi
 @Composable
 fun Navigator(navController: NavHostController) {
 
-    val faqViewModel = FAQViewModel()
-
     val secureSharedPref: SecureSharedPref = SecureSharedPref(LocalContext.current)
     val loginViewModel = LoginViewModel(LocalContext.current.applicationContext as Application, secureSharedPref = secureSharedPref)
 
-    val accessToken = secureSharedPref.getAccessToken()
-
-
-    val context = LocalContext.current
 
     NavHost(
         navController = navController,
-        startDestination = if(accessToken != null)  Screen.IntroHome.route else Screen.LoginScreen.route
+        startDestination = Screen.IntroHome.route
     ) {
         composable(Screen.IntroHome.route) {
-            IntroHome(navController = navController)
+            IntroNavbar(navController = navController)
         }
-        composable(Screen.IntroProducts.route) {
-            ProductsScreen(navController = navController)
-        }
-        composable(Screen.IntroLocations.route) {
-            IntroLocations(navController = navController)
-        }
-        composable(Screen.IntroMore.route) {
-            IntroMore(
-                navController = navController,
-                faqViewModel = faqViewModel
-            )
-        }
+
         composable(Screen.CurrentAccountScreen.route) {
             CurrentAccountScreen(navController = navController)
         }
@@ -102,7 +82,7 @@ fun Navigator(navController: NavHostController) {
         }
 
         composable(Screen.FAQScreen.route) {
-            FAQScreen(navController = navController, viewModel = faqViewModel)
+            FAQScreen(navController = navController)
         }
 
         composable(Screen.LocationsScreen.route) {

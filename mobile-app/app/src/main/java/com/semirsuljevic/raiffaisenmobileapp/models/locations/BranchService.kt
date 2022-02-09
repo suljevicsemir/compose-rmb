@@ -1,7 +1,6 @@
 package com.semirsuljevic.raiffaisenmobileapp.models.locations
 
-data class BranchService(
+data class BranchServiceType(
     val id: String,
-    val nameEj: String,
-    val nameBj: String
+    val name: String
 )

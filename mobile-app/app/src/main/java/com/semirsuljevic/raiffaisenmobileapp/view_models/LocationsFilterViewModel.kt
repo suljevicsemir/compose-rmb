@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.semirsuljevic.raiffaisenmobileapp.RetrofitInstance
 import com.semirsuljevic.raiffaisenmobileapp.models.City
-import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchService
+import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchServiceType
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchType
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -24,8 +24,8 @@ class LocationsFilterViewModel: ViewModel() {
         MutableLiveData<List<BranchType>>()
     }
 
-    val branchServices: MutableLiveData<List<BranchService>> by lazy {
-        MutableLiveData<List<BranchService>>()
+    val branchServices: MutableLiveData<List<BranchServiceType>> by lazy {
+        MutableLiveData<List<BranchServiceType>>()
     }
 
     var loading = mutableStateOf(false)
@@ -47,8 +47,8 @@ class LocationsFilterViewModel: ViewModel() {
         MutableLiveData<BranchType>()
     }
 
-    val selectedBranchService: MutableLiveData<BranchService> by lazy {
-        MutableLiveData<BranchService>()
+    val selectedBranchService: MutableLiveData<BranchServiceType> by lazy {
+        MutableLiveData<BranchServiceType>()
     }
 
     var insideAtm = mutableStateOf(true)
@@ -57,9 +57,9 @@ class LocationsFilterViewModel: ViewModel() {
 
 
     fun getCities() {
+        loading.value = true
         viewModelScope.launch {
             val response = try {
-                loading.value = true
                 RetrofitInstance.api.getCities()
             }
             catch (e: IOException) {
@@ -67,27 +67,47 @@ class LocationsFilterViewModel: ViewModel() {
             }
             if(response.isSuccessful && response.body() != null) {
                 cities.value = response.body()!!
+            }
+        }
+        viewModelScope.launch {
+            val response = try {
+                RetrofitInstance.api.getBranchServiceTypes()
+            }
+            catch (e: IOException) {
+                return@launch
+            }
+            if(response.isSuccessful && response.body() != null) {
+                branchServices.value = response.body()!!
                 loading.value = false
             }
         }
+        viewModelScope.launch {
+            val response = try {
+                RetrofitInstance.api.getBranchTypes()
+            }
+            catch (e: IOException) {
+                return@launch
+            }
+            if(response.isSuccessful && response.body() != null) {
+                branchTypes.value = response.body()!!
+                loading.value = false
+            }
+        }
+
+
+
     }
 
     fun getBranchTypes() {
         viewModelScope.launch {
-            branchTypes.value = listOf<BranchType>(
-                BranchType(id = "1", nameBj = "Sve vrste poslovnica", nameEj = "All branch types"),
-                BranchType(id = "2", nameBj = "Filijala", nameEj = "Branch"),
-                BranchType(id = "3", nameBj = "Agencija", nameEj = "Sub-office")
-            )
+
+
         }
     }
 
     fun getBranchServices() {
         viewModelScope.launch {
-            branchServices.value = listOf(
-                BranchService("1", nameBj = "Svi servisi", nameEj = "All branch services"),
-                BranchService("2", nameBj = "Sefovi", nameEj = "Safes")
-            )
+
         }
     }
 
@@ -102,7 +122,7 @@ class LocationsFilterViewModel: ViewModel() {
     }
 
     // branch service methods
-    fun selectBranchService(branchService: BranchService) {
+    fun selectBranchService(branchService: BranchServiceType) {
         selectedBranchService.value = branchService
     }
     fun toggleBranchServiceDropdown() {

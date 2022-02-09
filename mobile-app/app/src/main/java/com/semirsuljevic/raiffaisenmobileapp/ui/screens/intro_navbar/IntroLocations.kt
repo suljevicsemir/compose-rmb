@@ -6,7 +6,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountBalance
 import androidx.compose.material.icons.outlined.CreditCard
@@ -22,10 +25,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -37,12 +38,12 @@ import com.google.accompanist.pager.rememberPagerState
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
-
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import kotlinx.coroutines.launch
 
@@ -55,19 +56,11 @@ fun IntroLocations(navController: NavController) {
 
     Column (
         modifier = Modifier.background(color = Black)
-            ){
-        TopAppBar(
-            title = {
-                Text(
-                    stringResource(id = R.string.locations_title),
-                    color = White,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .wrapContentSize(align = Alignment.Center)
-                )
-            },
+    ){
+        CenteredTitleAppBar(
+            implyLeading = false,
+            title = stringResource(id = R.string.locations_title),
+            navController = navController,
             actions = {
                 IconButton(
                     onClick = {
@@ -80,8 +73,7 @@ fun IntroLocations(navController: NavController) {
                         tint = Gray200
                     )
                 }
-            },
-            backgroundColor = Black
+            }
         )
         Tabs(pagerState = pagerState)
         TabsContent(pagerState = pagerState, viewModel = viewModel)
@@ -198,7 +190,7 @@ fun FloatingFilter(
         .clip(RoundedCornerShape(size = 8.dp))
         .height(height = 42.dp)
         .width(width = 42.dp)
-        .background(color = if(selected) Yellow400 else Color.Gray)
+        .background(color = if (selected) Yellow400 else Color.Gray)
         .wrapContentSize(align = Alignment.Center)
 
     ) {

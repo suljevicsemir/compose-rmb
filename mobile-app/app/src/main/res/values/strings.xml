@@ -187,5 +187,17 @@
     <string name="onboarding_item4_desc">Svijetlo ili tamno? Ti biras.</string>
     <string name="onboarding_item5_title">Svajpaj za dodatne opcije</string>
     <string name="onboarding_item5_desc">Pokretom lijevo ili desno na listama otvarate nove opcije</string>
+    <string name="follow_us_screen_facebook" translatable="false">Facebook Raiffeisen bank BiH</string>
+    <string name="follow_us_screen_facebook_url" translatable="false">https://ww.facebook.com/RaiffeisenBankBiH</string>
+    <string name="follow_us_screen_youtube" translatable="false">YouTube Raiffeisen bank BiH</string>
+    <string name="follow_us_screen_youtube_url" translatable="false">https://www.youtube.com/user/RaiffeisenBankBiH</string>
+    <string name="follow_us_screen_viber" translatable="false">Viber Raiffeisen bank BiH</string>
+    <string name="follow_us_screen_viber_url" translatable="false">https://chats.viber.com/raiffeisenbankddbosnaiherceg</string>
+    <string name="follow_us_screen_linkedin" translatable="false">LinkedIn Raiffeisen bank BiH</string>
+    <string name="follow_us_screen_linkedin_url" translatable="false">https://www.linkedin.com/company/raiffeisen-bank-dd-bih</string>
+    <string name="follow_us_screen_instagram" translatable="false">Instagram Raiffeisen bank BiH</string>
+    <string name="follow_us_screen_instagram_url" translatable="false">https://www.instagram.com/raiffeisen_bank_bih/</string>
+    <string name="locations_filter_atm_indoor">Unutrašnji</string>
+    <string name="locations_filter_atm_outdoor">Vanjski</string>
 
 </resources>
