@@ -97,7 +97,7 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
                                     onCheckedChange = {
                                         viewModel.outsideAtm.value = it
                                     },
-                                    text = "Unutrašnji"
+                                    text = stringResource(id = R.string.locations_filter_atm_indoor)
                                 )
                                 Spacer(Modifier.height(10.dp))
                                 RMBCheckbox(
@@ -105,7 +105,7 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
                                     onCheckedChange = {
                                         viewModel.insideAtm.value = it
                                     },
-                                    text = "Vanjski"
+                                    text = stringResource(id = R.string.locations_filter_atm_outdoor)
                                 )
                             }
                         }
@@ -171,7 +171,7 @@ fun SearchBranchService(viewModel: LocationsFilterViewModel) {
                 DropdownMenuItem(
                     onClick = {
                         viewModel.selectBranchService(selectionOption)
-                        selectedOptionText = selectionOption.nameBj
+                        selectedOptionText = selectionOption.name
                         viewModel.branchServiceDropdownOff()
                     },
                     modifier = Modifier
@@ -179,7 +179,7 @@ fun SearchBranchService(viewModel: LocationsFilterViewModel) {
                         .padding(horizontal = 10.dp)
                 ) {
                     Text(
-                        text = selectionOption.nameBj,
+                        text = selectionOption.name,
                         color = Gray200,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.W600
@@ -241,7 +241,7 @@ fun SearchBranchType(viewModel: LocationsFilterViewModel) {
                 DropdownMenuItem(
                     onClick = {
                         viewModel.selectBranchType(selectionOption)
-                        selectedOptionText = selectionOption.nameBj
+                        selectedOptionText = selectionOption.name
                         viewModel.branchTypeDropdownOff()
                     },
                     modifier = Modifier
@@ -249,7 +249,7 @@ fun SearchBranchType(viewModel: LocationsFilterViewModel) {
                         .padding(horizontal = 10.dp)
                 ) {
                     Text(
-                        text = selectionOption.nameBj,
+                        text = selectionOption.name,
                         color = Gray200,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.W600

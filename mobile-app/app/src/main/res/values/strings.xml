@@ -197,5 +197,7 @@
     <string name="follow_us_screen_linkedin_url" translatable="false">https://www.linkedin.com/company/raiffeisen-bank-dd-bih</string>
     <string name="follow_us_screen_instagram" translatable="false">Instagram Raiffeisen bank BiH</string>
     <string name="follow_us_screen_instagram_url" translatable="false">https://www.instagram.com/raiffeisen_bank_bih/</string>
+    <string name="locations_filter_atm_indoor">Unutrašnji</string>
+    <string name="locations_filter_atm_outdoor">Vanjski</string>
 
 </resources>
