@@ -35,7 +35,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.FAQViewModel
 
 @Composable
-fun FAQScreen(
+fun IntroFAQScreen(
     navController: NavController,
     viewModel: FAQViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {

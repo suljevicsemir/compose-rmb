@@ -18,7 +18,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.Locations
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.WidgetManager
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.HomeNavBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
@@ -43,10 +44,14 @@ fun Navigator(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.IntroHome.route
+        startDestination = Screen.UserHome.route
     ) {
         composable(Screen.IntroHome.route) {
             IntroNavbar(navController = navController)
+        }
+
+        composable(Screen.UserHome.route) {
+            HomeNavBar(navController = navController)
         }
 
         composable(Screen.CurrentAccountScreen.route) {
@@ -81,12 +86,8 @@ fun Navigator(navController: NavHostController) {
             LoansScreen(navController = navController)
         }
 
-        composable(Screen.FAQScreen.route) {
-            FAQScreen(navController = navController)
-        }
-
-        composable(Screen.LocationsScreen.route) {
-            Locations()
+        composable(Screen.IntroFAQScreen.route) {
+            IntroFAQScreen(navController = navController)
         }
 
         composable(Screen.LocationsSearchScreen.route) {
@@ -120,6 +121,12 @@ fun Navigator(navController: NavHostController) {
 
         composable(Screen.OnBoardingScreen.route) {
             OnBoardingScreen(navController = navController)
+        }
+
+        //User home screens
+
+        composable(Screen.WidgetManager.route) {
+            WidgetManager(navController = navController)
         }
 
         composable(Screen.ErrorScreen.route) {

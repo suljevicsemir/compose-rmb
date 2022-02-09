@@ -13,7 +13,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun RMBNavBar(
-    items: List<IntroBottomBarItem>,
+    items: List<RMBBottomBarItem>,
     selectedIndex: Int,
     onItemClick: (Int) -> Unit
 ) {
@@ -36,7 +36,7 @@ fun RMBNavBar(
     }
 }
 
-data class IntroBottomBarItem(
+data class RMBBottomBarItem(
     val route: String,
     val icon: ImageVector,
     val index: Int

@@ -1,16 +1,13 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar
+package com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.outlined.Inventory2
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.More
+import androidx.compose.material.icons.outlined.Payments
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -19,38 +16,34 @@ import com.google.accompanist.pager.rememberPagerState
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBBottomBarItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBNavBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.IntroProductsScreen
-import kotlinx.coroutines.InternalCoroutinesApi
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import kotlinx.coroutines.launch
 
-
 @OptIn(ExperimentalPagerApi::class)
-@InternalCoroutinesApi
-@RequiresApi(Build.VERSION_CODES.N)
 @Composable
-fun IntroNavbar(navController: NavController) {
-    val pagerState = rememberPagerState(pageCount = 4)
+fun HomeNavBar(navController: NavController) {
+    val pagerState = rememberPagerState(pageCount = 5)
     Scaffold (
-        backgroundColor = Color.Black,
+        backgroundColor = Black,
         bottomBar = {
-            IntroNavBarItems(pagerState = pagerState)
+            HomeNavBarItems(pagerState = pagerState)
         }
     ) {
         HorizontalPager(state = pagerState, dragEnabled = false) { page ->
             when(page) {
-                0 -> IntroHome(navController = navController)
-                1 -> IntroLocations(navController = navController)
-                2 -> IntroProductsScreen(navController = navController)
-                3 -> IntroMore(navController = navController)
+                0 -> Home(navController = navController)
+                1 -> PaymentsScreen(navController = navController)
+                2 -> RMBSettings()
+                3 -> MoreScreen(navController = navController)
             }
-
         }
     }
+
 }
 
-@ExperimentalPagerApi
+@OptIn(ExperimentalPagerApi::class)
 @Composable
-private fun IntroNavBarItems(pagerState: PagerState) {
+private fun HomeNavBarItems(pagerState: PagerState) {
     val coroutineScope = rememberCoroutineScope()
     RMBNavBar(
         items = listOf(
@@ -61,12 +54,12 @@ private fun IntroNavBarItems(pagerState: PagerState) {
             ),
             RMBBottomBarItem(
                 route = Screen.IntroLocations.route,
-                icon = Icons.Filled.LocationOn,
+                icon = Icons.Outlined.Payments,
                 index = 1
             ),
             RMBBottomBarItem(
                 route = Screen.IntroProducts.route,
-                icon = Icons.Outlined.Inventory2,
+                icon = Icons.Default.Person,
                 index = 2
             ),
             RMBBottomBarItem(
@@ -76,7 +69,7 @@ private fun IntroNavBarItems(pagerState: PagerState) {
             )
         ),
         selectedIndex = pagerState.currentPage,
-        onItemClick =  {
+        onItemClick = {
             coroutineScope.launch {
                 pagerState.scrollToPage(it)
             }

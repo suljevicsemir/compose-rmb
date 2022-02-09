@@ -25,7 +25,7 @@ sealed  class Screen (val route: String){
     object DigitalServicesScreen: Screen(route = "digital_services")
     object SavingsScreen: Screen(route = "savings")
 
-    object FAQScreen: Screen(route = "faq")
+    object IntroFAQScreen: Screen(route = "faq")
 
     object LocationsScreen: Screen(route = "locations")
 
@@ -41,6 +41,11 @@ sealed  class Screen (val route: String){
     object InfoHelpDetails: Screen(route = "info_help_details")
 
     object OnBoardingScreen: Screen(route = "onboarding")
+
+    //Home screens
+    object UserHome: Screen(route = "user_home")
+    object WidgetManager: Screen(route = "widget_manager")
+
 
     object ErrorScreen: Screen(route = "error")
 

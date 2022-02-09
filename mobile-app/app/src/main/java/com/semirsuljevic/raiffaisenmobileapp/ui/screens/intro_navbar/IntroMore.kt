@@ -73,7 +73,7 @@ fun IntroMore(
             title = stringResource(id = R.string.more_screen_item_faq),
             icon = Icons.Outlined.Quiz,
             onPressed = {
-                navController.navigate(Screen.FAQScreen.route)
+                navController.navigate(Screen.IntroFAQScreen.route)
             }
         )
         ListSectionSeparator(text = stringResource(id = R.string.more_screen_section_about_bank))
