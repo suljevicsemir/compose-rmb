@@ -202,5 +202,6 @@
     <string name="login_screen_title">Prijava</string>
     <string name="login_screen_email" translatable="false">Email</string>
     <string name="login_screen_password">Lozinka</string>
+    <string name="home_debit_card_label">Debitna kartica</string>
 
 </resources>

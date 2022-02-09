@@ -169,4 +169,5 @@
     <string name="locations_filter_atm_outdoor">Outdoor</string>
     <string name="login_screen_title">Login</string>
     <string name="login_screen_password">Password</string>
+    <string name="home_debit_card_label">Debit card</string>
 </resources>
