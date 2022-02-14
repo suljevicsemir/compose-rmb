@@ -39,7 +39,7 @@ class LocationsFilterViewModel: ViewModel() {
     var branchTypeExpanded = mutableStateOf(false)
     var branchServiceExpanded = mutableStateOf(false)
 
-    val selectedCity: MutableLiveData<City> by lazy {
+    private val selectedCity: MutableLiveData<City> by lazy {
         MutableLiveData<City>()
     }
 

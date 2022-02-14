@@ -16,6 +16,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBBottomBarItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBNavBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.home.Home
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import kotlinx.coroutines.launch
 

@@ -203,5 +203,22 @@
     <string name="login_screen_email" translatable="false">Email</string>
     <string name="login_screen_password">Lozinka</string>
     <string name="home_debit_card_label">Debitna kartica</string>
+    <string name="home_greeting">Zdravo</string>
+    <string name="home_currency" translatable="false">BAM</string>
+    <string name="home_current_balance_label">Ukupno raspoloživo</string>
+    <string name="home_transactions_headline">Posljednje transakcije</string>
+    <string name="months_january">Januar</string>
+    <string name="months_february">Februar</string>
+    <string name="months_march">Mart</string>
+    <string name="months_april">April</string>
+    <string name="months_may">Maj</string>
+    <string name="months_june">Juni</string>
+    <string name="months_july">Juli</string>
+    <string name="months_august">August</string>
+    <string name="months_september">Septembar</string>
+    <string name="months_october">Oktobar</string>
+    <string name="months_november">Novembar</string>
+    <string name="months_december">Decembar</string>
+    <string name="home_transactions_see_all">Prikaži sve transakcije</string>
 
 </resources>

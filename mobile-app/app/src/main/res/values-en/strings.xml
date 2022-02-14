@@ -170,4 +170,20 @@
     <string name="login_screen_title">Login</string>
     <string name="login_screen_password">Password</string>
     <string name="home_debit_card_label">Debit card</string>
+    <string name="home_greeting">Hi</string>
+    <string name="home_current_balance_label">Current balance</string>
+    <string name="home_transactions_headline">Recent transactions</string>
+    <string name="months_january">January</string>
+    <string name="months_february">February</string>
+    <string name="months_march">March</string>
+    <string name="months_april">April</string>
+    <string name="months_may">May</string>
+    <string name="months_june">June</string>
+    <string name="months_july">July</string>
+    <string name="months_august">August</string>
+    <string name="months_september">September</string>
+    <string name="months_october">October</string>
+    <string name="months_november">November</string>
+    <string name="months_december">December</string>
+    <string name="home_transactions_see_all">See all transactions</string>
 </resources>
