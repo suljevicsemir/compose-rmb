@@ -34,7 +34,7 @@ fun HomeNavBar(navController: NavController) {
             when(page) {
                 0 -> Home(navController = navController)
                 1 -> PaymentsScreen(navController = navController)
-                2 -> RMBSettings()
+                2 -> MyProfileScreen(navController = navController)
                 3 -> MoreScreen(navController = navController)
             }
         }

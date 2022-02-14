@@ -1,8 +1,6 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.screens.my_profile
+package com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -15,12 +13,14 @@ import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.my_profile.ProfileInfo
 
 @Composable
 fun MyProfileScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     Column (
-        modifier = Modifier.verticalScroll(scrollState)
+        verticalArrangement = Arrangement.Top,
+        modifier = Modifier.fillMaxSize().verticalScroll(scrollState)
     ){
         ScreenTitle(text = stringResource(id = R.string.my_profile_screen_title))
         ListItemSeparator()
@@ -94,6 +94,6 @@ fun MyProfileScreen(navController: NavController) {
             }
         )
         ListItemSeparator()
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(80.dp))
     }
 }
