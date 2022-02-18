@@ -10,6 +10,7 @@ class PaymentCreateViewModel:ViewModel() {
     private val _templateName = mutableStateOf("")
     private val _isDialogOpened = mutableStateOf(false)
     private val _currencyConversion = mutableStateOf(false)
+    private val _urgent = mutableStateOf(false)
 
     val fields = FieldsController()
 
@@ -29,6 +30,7 @@ class PaymentCreateViewModel:ViewModel() {
     val templateName: MutableState<String> = _templateName
     val isDialogOpened: MutableState<Boolean> = _isDialogOpened
     val currencyConversion: MutableState<Boolean> = _currencyConversion
+    val urgent: MutableState<Boolean> = _urgent
 }
 
 class FieldsController {

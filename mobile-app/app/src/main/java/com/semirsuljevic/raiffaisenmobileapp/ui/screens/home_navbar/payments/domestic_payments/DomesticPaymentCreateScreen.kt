@@ -1,4 +1,4 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments
+package com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -33,15 +33,13 @@ import java.util.*
 @ExperimentalComposeUiApi
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PaymentCreateScreen(
+fun DomesticPaymentCreateScreen(
     navController: NavController,
     viewModel: PaymentCreateViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
     val scrollState = rememberScrollState()
 
-    var checked by remember {
-        mutableStateOf(false)
-    }
+
 
     var checkedUrgent by remember {
         mutableStateOf(false)
@@ -63,8 +61,6 @@ fun PaymentCreateScreen(
     }
 
 
-
-    val coroutineScope = rememberCoroutineScope()
     Scaffold (
         backgroundColor = Black,
         topBar = {
@@ -95,6 +91,10 @@ fun PaymentCreateScreen(
             AccountInfo(card = Card(transactionNumber = "161300008855564654", balance = 12345.51))
             ListSectionSeparator(text = stringResource(id = R.string.payment_create_screen_to_account))
 
+            Spacer(modifier = Modifier.height(10.dp))
+            TransactionNumberField(viewModel = viewModel)
+            Spacer(modifier = Modifier.height(10.dp))
+
             ListSectionSeparator(
                 text = stringResource(id = R.string.payment_create_screen_amount),
                 actions = {
@@ -117,83 +117,76 @@ fun PaymentCreateScreen(
                     )
                 }
             )
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    stringResource(id = R.string.payment_create_screen_emergency_label),
-                    color = White
-                )
-                Switch(
-                    checked = checkedUrgent,
-                    onCheckedChange = {
-                        checkedUrgent = it
-                    },
-                    colors = SwitchDefaults.colors(
-                        checkedThumbColor = Yellow400,
-                        checkedTrackColor = Yellow200,
-                        uncheckedTrackColor = Gray200,
-                        uncheckedThumbColor = White,
-                    )
-                )
-            }
-            ListSectionSeparator(text = stringResource(id = R.string.payment_create_screen_date))
-            Row {
-                Text(
-                    date,
-                    color = White
-                )
-                Box(
-                    Modifier
-                        .width(2.dp)
-                        .height(20.dp)
-                        .background(color = White)
-                )
-                Icon(
-                    imageVector = Icons.Outlined.CalendarToday,
-                    contentDescription = "",
-                    tint = White,
-                    modifier = Modifier.clickable {
-                        MaterialDialog(context).show {
-                            datePicker(
-                                minDate = calendar,
-                                currentDate = Calendar.getInstance(),
-                                dateCallback = { dialog, datetime ->
-                                    date = datetime.get(Calendar.DAY_OF_MONTH).toString()
-                                }
-                            )
-                        }
-                    }
-                )
-            }
 
+            TransactionAmountField(viewModel = viewModel)
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+
+            Spacer(modifier = Modifier.height(10.dp))
+            ListSectionSeparator(text = stringResource(id = R.string.payment_create_screen_date))
+            Column {
+                Row (
+                    modifier = Modifier.height(35.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ){
+                    Text(
+                        date,
+                        color = White,
+                        modifier = Modifier.weight(0.7f)
+                    )
+                    Box(
+                        Modifier
+                            .height(55.dp)
+                            .width(1.dp)
+                            .background(color = White)
+                    )
+                    Icon(
+                        imageVector = Icons.Outlined.CalendarToday,
+                        contentDescription = "",
+                        tint = Yellow400,
+                        modifier = Modifier
+                            .weight(0.15f)
+                            .clickable {
+                                MaterialDialog(context).show {
+                                    datePicker(
+                                        minDate = calendar,
+                                        currentDate = Calendar.getInstance(),
+                                        dateCallback = { dialog, datetime ->
+                                            date = datetime
+                                                .get(Calendar.DAY_OF_MONTH)
+                                                .toString()
+                                        }
+                                    )
+                                }
+                            }
+                    )
+                }
+                Divider(color = Gray200,)
+            }
+            Spacer(modifier = Modifier.height(10.dp))
             ListSectionSeparator(text = stringResource(id = R.string.payment_create_screen_save_template))
 
 
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
-                .padding(16.dp)
-                .onFocusEvent { focusState ->
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onFocusEvent { focusState ->
 
-                },
+                    },
                 value = viewModel.templateName.value,
                 onValueChange = {
                     viewModel.onTemplateNameChange(it)
                 },
-
                 placeholder = {
                     Text(
                         stringResource(id = R.string.payment_create_screen_save_hint),
                         color = Gray200
                     )
                 },
-
                 textStyle = androidx.compose.ui.text.TextStyle(
                     color = White
                 ),
-
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = Black,
                     unfocusedBorderColor = Black,

@@ -9,6 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -20,7 +21,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.WidgetManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.HomeNavBar
-//import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.PaymentCreateScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments.DomesticPaymentCreateScreen
+//import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments.PaymentCreateScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
@@ -33,6 +35,7 @@ import com.semirsuljevic.raiffaisenmobileapp.view_models.LoginViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 
 
+@OptIn(ExperimentalComposeUiApi::class)
 @RequiresApi(Build.VERSION_CODES.N)
 @ExperimentalPagerApi
 @InternalCoroutinesApi
@@ -131,7 +134,7 @@ fun Navigator(navController: NavHostController) {
         }
 
         composable(Screen.PaymentCreateScreen.route) {
-           // Screen.PaymentCreateScreen(navController = navController)
+           DomesticPaymentCreateScreen(navController = navController)
         }
 
         composable(Screen.ErrorScreen.route) {

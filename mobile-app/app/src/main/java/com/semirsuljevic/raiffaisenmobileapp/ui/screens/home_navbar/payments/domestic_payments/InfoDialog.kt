@@ -1,4 +1,4 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments
+package com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.AlertDialog
