@@ -37,7 +37,7 @@ fun PaymentsScreen(navController: NavController) {
             title = stringResource(id = R.string.payments_screen_item_country),
             icon = Icons.Outlined.CreditCard,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(Screen.PaymentCreateScreen.route)
             }
         )
         ListItemSeparator()

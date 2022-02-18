@@ -47,6 +47,9 @@ sealed  class Screen (val route: String){
     object WidgetManager: Screen(route = "widget_manager")
 
 
+    object PaymentCreateScreen: Screen(route = "payment_create")
+
+
     object ErrorScreen: Screen(route = "error")
 
 

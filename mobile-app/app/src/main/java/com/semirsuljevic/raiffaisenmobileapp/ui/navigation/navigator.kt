@@ -20,6 +20,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.WidgetManager
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.HomeNavBar
+//import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.PaymentCreateScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
@@ -127,6 +128,10 @@ fun Navigator(navController: NavHostController) {
 
         composable(Screen.WidgetManager.route) {
             WidgetManager(navController = navController)
+        }
+
+        composable(Screen.PaymentCreateScreen.route) {
+           // Screen.PaymentCreateScreen(navController = navController)
         }
 
         composable(Screen.ErrorScreen.route) {

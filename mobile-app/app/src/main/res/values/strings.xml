@@ -220,5 +220,22 @@
     <string name="months_november">Novembar</string>
     <string name="months_december">Decembar</string>
     <string name="home_transactions_see_all">Prikaži sve transakcije</string>
+    <string name="payment_create_screen_title">Novo plaćanje</string>
+    <string name="payment_create_screen_from_account">Sa računa</string>
+    <string name="payment_create_screen_debit_label">Debitna kartica</string>
+    <string name="payment_create_screen_currency" translatable="false">BAM</string>
+    <string name="payment_create_screen_to_account">Na račun</string>
+    <string name="payment_create_screen_account_number_hint">Broj računa primaoca</string>
+    <string name="payment_create_screen_amount">Iznos</string>
+    <string name="payment_create_screen_convert">Konvertuj</string>
+    <string name="payment_create_screen_emergency_label">Hitni nalog?</string>
+    <string name="payment_create_screen_date">Datum</string>
+    <string name="payment_create_screen_save_template">Želite li spasiti nalog kao uzorak?</string>
+    <string name="payment_create_screen_save_hint">Unesite naziv uzorka</string>
+    <string name="payment_create_screen_character_limit" translatable="false">0/50</string>
+    <string name="payment_create_screen_bottom_label">Detalje naloga uvijek možete pregledati na idućem koraku. Vaše uplate su uvijek sigurne.</string>
+    <string name="payment_create_screen_info_dialog_text1">Omogućava uplatu drugim fizičkim ili pravnim licima na račune u Raiffeisen banci ili u drugim bankama u BiH.</string>
+    <string name="payment_create_screen_info_dialog_text2">Napomena: Ova opcija ne podržava uplate javnih prihoda. Molimo da u aplikaciji odaberete opciju \"Uplata javnih prihoda\".</string>
+    <string name="payment_create_screen_info_dialog_ok">UREDU</string>
 
 </resources>

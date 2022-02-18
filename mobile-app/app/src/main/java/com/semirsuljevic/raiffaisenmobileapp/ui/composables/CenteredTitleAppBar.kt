@@ -66,7 +66,7 @@ private fun LeadingComposable(implyLeading: Boolean, navController: NavControlle
 
 @Composable
 private fun ActionsContent(actions: @Composable() (RowScope.() -> Unit)?) {
-    Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.End) {
+    Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.CenterVertically) {
         actions?.invoke(this)
     }
 }

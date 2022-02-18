@@ -186,4 +186,19 @@
     <string name="months_november">November</string>
     <string name="months_december">December</string>
     <string name="home_transactions_see_all">See all transactions</string>
+    <string name="payment_create_screen_title">New payment</string>
+    <string name="payment_create_screen_from_account">Account debit</string>
+    <string name="payment_create_screen_debit_label">Debit card</string>
+    <string name="payment_create_screen_to_account">Account credit</string>
+    <string name="payment_create_screen_account_number_hint">Receiver\'s Account number</string>
+    <string name="payment_create_screen_amount">Amount</string>
+    <string name="payment_create_screen_convert">Currency conversion</string>
+    <string name="payment_create_screen_emergency_label">Urgent order?</string>
+    <string name="payment_create_screen_date">Date</string>
+    <string name="payment_create_screen_save_template">Save this payment as a template?</string>
+    <string name="payment_create_screen_save_hint">Enter template name</string>
+    <string name="payment_create_screen_bottom_label">You can view payment details at the next step. Your payments are always safe.</string>
+    <string name="payment_create_screen_info_dialog_ok">OK</string>
+    <string name="payment_create_screen_info_dialog_text1">Enables payment to other private individuals or legal entities to the accounts with Raiffeisen Bank or other banks in BiH.</string>
+    <string name="payment_create_screen_info_dialog_text2">Note: This option does not support payment of public revenues. Please select an option \"Public revenue payment\".</string>
 </resources>
