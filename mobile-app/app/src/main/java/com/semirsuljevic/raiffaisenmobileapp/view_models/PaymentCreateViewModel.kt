@@ -12,6 +12,24 @@ class PaymentCreateViewModel:ViewModel() {
     private val _currencyConversion = mutableStateOf(false)
     private val _urgent = mutableStateOf(false)
 
+    val transactionMinDate: Calendar = Calendar.getInstance()
+
+
+    private val _calendar = mutableStateOf(
+        Calendar.getInstance()
+    )
+    init {
+        transactionMinDate.set(Calendar.HOUR_OF_DAY, 0)
+        transactionMinDate.set(Calendar.MINUTE, 0)
+        transactionMinDate.set(Calendar.SECOND, 0)
+    }
+
+    fun setDate(calendar: Calendar) {
+        _calendar.value = calendar
+    }
+
+
+
     val fields = FieldsController()
 
     fun setDialogState(value: Boolean) {
@@ -31,6 +49,7 @@ class PaymentCreateViewModel:ViewModel() {
     val isDialogOpened: MutableState<Boolean> = _isDialogOpened
     val currencyConversion: MutableState<Boolean> = _currencyConversion
     val urgent: MutableState<Boolean> = _urgent
+    val calendar: MutableState<Calendar> = _calendar
 }
 
 class FieldsController {

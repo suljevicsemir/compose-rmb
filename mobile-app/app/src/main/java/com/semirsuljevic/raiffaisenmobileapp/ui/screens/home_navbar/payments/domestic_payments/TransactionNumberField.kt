@@ -22,7 +22,7 @@ fun TransactionNumberField(
     viewModel: PaymentCreateViewModel
 ) {
     Column (
-        modifier = Modifier.padding(end = 10.dp)
+        modifier = Modifier.padding(end = 10.dp, top = 10.dp, bottom = 10.dp)
     ){
         Row (
             modifier = Modifier.height(55.dp)

@@ -1,43 +1,36 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListSectionSeparator
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.view_models.PaymentCreateViewModel
 
-
 @Composable
-fun TransactionUrgentField(
-    viewModel: PaymentCreateViewModel
-) {
-    Column (
-        modifier = Modifier.padding(top = 10.dp, start = 10.dp, end = 10.dp, bottom = 10.dp)
-    ){
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
-        ) {
+fun ConvertSectionSeparator(viewModel: PaymentCreateViewModel) {
+    ListSectionSeparator(
+        text = stringResource(id = R.string.payment_create_screen_amount),
+        actions = {
             Text(
-                stringResource(id = R.string.payment_create_screen_emergency_label),
-                color = White
+                stringResource(id = R.string.payment_create_screen_convert),
+                color = White,
             )
+            Spacer(modifier = Modifier.width(8.dp))
             Switch(
-                checked = viewModel.urgent.value,
+                checked = viewModel.currencyConversion.value,
                 onCheckedChange = {
-                    viewModel.urgent.value = it
+                    viewModel.currencyConversion.value = it
                 },
                 colors = SwitchDefaults.colors(
                     checkedThumbColor = Yellow400,
@@ -47,6 +40,5 @@ fun TransactionUrgentField(
                 )
             )
         }
-        Divider(color = Gray200)
-    }
+    )
 }
