@@ -1,14 +1,25 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.VerifiedUser
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusEvent
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -18,17 +29,30 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.view_models.PaymentCreateViewModel
+import kotlinx.coroutines.launch
 
+@ExperimentalFoundationApi
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun PaymentTemplateSection(viewModel: PaymentCreateViewModel) {
+fun PaymentTemplateSection(viewModel: PaymentCreateViewModel, scrollState: ScrollState) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
+    val coroutineScope = rememberCoroutineScope()
+
+
     Column (
         modifier = Modifier.padding(end = 10.dp)
     ){
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .onFocusEvent { focusState ->
-
+                .bringIntoViewRequester(bringIntoViewRequester)
+                .onFocusEvent {
+                    if (it.isFocused) {
+                        coroutineScope.launch {
+                            bringIntoViewRequester.bringIntoView()
+                        }
+                    }
                 },
             value = viewModel.templateName.value,
             onValueChange = {
@@ -48,6 +72,8 @@ fun PaymentTemplateSection(viewModel: PaymentCreateViewModel) {
                 unfocusedBorderColor = Black,
                 cursorColor = Yellow400,
             ),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() })
         )
         Divider(
             color = Gray200,
@@ -57,7 +83,9 @@ fun PaymentTemplateSection(viewModel: PaymentCreateViewModel) {
             stringResource(id = R.string.payment_create_screen_character_limit),
             color = White,
             textAlign = TextAlign.End,
-            modifier = Modifier.fillMaxWidth().padding(top = 6.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 6.dp)
         )
 
         Row(
@@ -77,4 +105,6 @@ fun PaymentTemplateSection(viewModel: PaymentCreateViewModel) {
             )
         }
     }
+
+
 }
