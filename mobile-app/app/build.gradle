@@ -58,7 +58,6 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            //signingConfig signingConfigs.dev
             buildConfigField("String", "BUILD_TIME", "\"" + System.currentTimeMillis().toString() + "\"")
         }
     }
@@ -69,13 +68,20 @@ android {
             dimension "version"
             applicationId "com.raiffaisenmobileapp.dev"
             resValue "string", "app_name", "RMB Test"
-            manifestPlaceholders = [appLabel:"@string/dev_app_name"]
+            //manifestPlaceholders = [appLabel:"@string/dev_app_name"]
+            manifestPlaceholders["appLabel"] = "@string/dev_app_name"
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            manifestPlaceholders["MAPS_API_KEY"] = "${properties.getProperty("MAPS_DEV_API_KEY")}"
         }
         prod {
             dimension "version"
             applicationId "com.raiffaisenmobileapp.prod"
             resValue "string", "app_name", "RMB"
-            manifestPlaceholders = [appLabel:"@string/prod_app_name"]
+            manifestPlaceholders["appLabel"] = "@string/prod_app_name"
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            manifestPlaceholders["MAPS_API_KEY"] = "${properties.getProperty("MAPS_PROD_API_KEY")}"
         }
     }
     compileOptions {
