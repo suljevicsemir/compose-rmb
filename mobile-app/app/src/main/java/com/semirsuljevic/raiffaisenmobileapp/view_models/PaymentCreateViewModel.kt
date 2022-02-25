@@ -7,6 +7,8 @@ import java.util.*
 
 class PaymentCreateViewModel:ViewModel() {
 
+    private val _accountNumber = mutableStateOf("")
+    private val _amount = mutableStateOf("")
     private val _templateName = mutableStateOf("")
     private val _isDialogOpened = mutableStateOf(false)
     private val _currencyConversion = mutableStateOf(false)
@@ -30,7 +32,6 @@ class PaymentCreateViewModel:ViewModel() {
 
 
 
-    val fields = FieldsController()
 
     fun setDialogState(value: Boolean) {
         _isDialogOpened.value = value
@@ -45,31 +46,12 @@ class PaymentCreateViewModel:ViewModel() {
         _templateName.value = value
     }
 
+    val accountNumber: MutableState<String> = _accountNumber
+    val amount: MutableState<String> = _amount
     val templateName: MutableState<String> = _templateName
     val isDialogOpened: MutableState<Boolean> = _isDialogOpened
     val currencyConversion: MutableState<Boolean> = _currencyConversion
     val urgent: MutableState<Boolean> = _urgent
     val calendar: MutableState<Calendar> = _calendar
-}
-
-class FieldsController {
-    var x = mutableStateOf("")
-    var dateLabel = mutableStateOf("")
-    var templateName = mutableStateOf("")
-    var accountNumber = mutableStateOf("")
-    var amount = mutableStateOf<Float>(0f)
-        private set
-
-    fun setDateFromPicker(calendar: Calendar) {
-        dateLabel.value = calendar.get(Calendar.DAY_OF_MONTH).toString() + ", " + calendar.get(Calendar.YEAR)
-    }
-
-    fun setAmount(value: String):Boolean {
-        return if(value.toFloatOrNull() == null) false else {
-            amount.value = value.toFloat()
-            true
-        }
-    }
-
 
 }

@@ -36,9 +36,9 @@ fun TransactionAmountField(viewModel: PaymentCreateViewModel) {
                     .onFocusEvent { focusState ->
 
                     },
-                value = viewModel.templateName.value,
+                value = viewModel.amount.value,
                 onValueChange = {
-
+                    viewModel.amount.value = it
                 },
                 textStyle = androidx.compose.ui.text.TextStyle(
                     color = White

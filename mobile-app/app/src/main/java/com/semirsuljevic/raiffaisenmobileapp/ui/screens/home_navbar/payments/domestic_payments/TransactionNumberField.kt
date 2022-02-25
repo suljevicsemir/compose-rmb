@@ -33,9 +33,9 @@ fun TransactionNumberField(
                     .onFocusEvent { focusState ->
 
                     },
-                value = viewModel.templateName.value,
+                value = viewModel.accountNumber.value,
                 onValueChange = {
-
+                    viewModel.accountNumber.value = it
                 },
                 placeholder = {
                     Text(
