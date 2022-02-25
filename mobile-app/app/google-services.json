@@ -7,9 +7,67 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:426668271261:android:2e90f95bdb18cf9b56d674",
+        "android_client_info": {
+          "package_name": "com.raiffaisenmobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426668271261-igpqj5fjmpjbaobotf1fvsmmm653dmtl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeCUMCnNd-0qK2RQM3euFdaD5pIngtVOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426668271261-igpqj5fjmpjbaobotf1fvsmmm653dmtl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:426668271261:android:37029908423ba55e56d674",
         "android_client_info": {
           "package_name": "com.raiffaisenmobileapp.devfree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426668271261-igpqj5fjmpjbaobotf1fvsmmm653dmtl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeCUMCnNd-0qK2RQM3euFdaD5pIngtVOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426668271261-igpqj5fjmpjbaobotf1fvsmmm653dmtl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426668271261:android:82c1bbee95a9362556d674",
+        "android_client_info": {
+          "package_name": "com.semirsuljevic.raiffaisenmobileapp.dev.free"
         }
       },
       "oauth_client": [

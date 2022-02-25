@@ -20,7 +20,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.raiffaisenmobileapp.devfree"
+        applicationId "com.raiffaisenmobileapp"
         minSdk 24
         targetSdk 31
         versionCode 1
@@ -33,28 +33,52 @@ android {
     }
 
     signingConfigs {
-        sign {
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
+        dev {
+            storeFile file(keystoreProperties['devStoreFile'])
+            storePassword keystoreProperties['devStorePassword']
+            keyAlias keystoreProperties['devKeyAlias']
+            keyPassword keystoreProperties['devKeyPassword']
         }
+        prod {
+            storeFile file(keystoreProperties['prodStoreFile'])
+            storePassword keystoreProperties['prodStorePassword']
+            keyAlias keystoreProperties['prodKeyAlias']
+            keyPassword keystoreProperties['prodKeyPassword']
+        }
+
     }
 
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.sign
+            signingConfig signingConfigs.prod
             buildConfigField("String", "BUILD_TIME", "\"" + System.currentTimeMillis().toString() + "\"")
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.sign
+            //signingConfig signingConfigs.dev
             buildConfigField("String", "BUILD_TIME", "\"" + System.currentTimeMillis().toString() + "\"")
         }
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        dev {
+            dimension "version"
+            applicationId "com.raiffaisenmobileapp.dev"
+            resValue "string", "app_name", "RMB Test"
+            manifestPlaceholders = [appLabel:"@string/dev_app_name"]
+        }
+        prod {
+            dimension "version"
+            applicationId "com.raiffaisenmobileapp.prod"
+            resValue "string", "app_name", "RMB"
+            manifestPlaceholders = [appLabel:"@string/prod_app_name"]
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
