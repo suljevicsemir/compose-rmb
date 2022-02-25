@@ -67,8 +67,7 @@ android {
         dev {
             dimension "version"
             applicationId "com.raiffaisenmobileapp.dev"
-            resValue "string", "app_name", "RMB Test"
-            //manifestPlaceholders = [appLabel:"@string/dev_app_name"]
+
             manifestPlaceholders["appLabel"] = "@string/dev_app_name"
             Properties properties = new Properties()
             properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -77,7 +76,7 @@ android {
         prod {
             dimension "version"
             applicationId "com.raiffaisenmobileapp.prod"
-            resValue "string", "app_name", "RMB"
+
             manifestPlaceholders["appLabel"] = "@string/prod_app_name"
             Properties properties = new Properties()
             properties.load(project.rootProject.file('local.properties').newDataInputStream())
