@@ -61,7 +61,7 @@ fun DomesticPaymentCreateScreen(
 
             ListSectionSeparator(text = stringResource(id = R.string.payment_create_screen_save_template))
 
-            PaymentTemplateSection(viewModel = viewModel)
+            PaymentTemplateSection(viewModel = viewModel, scrollState = scrollState)
 
             Spacer(modifier = Modifier.height(30.dp))
         }

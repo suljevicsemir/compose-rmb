@@ -1,16 +1,26 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusEvent
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -20,9 +30,15 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.view_models.PaymentCreateViewModel
+import kotlinx.coroutines.launch
 
+@ExperimentalFoundationApi
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TransactionAmountField(viewModel: PaymentCreateViewModel) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
+    val coroutineScope = rememberCoroutineScope()
     Column (
         modifier = Modifier.padding(end = 10.dp)
     ){
@@ -33,8 +49,13 @@ fun TransactionAmountField(viewModel: PaymentCreateViewModel) {
             TextField(
                 modifier = Modifier
                     .weight(0.7f)
-                    .onFocusEvent { focusState ->
-
+                    .bringIntoViewRequester(bringIntoViewRequester)
+                    .onFocusEvent {
+                        if (it.isFocused) {
+                            coroutineScope.launch {
+                                bringIntoViewRequester.bringIntoView()
+                            }
+                        }
                     },
                 value = viewModel.amount.value,
                 onValueChange = {
@@ -48,6 +69,8 @@ fun TransactionAmountField(viewModel: PaymentCreateViewModel) {
                     unfocusedBorderColor = Black,
                     cursorColor = Yellow400,
                 ),
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() })
             )
             Box(
                 Modifier
