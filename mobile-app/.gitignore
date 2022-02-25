@@ -17,3 +17,4 @@ local.properties
 /app/rmb-keystore-prod.jks
 keystore.properties
 /app/src/dev/google-services.json
+/app/google-services.json
