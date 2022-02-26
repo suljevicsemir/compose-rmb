@@ -58,6 +58,7 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.dev
             buildConfigField("String", "BUILD_TIME", "\"" + System.currentTimeMillis().toString() + "\"")
         }
     }
@@ -72,6 +73,9 @@ android {
             Properties properties = new Properties()
             properties.load(project.rootProject.file('local.properties').newDataInputStream())
             manifestPlaceholders["MAPS_API_KEY"] = "${properties.getProperty("MAPS_DEV_API_KEY")}"
+
+
+            buildConfigField "String", "BASE_URL", '"http://rmbcloneapi.azurewebsites.net/api/"'
         }
         prod {
             dimension "version"
@@ -81,6 +85,8 @@ android {
             Properties properties = new Properties()
             properties.load(project.rootProject.file('local.properties').newDataInputStream())
             manifestPlaceholders["MAPS_API_KEY"] = "${properties.getProperty("MAPS_PROD_API_KEY")}"
+
+            buildConfigField "String", "BASE_URL", '"http://rmbcloneapi.azurewebsites.net/api/"'
         }
     }
     compileOptions {
