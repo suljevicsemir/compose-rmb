@@ -1,16 +1,19 @@
 package com.semirsuljevic.raiffaisenmobileapp.view_models
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.semirsuljevic.raiffaisenmobileapp.RetrofitInstance
 import com.semirsuljevic.raiffaisenmobileapp.models.City
+import com.semirsuljevic.raiffaisenmobileapp.models.locations.ATMFilter
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchServiceType
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchType
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
-import java.util.*
 
 class LocationsFilterViewModel: ViewModel() {
 
@@ -28,7 +31,12 @@ class LocationsFilterViewModel: ViewModel() {
         MutableLiveData<List<BranchServiceType>>()
     }
 
+    val atmFilters: MutableLiveData<List<ATMFilter>> by lazy {
+        MutableLiveData<List<ATMFilter>>()
+    }
+
     var loading = mutableStateOf(false)
+    var errorOnLoading = mutableStateOf(false)
 
     var agenciesToggle = mutableStateOf(true)
     var atmsToggle = mutableStateOf(true)
@@ -37,7 +45,8 @@ class LocationsFilterViewModel: ViewModel() {
 
     var dropdownExpanded = mutableStateOf(false)
     var branchTypeExpanded = mutableStateOf(false)
-    var branchServiceExpanded = mutableStateOf(false)
+    var branchServiceTypeExpanded = mutableStateOf(false)
+    var atmFilterExpanded = mutableStateOf(false)
 
     private val selectedCity: MutableLiveData<City> by lazy {
         MutableLiveData<City>()
@@ -50,64 +59,123 @@ class LocationsFilterViewModel: ViewModel() {
     val selectedBranchService: MutableLiveData<BranchServiceType> by lazy {
         MutableLiveData<BranchServiceType>()
     }
+    val selectedATMFilter: MutableLiveData<ATMFilter> by lazy {
+        MutableLiveData<ATMFilter>()
+    }
 
     var insideAtm = mutableStateOf(true)
     var outsideAtm = mutableStateOf(true)
 
 
-
-    fun getCities() {
+    suspend fun getLocationsFilter() {
         loading.value = true
-        viewModelScope.launch {
-            val response = try {
-                RetrofitInstance.api.getCities()
+        println("debug: Before launch call")
+        val job = viewModelScope.launch {
+            launch {
+                getBranchServiceTypes()
             }
-            catch (e: IOException) {
-                return@launch
+            launch {
+                getBranchTypes()
             }
-            if(response.isSuccessful && response.body() != null) {
-                cities.value = response.body()!!
+            launch {
+                getCities()
             }
-        }
-        viewModelScope.launch {
-            val response = try {
-                RetrofitInstance.api.getBranchServiceTypes()
-            }
-            catch (e: IOException) {
-                return@launch
-            }
-            if(response.isSuccessful && response.body() != null) {
-                branchServices.value = response.body()!!
-                loading.value = false
-            }
-        }
-        viewModelScope.launch {
-            val response = try {
-                RetrofitInstance.api.getBranchTypes()
-            }
-            catch (e: IOException) {
-                return@launch
-            }
-            if(response.isSuccessful && response.body() != null) {
-                branchTypes.value = response.body()!!
-                loading.value = false
+            launch {
+                getATMFilters()
             }
         }
 
 
-
+//        val parentJob = viewModelScope.launch {
+//            println("debug: Job1 started at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
+//            val job1 = launch {
+//                getBranchTypes()
+//            }
+//            println("debug: Job1 ended at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
+//            println("debug: Job2 started at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
+//            val job2 = launch {
+//                getBranchServiceTypes()
+//            }
+//            println("debug: Job2 ended at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
+//            println("debug: Job3 started at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
+//            val job3 = launch {
+//                getCities()
+//            }
+//            println("debug: Job3 ended at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
+//            println("debug: Job4 started at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
+//            val job4 = launch {
+//                getATMFilters()
+//            }
+//            println("debug: Job4 ended at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
+//        }
+        println("debug: After launch call")
+        job.join()
+        if(branchTypes.value != null && branchServices.value != null && cities.value != null) {
+            loading.value = false
+            errorOnLoading.value = false
+        }
+        else {
+            errorOnLoading.value = true
+        }
     }
 
-    fun getBranchTypes() {
-        viewModelScope.launch {
-
-
+    private suspend fun getCities() {
+        val response = try {
+            RetrofitInstance.api.getCities()
+        }
+        catch (e: IOException) {
+            return
+        }
+        if(response.isSuccessful && response.body() != null) {
+            println("debug: Cities not null")
+            withContext(Dispatchers.Main) {
+                cities.value = response.body()
+            }
         }
     }
 
-    fun getBranchServices() {
-        viewModelScope.launch {
+    private suspend fun getBranchTypes() {
+        val response = try {
+            RetrofitInstance.api.getBranchTypes()
+        }
+        catch (e: IOException) {
+            return
+        }
+        if(response.isSuccessful && response.body() != null) {
+            println("debug: Branch types not null")
+            withContext(Dispatchers.Main) {
+                branchTypes.value = response.body()
+            }
+        }
+    }
 
+    private suspend fun getBranchServiceTypes() {
+        val response = try {
+            RetrofitInstance.api.getBranchServiceTypes()
+        }
+        catch (e: IOException) {
+            return
+        }
+        if(response.isSuccessful && response.body() != null) {
+            println("debug: Branch service types not null")
+            withContext(Dispatchers.Main) {
+                branchServices.value = response.body()
+            }
+        }
+    }
+
+    private suspend fun getATMFilters() {
+        val response = try {
+            RetrofitInstance.api.getATMFilters()
+        }
+        catch (e: IOException) {
+            return
+        }
+        if(response.isSuccessful && response.body() != null) {
+            println("debug: ATM Filters not null")
+            withContext(Dispatchers.Main) {
+                atmFilters.value = response.body()
+            }
         }
     }
 
@@ -126,10 +194,21 @@ class LocationsFilterViewModel: ViewModel() {
         selectedBranchService.value = branchService
     }
     fun toggleBranchServiceDropdown() {
-        branchServiceExpanded.value = !branchServiceExpanded.value
+        branchServiceTypeExpanded.value = !branchServiceTypeExpanded.value
     }
     fun branchServiceDropdownOff() {
-        branchServiceExpanded.value = false
+        branchServiceTypeExpanded.value = false
+    }
+
+    //atm filter method
+    fun toggleATMFilterDropdown() {
+        atmFilterExpanded.value = !atmFilterExpanded.value
+    }
+    fun atmFilterDropdownOff() {
+        atmFilterExpanded.value = false
+    }
+    fun selectATMFilter(atmFilter: ATMFilter) {
+
     }
 
 

@@ -1,1 +1,3 @@
 Koin, https://blog.mindorks.com/kotlin-koin-tutorial
+
+Make reusable dropdown based on locations filter dropdown

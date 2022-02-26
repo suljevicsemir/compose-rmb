@@ -3,6 +3,7 @@ package com.semirsuljevic.raiffaisenmobileapp
 import com.semirsuljevic.raiffaisenmobileapp.models.City
 import com.semirsuljevic.raiffaisenmobileapp.models.FAQItem
 import com.semirsuljevic.raiffaisenmobileapp.models.Location
+import com.semirsuljevic.raiffaisenmobileapp.models.locations.ATMFilter
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchServiceType
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchType
 import com.semirsuljevic.raiffaisenmobileapp.models.user.LoginCredentials
@@ -32,6 +33,8 @@ interface RMBAPI {
     @GET(value = "BranchType")
     suspend fun getBranchTypes() : Response<List<BranchType>>
 
+    @GET(value = "ATMFilter")
+    suspend fun getATMFilters() : Response<List<ATMFilter>>
 
 
 
