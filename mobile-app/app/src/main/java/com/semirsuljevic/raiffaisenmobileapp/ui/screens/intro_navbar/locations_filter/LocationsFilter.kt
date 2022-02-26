@@ -108,12 +108,28 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
                     )
                     Spacer(modifier = Modifier.height(20.dp))
                     FilterContainer(
-                        title = stringResource(id = R.string.locations_filter_service_search),
+                        title = stringResource(id = R.string.locations_filter_atm_service_search),
                         topContent = {
                             SearchATMType(viewModel = viewModel)
                         }
                     )
-                    Spacer(modifier = Modifier.height(65.dp))
+                    Spacer(modifier = Modifier.height(40.dp))
+                    Button(
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
+                        onClick = {
+
+                        },
+                        content = {
+                            Text(
+                                stringResource(id = R.string.locations_filter_apply_filters)
+                            )
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = Yellow400,
+                        ),
+                        contentPadding = PaddingValues(vertical = 15.dp)
+                    )
+                    Spacer(modifier = Modifier.height(35.dp))
                 }
             }
         }

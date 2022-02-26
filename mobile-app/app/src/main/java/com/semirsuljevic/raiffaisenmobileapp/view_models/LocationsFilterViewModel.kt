@@ -69,7 +69,6 @@ class LocationsFilterViewModel: ViewModel() {
 
     suspend fun getLocationsFilter() {
         loading.value = true
-        println("debug: Before launch call")
         val job = viewModelScope.launch {
             launch {
                 getBranchServiceTypes()
@@ -84,31 +83,6 @@ class LocationsFilterViewModel: ViewModel() {
                 getATMFilters()
             }
         }
-
-
-//        val parentJob = viewModelScope.launch {
-//            println("debug: Job1 started at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
-//            val job1 = launch {
-//                getBranchTypes()
-//            }
-//            println("debug: Job1 ended at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
-//            println("debug: Job2 started at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
-//            val job2 = launch {
-//                getBranchServiceTypes()
-//            }
-//            println("debug: Job2 ended at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
-//            println("debug: Job3 started at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
-//            val job3 = launch {
-//                getCities()
-//            }
-//            println("debug: Job3 ended at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
-//            println("debug: Job4 started at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
-//            val job4 = launch {
-//                getATMFilters()
-//            }
-//            println("debug: Job4 ended at: ${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}:${Calendar.getInstance().get(Calendar.MILLISECOND)}")
-//        }
-        println("debug: After launch call")
         job.join()
         if(branchTypes.value != null && branchServices.value != null && cities.value != null) {
             loading.value = false
