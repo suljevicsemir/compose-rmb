@@ -20,6 +20,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBBottomBarItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBNavBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.IntroProductsScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_locations.IntroLocations
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
 

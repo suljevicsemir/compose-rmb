@@ -155,7 +155,8 @@ dependencies {
 
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
-    implementation 'com.google.android.gms:play-services-maps:18.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
 
     //pager api
     implementation 'androidx.paging:paging-compose:1.0.0-alpha14'
@@ -172,5 +173,8 @@ dependencies {
     //material dialogs
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
     implementation 'com.afollestad.material-dialogs:datetime:3.3.0'
+
+    //permissions
+    implementation 'com.google.accompanist:accompanist-permissions:0.24.3-alpha'
 
 }
