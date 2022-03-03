@@ -145,6 +145,10 @@ fun Navigator(navController: NavHostController) {
            DomesticPaymentCreateScreen(navController = navController)
         }
 
+        composable(Screen.BranchDetailsScreen.route) {
+
+        }
+
         composable(Screen.ErrorScreen.route) {
             val scrollState = rememberScrollState()
 

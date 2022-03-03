@@ -49,6 +49,7 @@ sealed  class Screen (val route: String){
 
     object PaymentCreateScreen: Screen(route = "payment_create")
 
+    object BranchDetailsScreen: Screen(route = "branch_details")
 
     object ErrorScreen: Screen(route = "error")
 

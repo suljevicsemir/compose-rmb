@@ -1,6 +1,5 @@
 package com.semirsuljevic.raiffaisenmobileapp.view_models
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.semirsuljevic.raiffaisenmobileapp.RetrofitInstance
 import com.semirsuljevic.raiffaisenmobileapp.models.City
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.ATMFilter
+import com.semirsuljevic.raiffaisenmobileapp.models.locations.BankBranch
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchServiceType
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchType
 import kotlinx.coroutines.Dispatchers
@@ -48,17 +48,18 @@ class LocationsFilterViewModel: ViewModel() {
         MutableLiveData<List<ATMFilter>>()
     }
 
-    init {
-        Log.d("SEMIR", "INIT FROM LOCATIONS CALLED")
+    val branches: MutableLiveData<List<BankBranch>> by lazy {
+        MutableLiveData<List<BankBranch>>()
     }
+
 
     suspend fun getFilters() {
         viewModelScope.launch {
-            testFilter()
+            initCall()
         }
     }
 
-    private suspend fun testFilter() {
+    private suspend fun initCall() {
 
         val response = try {
             RetrofitInstance.api.filterBranches(
@@ -71,13 +72,7 @@ class LocationsFilterViewModel: ViewModel() {
             return
         }
         if(response.isSuccessful && response.body() != null) {
-            Log.d("SEMIR", "Response ok")
-            val branches = response.body()
-            branches!!.forEach {
-                Log.d("SEMIR", it.name)
-            }
-
-
+            branches.value = response.body()
         }
     }
 

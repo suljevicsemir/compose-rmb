@@ -38,3 +38,8 @@ fun Home(navController: NavController) {
         }
     }
 }
+
+@Composable
+fun S() {
+
+}
