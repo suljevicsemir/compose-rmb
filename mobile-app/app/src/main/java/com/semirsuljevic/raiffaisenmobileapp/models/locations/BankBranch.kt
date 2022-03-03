@@ -15,7 +15,7 @@ data class BankBranch (
     val atmFilter: ATMFilter
 ) {
     fun isAtm() : Boolean {
-        return  branchType.id == ""
+        return  branchType.id == "9597cffd-63cb-48e2-a724-83da80199840"
     }
 
 }
