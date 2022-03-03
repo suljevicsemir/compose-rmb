@@ -170,6 +170,10 @@ private fun ButtonsRow(branch: BankBranch) {
         Intent(Intent.ACTION_DIAL, Uri.parse("tel:${branch.contact}"))
     }
 
+    val mapsIntent = remember {
+        Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=${branch.location.latitude},${branch.location.longitude}&mode=l"))
+    }
+
     Row (
         modifier = Modifier
             .fillMaxWidth()
@@ -188,6 +192,10 @@ private fun ButtonsRow(branch: BankBranch) {
             imageVector = Icons.Outlined.Directions,
             text = stringResource(id = R.string.branch_details_directions_button),
             onClick = {
+                mapsIntent.setPackage("com.google.android.apps.maps")
+                if(mapsIntent.resolveActivity(context.packageManager) != null) {
+                    context.startActivity(mapsIntent)
+                }
 
             }
         )
@@ -201,7 +209,7 @@ private fun BranchDetailsButton(
     onClick: () -> Unit
 ) {
     val configuration = LocalConfiguration.current
-    val width = (configuration.screenWidthDp - 30) / 2
+    val width = (configuration.screenWidthDp - 40) / 2
     Button(
         onClick = {
             onClick()
