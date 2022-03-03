@@ -28,6 +28,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.dom
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_locations.BranchDetails
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
@@ -146,7 +147,7 @@ fun Navigator(navController: NavHostController) {
         }
 
         composable(Screen.BranchDetailsScreen.route) {
-
+            BranchDetails(navController = navController)
         }
 
         composable(Screen.ErrorScreen.route) {

@@ -240,5 +240,11 @@
     <string name="prod_app_name" translatable="false">RMB Prod</string>
     <string name="locations_filter_dialog_button">UREDU</string>
     <string name="locations_filter_dialog_text">Aplikaciji je potrebna lokacija da bi smo mogli prikazati vašu lokaciju na mapama korektno.</string>
+    <string name="branche_details_call_button">Pozovi</string>
+    <string name="branch_details_directions_button">Smjernice</string>
+    <string name="branch_details_address_label">Adresa</string>
+    <string name="branch_details_city_label">Grad</string>
+    <string name="branch_details_contact_label">Kontakt</string>
+    <string name="branch_details_working_hours_label">Radno vrijeme</string>
 
 </resources>

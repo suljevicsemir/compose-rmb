@@ -21,15 +21,15 @@ class LocationsFilterViewModel: ViewModel() {
     private var _selectedSearch = mutableStateOf(value = SearchBy.Closest)
 
     var currentLatitude = mutableStateOf(
-        0.0
+        43.79675
     )
     var currentLongitude = mutableStateOf(
-        0.0
+        18.09284
     )
 
     fun setCurrentPosition(latitude: Double, longitude: Double) {
-        currentLongitude.value = longitude
-        currentLatitude.value = latitude
+        //currentLongitude.value = longitude
+        //currentLatitude.value = latitude
     }
 
     val cities:  MutableLiveData<List<City>> by lazy {
@@ -50,6 +50,10 @@ class LocationsFilterViewModel: ViewModel() {
 
     val branches: MutableLiveData<List<BankBranch>> by lazy {
         MutableLiveData<List<BankBranch>>()
+    }
+
+    val currentBranch: MutableLiveData<BankBranch> by lazy {
+        MutableLiveData<BankBranch>()
     }
 
 

@@ -202,4 +202,10 @@
     <string name="payment_create_screen_info_dialog_text2">Note: This option does not support payment of public revenues. Please select an option \"Public revenue payment\".</string>
     <string name="locations_filter_dialog_button">OK</string>
     <string name="locations_filter_dialog_text">App needs device\'s location access so we could display location correctly.</string>
+    <string name="branche_details_call_button">Call</string>
+    <string name="branch_details_directions_button">Directions</string>
+    <string name="branch_details_address_label">Address</string>
+    <string name="branch_details_city_label">City</string>
+    <string name="branch_details_contact_label">Contact</string>
+    <string name="branch_details_working_hours_label">Working hours</string>
 </resources>
