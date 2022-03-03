@@ -1,5 +1,6 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_locations
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,9 +16,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -40,7 +43,7 @@ import kotlinx.coroutines.launch
 fun IntroLocations(navController: NavController) {
 
     val pagerState = rememberPagerState(pageCount = 2)
-    val viewModel = LocationsFilterViewModel()
+    val locationsFilterViewModel : LocationsFilterViewModel = viewModel(LocalContext.current as ComponentActivity)
 
 
     Column (
@@ -65,7 +68,7 @@ fun IntroLocations(navController: NavController) {
             }
         )
         Tabs(pagerState = pagerState)
-        TabsContent(pagerState = pagerState, viewModel = viewModel)
+        TabsContent(pagerState = pagerState, viewModel = locationsFilterViewModel)
     }
 }
 @ExperimentalPagerApi

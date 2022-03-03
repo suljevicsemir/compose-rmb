@@ -27,7 +27,7 @@ import com.semirsuljevic.raiffaisenmobileapp.view_models.SearchBy
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilterViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
+fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilterViewModel) {
     val scrollState = rememberScrollState()
 
     LaunchedEffect(Unit) {

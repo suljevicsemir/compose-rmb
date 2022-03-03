@@ -5,19 +5,22 @@ import android.os.Bundle
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountBalance
 import androidx.compose.material.icons.outlined.CreditCard
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
@@ -29,8 +32,11 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
+import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 
 
@@ -42,17 +48,19 @@ fun LocationsMap(viewModel: LocationsFilterViewModel) {
     )
     val context = LocalContext.current
 
+    LaunchedEffect(Unit) {
+        viewModel.getFilters()
+    }
+
     when(state.status) {
         PermissionStatus.Granted -> {
             LaunchedEffect(Unit) {
                 val fusedClient = LocationServices.getFusedLocationProviderClient(context)
-
                 try {
                     fusedClient.lastLocation
                         .addOnSuccessListener {
                             if(it != null) {
-                                println("debug: Finally a location")
-                                println("debug: Latitude is : ${it.latitude}")
+                                viewModel.setCurrentPosition(latitude = it.latitude, longitude = it.longitude)
                             }
                         }
                 }
@@ -89,45 +97,18 @@ fun LocationsMap(viewModel: LocationsFilterViewModel) {
                             },
                             selected = viewModel.agenciesToggle.value
                         )
-                        Button(
-                            onClick = {
-                                state.launchPermissionRequest()
-                            },
-                            content = {
-                                Text(
-                                    "ask for permission"
-                                )
-                            }
-                        )
                     }
                 }
             }
         }
         is PermissionStatus.Denied -> {
             if((state.status as PermissionStatus.Denied).shouldShowRationale) {
-                Text(
-                    "Denied bokte show rationale",
-                    color = White
-                )
+                LocationPermissionDialog(permissionState = state)
             }
             else {
-                Column {
-                    Button(
-                        onClick = {
-                            state.launchPermissionRequest()
-                        },
-                        content = {
-                            Text(
-                                "ask for permission"
-                            )
-                        }
-                    )
-                    Text(
-                        "Denied bokte",
-                        color = White
-                    )
+                LaunchedEffect(Unit) {
+                    state.launchPermissionRequest()
                 }
-
             }
         }
     }
@@ -181,4 +162,54 @@ fun rememberMapLifecycle(map: MapView) : LifecycleEventObserver {
             }
         }
     }
+}
+
+
+@ExperimentalPermissionsApi
+@Composable
+private fun LocationPermissionDialog(permissionState: PermissionState) {
+    val isVisible = remember {
+        mutableStateOf(true)
+    }
+    if(isVisible.value) {
+        AlertDialog(
+            onDismissRequest = {
+                //isVisible.value = false
+
+            },
+            backgroundColor = Gray400,
+            buttons = {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    TextButton(
+                        onClick = {
+                            isVisible.value = false
+                            permissionState.launchPermissionRequest()
+                        },
+                        content = {
+                            Text(
+                                stringResource(R.string.locations_filter_dialog_button),
+                                color = Yellow400
+                            )
+                        },
+                        contentPadding = PaddingValues(vertical = 8.dp, horizontal = 5.dp)
+                    )
+                    Spacer(modifier = Modifier.padding(horizontal = 10.dp))
+                }
+            },
+            text = {
+                Column {
+                    Text(
+                        stringResource(id = R.string.locations_filter_dialog_text),
+                        color = White
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
+            }
+        )
+    }
+
+
 }

@@ -238,5 +238,7 @@
     <string name="payment_create_screen_info_dialog_ok">UREDU</string>
     <string name="dev_app_name" translatable="false">RMB Test</string>
     <string name="prod_app_name" translatable="false">RMB Prod</string>
+    <string name="locations_filter_dialog_button">UREDU</string>
+    <string name="locations_filter_dialog_text">Aplikaciji je potrebna lokacija da bi smo mogli prikazati vašu lokaciju na mapama korektno.</string>
 
 </resources>

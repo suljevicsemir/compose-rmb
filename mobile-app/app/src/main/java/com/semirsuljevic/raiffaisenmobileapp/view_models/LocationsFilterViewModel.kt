@@ -1,5 +1,6 @@
 package com.semirsuljevic.raiffaisenmobileapp.view_models
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
@@ -19,6 +20,18 @@ class LocationsFilterViewModel: ViewModel() {
 
     private var _selectedSearch = mutableStateOf(value = SearchBy.Closest)
 
+    var currentLatitude = mutableStateOf(
+        0.0
+    )
+    var currentLongitude = mutableStateOf(
+        0.0
+    )
+
+    fun setCurrentPosition(latitude: Double, longitude: Double) {
+        currentLongitude.value = longitude
+        currentLatitude.value = latitude
+    }
+
     val cities:  MutableLiveData<List<City>> by lazy {
         MutableLiveData<List<City>>()
     }
@@ -33,6 +46,39 @@ class LocationsFilterViewModel: ViewModel() {
 
     val atmFilters: MutableLiveData<List<ATMFilter>> by lazy {
         MutableLiveData<List<ATMFilter>>()
+    }
+
+    init {
+        Log.d("SEMIR", "INIT FROM LOCATIONS CALLED")
+    }
+
+    suspend fun getFilters() {
+        viewModelScope.launch {
+            testFilter()
+        }
+    }
+
+    private suspend fun testFilter() {
+
+        val response = try {
+            RetrofitInstance.api.filterBranches(
+                latitude = 43.7965,
+                longitude = 18.0924,
+                radius = 15.0
+            )
+        }
+        catch (e: IOException) {
+            return
+        }
+        if(response.isSuccessful && response.body() != null) {
+            Log.d("SEMIR", "Response ok")
+            val branches = response.body()
+            branches!!.forEach {
+                Log.d("SEMIR", it.name)
+            }
+
+
+        }
     }
 
     var loading = mutableStateOf(false)
