@@ -1,9 +1,11 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_locations
 
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -15,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Call
 import androidx.compose.material.icons.outlined.Directions
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,6 +35,7 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.models.locations.BankBranch
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.*
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
@@ -63,6 +67,7 @@ fun BranchDetails(
 
     val scrollState = rememberScrollState()
 
+
     Scaffold (
         topBar = {
             CenteredTitleAppBar(
@@ -73,7 +78,9 @@ fun BranchDetails(
         backgroundColor = Black
     ){
         Column (
-            modifier = Modifier.verticalScroll(scrollState).padding(horizontal = 10.dp)
+            modifier = Modifier
+                .verticalScroll(scrollState)
+                .padding(horizontal = 10.dp)
         ){
             GoogleMap(
                 modifier = Modifier
@@ -113,7 +120,9 @@ fun BranchDetails(
                     strokeWidth = 1f
                 )
             }
-            ButtonsRow()
+            ButtonsRow(
+                branch = branch
+            )
             Text(
                 branch.name,
                 color = White,
@@ -155,7 +164,12 @@ private fun BranchRowInfo(infoLabel: String, value: String) {
 }
 
 @Composable
-private fun ButtonsRow() {
+private fun ButtonsRow(branch: BankBranch) {
+    val context = LocalContext.current
+    val numberIntent = remember {
+        Intent(Intent.ACTION_DIAL, Uri.parse("tel:${branch.contact}"))
+    }
+
     Row (
         modifier = Modifier
             .fillMaxWidth()
@@ -166,7 +180,7 @@ private fun ButtonsRow() {
             imageVector = Icons.Outlined.Call,
             text = stringResource(id = R.string.branche_details_call_button),
             onClick = {
-
+                context.startActivity(numberIntent)
             }
         )
         Spacer(modifier = Modifier.width(10.dp))
