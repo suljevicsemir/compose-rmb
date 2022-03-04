@@ -20,6 +20,8 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBBottomBarItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBNavBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.IntroProductsScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_locations.IntroLocations
+import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
 
@@ -28,7 +30,7 @@ import kotlinx.coroutines.launch
 @InternalCoroutinesApi
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
-fun IntroNavbar(navController: NavController) {
+fun IntroNavbar(navController: NavController, locationsFilterViewModel: LocationsFilterViewModel) {
     val pagerState = rememberPagerState(pageCount = 4)
     Scaffold (
         backgroundColor = Color.Black,

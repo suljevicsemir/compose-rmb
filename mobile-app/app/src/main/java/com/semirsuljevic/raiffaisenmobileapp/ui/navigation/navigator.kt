@@ -2,6 +2,7 @@ package com.semirsuljevic.raiffaisenmobileapp.ui.navigation
 
 import android.app.Application
 import android.os.Build
+import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,11 +28,13 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.dom
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_locations.BranchDetails
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.SecureSharedPref
+import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LoginViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 
@@ -45,13 +49,18 @@ fun Navigator(navController: NavHostController) {
     val secureSharedPref: SecureSharedPref = SecureSharedPref(LocalContext.current)
     val loginViewModel = LoginViewModel(LocalContext.current.applicationContext as Application, secureSharedPref = secureSharedPref)
 
+    val locationsFilterViewModel : LocationsFilterViewModel = viewModel(LocalContext.current as ComponentActivity)
+
 
     NavHost(
         navController = navController,
         startDestination = Screen.IntroHome.route
     ) {
         composable(Screen.IntroHome.route) {
-            IntroNavbar(navController = navController)
+            IntroNavbar(
+                navController = navController,
+                locationsFilterViewModel = locationsFilterViewModel
+            )
         }
 
         composable(Screen.UserHome.route) {
@@ -95,7 +104,7 @@ fun Navigator(navController: NavHostController) {
         }
 
         composable(Screen.LocationsSearchScreen.route) {
-            LocationsFilterScreen(navController = navController)
+            LocationsFilterScreen(navController = navController, viewModel = locationsFilterViewModel)
         }
 
         composable(Screen.LoginScreen.route) {
@@ -135,6 +144,10 @@ fun Navigator(navController: NavHostController) {
 
         composable(Screen.PaymentCreateScreen.route) {
            DomesticPaymentCreateScreen(navController = navController)
+        }
+
+        composable(Screen.BranchDetailsScreen.route) {
+            BranchDetails(navController = navController)
         }
 
         composable(Screen.ErrorScreen.route) {

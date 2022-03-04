@@ -135,7 +135,7 @@ fun IntroHome(navController: NavController) {
 }
 
 
-fun getGifPath(calendar: Calendar = Calendar.getInstance()): Int {
+private fun getGifPath(calendar: Calendar = Calendar.getInstance()): Int {
     val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
     val month = calendar.get(Calendar.MONTH)
 

@@ -23,20 +23,19 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.SearchBy
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilterViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
+fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilterViewModel) {
     val scrollState = rememberScrollState()
-    val scope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
-        viewModel.getCities()
-        viewModel.getBranchTypes()
-        viewModel.getBranchServices()
+        viewModel.getLocationsFilter()
     }
 
+    val coroutineScope = rememberCoroutineScope()
 
     Scaffold (
         backgroundColor = Black,
@@ -47,7 +46,7 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
             )
         }
     ){
-        if(viewModel.loading.value) {
+        if(viewModel.loadingFilters.value) {
             CircularProgressIndicator(color = Yellow400, modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(align = Alignment.Center))
@@ -93,24 +92,51 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
                         topContent = {
                             Column {
                                 RMBCheckbox(
-                                    checked = viewModel.outsideAtm.value,
+                                    checked = viewModel.insideAtm.value,
                                     onCheckedChange = {
-                                        viewModel.outsideAtm.value = it
+                                        viewModel.insideAtm.value = it
                                     },
                                     text = stringResource(id = R.string.locations_filter_atm_indoor)
                                 )
                                 Spacer(Modifier.height(10.dp))
                                 RMBCheckbox(
-                                    checked = viewModel.insideAtm.value,
+                                    checked = viewModel.outsideAtm.value,
                                     onCheckedChange = {
-                                        viewModel.insideAtm.value = it
+                                        viewModel.outsideAtm.value = it
                                     },
                                     text = stringResource(id = R.string.locations_filter_atm_outdoor)
                                 )
                             }
                         }
                     )
-                    Spacer(modifier = Modifier.height(65.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
+                    FilterContainer(
+                        title = stringResource(id = R.string.locations_filter_atm_service_search),
+                        topContent = {
+                            SearchATMType(viewModel = viewModel)
+                        }
+                    )
+                    Spacer(modifier = Modifier.height(40.dp))
+                    Button(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 10.dp),
+                        onClick = {
+                            coroutineScope.launch {
+                                viewModel.applyFilters()
+                            }
+                        },
+                        content = {
+                            Text(
+                                stringResource(id = R.string.locations_filter_apply_filters)
+                            )
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = Yellow400,
+                        ),
+                        contentPadding = PaddingValues(vertical = 15.dp)
+                    )
+                    Spacer(modifier = Modifier.height(35.dp))
                 }
             }
         }
@@ -128,7 +154,7 @@ fun SearchBranchService(viewModel: LocationsFilterViewModel) {
     }
 
     ExposedDropdownMenuBox(
-        expanded = viewModel.branchServiceExpanded.value,
+        expanded = viewModel.branchServiceTypeExpanded.value,
         onExpandedChange = {
             viewModel.toggleBranchServiceDropdown()
         },
@@ -143,7 +169,7 @@ fun SearchBranchService(viewModel: LocationsFilterViewModel) {
             onValueChange = { },
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(
-                    expanded = viewModel.branchServiceExpanded.value,
+                    expanded = viewModel.branchServiceTypeExpanded.value,
                 )
             },
             colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -159,7 +185,7 @@ fun SearchBranchService(viewModel: LocationsFilterViewModel) {
             modifier = Modifier.fillMaxWidth(1f)
         )
         ExposedDropdownMenu(
-            expanded = viewModel.branchServiceExpanded.value,
+            expanded = viewModel.branchServiceTypeExpanded.value,
             onDismissRequest = {
                 viewModel.branchServiceDropdownOff()
             },
@@ -167,10 +193,10 @@ fun SearchBranchService(viewModel: LocationsFilterViewModel) {
                 .padding(vertical = 0.dp, horizontal = 0.dp)
                 .background(color = Black)
         ) {
-            viewModel.branchServices.value!!.forEach { selectionOption ->
+            viewModel.branchServiceTypes.value!!.forEach { selectionOption ->
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.selectBranchService(selectionOption)
+                        viewModel.selectBranchService(selectionOption.id)
                         selectedOptionText = selectionOption.name
                         viewModel.branchServiceDropdownOff()
                     },
@@ -240,7 +266,7 @@ fun SearchBranchType(viewModel: LocationsFilterViewModel) {
             viewModel.branchTypes.value!!.forEach { selectionOption ->
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.selectBranchType(selectionOption)
+                        viewModel.selectBranchType(selectionOption.id)
                         selectedOptionText = selectionOption.name
                         viewModel.branchTypeDropdownOff()
                     },
@@ -259,6 +285,76 @@ fun SearchBranchType(viewModel: LocationsFilterViewModel) {
         }
     }
 }
+
+@ExperimentalMaterialApi
+@Composable
+fun SearchATMType(viewModel: LocationsFilterViewModel) {
+    var selectedOptionText by remember {
+        mutableStateOf("All ATM types")
+    }
+
+    ExposedDropdownMenuBox(
+        expanded = viewModel.atmFilterExpanded.value,
+        onExpandedChange = {
+            viewModel.toggleATMFilterDropdown()
+        },
+        modifier = Modifier
+            .fillMaxWidth(1f)
+            .padding(horizontal = 10.dp)
+
+    ) {
+        OutlinedTextField(
+            readOnly = true,
+            value = selectedOptionText,
+            onValueChange = { },
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(
+                    expanded = viewModel.atmFilterExpanded.value,
+                )
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                backgroundColor = Gray400,
+                trailingIconColor = Gray200,
+                focusedBorderColor = Yellow400,
+                unfocusedBorderColor = Yellow400
+            ),
+            textStyle = TextStyle(
+                color = Gray200
+            ),
+            modifier = Modifier.fillMaxWidth(1f)
+        )
+        ExposedDropdownMenu(
+            expanded = viewModel.atmFilterExpanded.value,
+            onDismissRequest = {
+                viewModel.atmFilterDropdownOff()
+            },
+            modifier = Modifier
+                .padding(vertical = 0.dp, horizontal = 0.dp)
+                .background(color = Black)
+        ) {
+            viewModel.atmFilters.value!!.forEach { selectionOption ->
+                DropdownMenuItem(
+                    onClick = {
+                        viewModel.selectATMFilter(selectionOption)
+                        selectedOptionText = selectionOption.name
+                        viewModel.atmFilterDropdownOff()
+                    },
+                    modifier = Modifier
+                        .background(color = Black)
+                        .padding(horizontal = 10.dp)
+                ) {
+                    Text(
+                        text = selectionOption.name,
+                        color = Gray200,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.W600
+                    )
+                }
+            }
+        }
+    }
+}
+
 
 
 @ExperimentalMaterialApi
@@ -313,7 +409,7 @@ fun DistanceCity(viewModel: LocationsFilterViewModel) {
             viewModel.cities.value!!.forEach { selectionOption ->
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.selectCity(selectionOption)
+                        viewModel.selectCity(selectionOption.id!!)
                         selectedOptionText = selectionOption.name
                         viewModel.distanceDropdownOff()
                     },
