@@ -47,14 +47,20 @@ import kotlinx.coroutines.InternalCoroutinesApi
 fun Navigator(navController: NavHostController) {
 
     val secureSharedPref: SecureSharedPref = SecureSharedPref(LocalContext.current)
-    val loginViewModel = LoginViewModel(LocalContext.current.applicationContext as Application, secureSharedPref = secureSharedPref)
+    val loginViewModel = LoginViewModel(
+        LocalContext.current.applicationContext as Application,
+        secureSharedPref = secureSharedPref,
+        navController = navController
+    )
 
     val locationsFilterViewModel : LocationsFilterViewModel = viewModel(LocalContext.current as ComponentActivity)
+
+    val x: Boolean = secureSharedPref.getBooleanValue(SecureSharedPref.isLoggedInKey)
 
 
     NavHost(
         navController = navController,
-        startDestination = Screen.IntroHome.route
+        startDestination = if(x) Screen.UserHome.route else Screen.IntroHome.route
     ) {
         composable(Screen.IntroHome.route) {
             IntroNavbar(

@@ -179,4 +179,8 @@ dependencies {
     //permissions
     implementation 'com.google.accompanist:accompanist-permissions:0.24.3-alpha'
 
+
+    //jwt decoder
+    implementation 'com.auth0.android:jwtdecode:2.0.1'
+
 }

@@ -27,8 +27,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
+import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.*
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LoginViewModel
 import kotlinx.coroutines.launch
@@ -64,7 +66,14 @@ fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel) {
             Button(
                 onClick = {
                     coroutineScope.launch {
-                        loginViewModel.onLogin()
+                        val x = loginViewModel.onLogin()
+                        if(x) {
+                            navController.navigate(Screen.UserHome.route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    inclusive = true
+                                }
+                            }
+                        }
                     }
                 },
                 colors = ButtonDefaults.buttonColors(
