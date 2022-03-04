@@ -55,6 +55,8 @@ fun IntroLocations(navController: NavController) {
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
 
+
+
     when(state.status) {
         PermissionStatus.Granted -> {
             LaunchedEffect(Unit) {

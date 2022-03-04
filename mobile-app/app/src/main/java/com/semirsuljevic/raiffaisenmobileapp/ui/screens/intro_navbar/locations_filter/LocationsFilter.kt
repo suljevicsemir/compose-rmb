@@ -23,6 +23,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.SearchBy
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -34,6 +35,8 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
         viewModel.getLocationsFilter()
     }
 
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold (
         backgroundColor = Black,
         topBar = {
@@ -43,7 +46,7 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
             )
         }
     ){
-        if(viewModel.loading.value) {
+        if(viewModel.loadingFilters.value) {
             CircularProgressIndicator(color = Yellow400, modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(align = Alignment.Center))
@@ -89,17 +92,17 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
                         topContent = {
                             Column {
                                 RMBCheckbox(
-                                    checked = viewModel.outsideAtm.value,
+                                    checked = viewModel.insideAtm.value,
                                     onCheckedChange = {
-                                        viewModel.outsideAtm.value = it
+                                        viewModel.insideAtm.value = it
                                     },
                                     text = stringResource(id = R.string.locations_filter_atm_indoor)
                                 )
                                 Spacer(Modifier.height(10.dp))
                                 RMBCheckbox(
-                                    checked = viewModel.insideAtm.value,
+                                    checked = viewModel.outsideAtm.value,
                                     onCheckedChange = {
-                                        viewModel.insideAtm.value = it
+                                        viewModel.outsideAtm.value = it
                                     },
                                     text = stringResource(id = R.string.locations_filter_atm_outdoor)
                                 )
@@ -115,9 +118,13 @@ fun LocationsFilterScreen(navController: NavController, viewModel: LocationsFilt
                     )
                     Spacer(modifier = Modifier.height(40.dp))
                     Button(
-                        modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 10.dp),
                         onClick = {
-
+                            coroutineScope.launch {
+                                viewModel.applyFilters()
+                            }
                         },
                         content = {
                             Text(
@@ -186,10 +193,10 @@ fun SearchBranchService(viewModel: LocationsFilterViewModel) {
                 .padding(vertical = 0.dp, horizontal = 0.dp)
                 .background(color = Black)
         ) {
-            viewModel.branchServices.value!!.forEach { selectionOption ->
+            viewModel.branchServiceTypes.value!!.forEach { selectionOption ->
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.selectBranchService(selectionOption)
+                        viewModel.selectBranchService(selectionOption.id)
                         selectedOptionText = selectionOption.name
                         viewModel.branchServiceDropdownOff()
                     },
@@ -259,7 +266,7 @@ fun SearchBranchType(viewModel: LocationsFilterViewModel) {
             viewModel.branchTypes.value!!.forEach { selectionOption ->
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.selectBranchType(selectionOption)
+                        viewModel.selectBranchType(selectionOption.id)
                         selectedOptionText = selectionOption.name
                         viewModel.branchTypeDropdownOff()
                     },
@@ -402,7 +409,7 @@ fun DistanceCity(viewModel: LocationsFilterViewModel) {
             viewModel.cities.value!!.forEach { selectionOption ->
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.selectCity(selectionOption)
+                        viewModel.selectCity(selectionOption.id!!)
                         selectedOptionText = selectionOption.name
                         viewModel.distanceDropdownOff()
                     },

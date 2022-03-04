@@ -12,7 +12,6 @@ import com.semirsuljevic.raiffaisenmobileapp.models.locations.BankBranch
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchServiceType
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchType
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -41,7 +40,7 @@ class LocationsFilterViewModel: ViewModel() {
         MutableLiveData<List<BranchType>>()
     }
 
-    val branchServices: MutableLiveData<List<BranchServiceType>> by lazy {
+    val branchServiceTypes: MutableLiveData<List<BranchServiceType>> by lazy {
         MutableLiveData<List<BranchServiceType>>()
     }
 
@@ -59,19 +58,70 @@ class LocationsFilterViewModel: ViewModel() {
 
 
     suspend fun getInitialBranches() {
-        viewModelScope.launch {
-            initCall()
+        if(!didSendInit) {
+            viewModelScope.launch {
+                initCall()
+            }
         }
+        didSendInit = true
+
+
     }
 
-    init {
+    var didSendInit = false
+
+    suspend fun applyFilters() {
+        val radius:Double? = when(_selectedSearch.value) {
+            SearchBy.Closest -> 10.0
+            SearchBy.Radius -> slideValue.value.toDouble()
+            else -> {
+                null
+            }
+        }
+        val atmType: String? = if(outsideAtm.value && insideAtm.value || (!outsideAtm.value && !insideAtm.value)) null else {
+            if(outsideAtm.value && !insideAtm.value) "Vanjski"
+            else "Unutrasnji"
+        }
+        println("debug: filter values");
+        println("debug: Latitude: ${currentLatitude.value}")
+        println("debug: Latitude: ${currentLongitude.value}")
+        println("debug: Radius: $radius")
+        println("debug: atmType: $atmType")
+        println("debug: selectedBranchType: ${selectedBranchType.value}")
+        println("debug: branchServiceType: ${selectedBranchService.value}")
+        println("debug: city: ${selectedCity.value}")
+
+        val response = try {
+            RetrofitInstance.api.filterBranches(
+                latitude = currentLatitude.value,
+                longitude = currentLongitude.value,
+                radius = radius,
+                atmType = atmType,
+                branchTypeId = selectedBranchType.value,
+                branchServiceTypeId = selectedBranchService.value,
+                cityId = selectedCity.value
+            )
+        }
+        catch (e: IOException) {
+            return
+        }
+        if(response.isSuccessful && response.body() != null) {
+            branches.value = response.body()
+            branches.value!!.forEach {
+                println("debug: ${it.toString()}")
+            }
+
+        }
+        else {
+            println("debug: " + response.message())
+        }
+
     }
+
+
 
     private suspend fun initCall() {
         println("debug: Sending init call")
-
-        delay(5000)
-
         val response = try {
             RetrofitInstance.api.filterBranches(
                 latitude = currentLatitude.value,
@@ -89,28 +139,29 @@ class LocationsFilterViewModel: ViewModel() {
     }
 
     var loading = mutableStateOf(true)
+    var loadingFilters = mutableStateOf(false)
     var errorOnLoading = mutableStateOf(false)
 
     var agenciesToggle = mutableStateOf(true)
     var atmsToggle = mutableStateOf(true)
 
-    var slideValue = mutableStateOf(value = 1)
+    var slideValue = mutableStateOf(value = 10)
 
     var dropdownExpanded = mutableStateOf(false)
     var branchTypeExpanded = mutableStateOf(false)
     var branchServiceTypeExpanded = mutableStateOf(false)
     var atmFilterExpanded = mutableStateOf(false)
 
-    private val selectedCity: MutableLiveData<City> by lazy {
-        MutableLiveData<City>()
+    private val selectedCity: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
     }
 
-    val selectedBranch: MutableLiveData<BranchType> by lazy{
-        MutableLiveData<BranchType>()
+    private val selectedBranchType: MutableLiveData<String> by lazy{
+        MutableLiveData<String>()
     }
 
-    val selectedBranchService: MutableLiveData<BranchServiceType> by lazy {
-        MutableLiveData<BranchServiceType>()
+    private val selectedBranchService: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
     }
     val selectedATMFilter: MutableLiveData<ATMFilter> by lazy {
         MutableLiveData<ATMFilter>()
@@ -121,7 +172,7 @@ class LocationsFilterViewModel: ViewModel() {
 
 
     suspend fun getLocationsFilter() {
-        loading.value = true
+        loadingFilters.value = true
         val job = viewModelScope.launch {
             launch {
                 getBranchServiceTypes()
@@ -137,8 +188,8 @@ class LocationsFilterViewModel: ViewModel() {
             }
         }
         job.join()
-        if(branchTypes.value != null && branchServices.value != null && cities.value != null) {
-            loading.value = false
+        if(branchTypes.value != null && branchServiceTypes.value != null && cities.value != null) {
+            loadingFilters.value = false
             errorOnLoading.value = false
         }
         else {
@@ -186,7 +237,7 @@ class LocationsFilterViewModel: ViewModel() {
         if(response.isSuccessful && response.body() != null) {
             println("debug: Branch service types not null")
             withContext(Dispatchers.Main) {
-                branchServices.value = response.body()
+                branchServiceTypes.value = response.body()
             }
         }
     }
@@ -206,8 +257,8 @@ class LocationsFilterViewModel: ViewModel() {
         }
     }
 
-    fun selectBranchType(branchType: BranchType) {
-        selectedBranch.value = branchType
+    fun selectBranchType(branchType: String) {
+        selectedBranchType.value = branchType
     }
     fun toggleBranchTypeDropdown() {
         branchTypeExpanded.value = !branchTypeExpanded.value
@@ -217,7 +268,7 @@ class LocationsFilterViewModel: ViewModel() {
     }
 
     // branch service methods
-    fun selectBranchService(branchService: BranchServiceType) {
+    fun selectBranchService(branchService: String) {
         selectedBranchService.value = branchService
     }
     fun toggleBranchServiceDropdown() {
@@ -239,7 +290,7 @@ class LocationsFilterViewModel: ViewModel() {
     }
 
 
-    fun selectCity(city: City) {
+    fun selectCity(city: String) {
         selectedCity.value = city
     }
 
