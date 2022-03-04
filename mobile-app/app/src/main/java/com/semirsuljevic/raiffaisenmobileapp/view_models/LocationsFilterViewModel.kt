@@ -12,6 +12,7 @@ import com.semirsuljevic.raiffaisenmobileapp.models.locations.BankBranch
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchServiceType
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchType
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -21,15 +22,15 @@ class LocationsFilterViewModel: ViewModel() {
     private var _selectedSearch = mutableStateOf(value = SearchBy.Closest)
 
     var currentLatitude = mutableStateOf(
-        43.79675
+        0.0
     )
     var currentLongitude = mutableStateOf(
-        18.09284
+        0.0
     )
 
     fun setCurrentPosition(latitude: Double, longitude: Double) {
-        //currentLongitude.value = longitude
-        //currentLatitude.value = latitude
+        currentLongitude.value = longitude
+        currentLatitude.value = latitude
     }
 
     val cities:  MutableLiveData<List<City>> by lazy {
@@ -57,19 +58,25 @@ class LocationsFilterViewModel: ViewModel() {
     }
 
 
-    suspend fun getFilters() {
+    suspend fun getInitialBranches() {
         viewModelScope.launch {
             initCall()
         }
     }
 
+    init {
+    }
+
     private suspend fun initCall() {
+        println("debug: Sending init call")
+
+        delay(5000)
 
         val response = try {
             RetrofitInstance.api.filterBranches(
-                latitude = 43.7965,
-                longitude = 18.0924,
-                radius = 15.0
+                latitude = currentLatitude.value,
+                longitude = currentLongitude.value,
+                radius = 10.0
             )
         }
         catch (e: IOException) {
@@ -77,10 +84,11 @@ class LocationsFilterViewModel: ViewModel() {
         }
         if(response.isSuccessful && response.body() != null) {
             branches.value = response.body()
+            loading.value = false
         }
     }
 
-    var loading = mutableStateOf(false)
+    var loading = mutableStateOf(true)
     var errorOnLoading = mutableStateOf(false)
 
     var agenciesToggle = mutableStateOf(true)

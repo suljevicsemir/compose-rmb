@@ -12,9 +12,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountBalance
 import androidx.compose.material.icons.outlined.CreditCard
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,9 +27,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
-import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.semirsuljevic.raiffaisenmobileapp.R
@@ -48,70 +46,78 @@ fun LocationsMap(viewModel: LocationsFilterViewModel) {
     )
     val context = LocalContext.current
 
-    LaunchedEffect(Unit) {
-        viewModel.getFilters()
-    }
+    val coroutineScope = rememberCoroutineScope()
 
-    when(state.status) {
-        PermissionStatus.Granted -> {
-            LaunchedEffect(Unit) {
-                val fusedClient = LocationServices.getFusedLocationProviderClient(context)
-                try {
-                    fusedClient.lastLocation
-                        .addOnSuccessListener {
-                            if(it != null) {
-                                viewModel.setCurrentPosition(latitude = it.latitude, longitude = it.longitude)
-                            }
-                        }
-                }
-                catch(e: SecurityException) {
 
-                }
-            }
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.BottomEnd
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.BottomEnd
+    ) {
+        GoogleMap(modifier = Modifier.fillMaxSize()) {}
+        Box(modifier = Modifier.padding(bottom = 80.dp, end = 10.dp)) {
+            Column(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(8.dp))
+                    .background(color = Black)
+                    .padding(all = 4.dp)
             ) {
-                GoogleMap(modifier = Modifier.fillMaxSize()) {}
-                Box(modifier = Modifier.padding(bottom = 80.dp, end = 10.dp)) {
-                    Column(
-                        modifier = Modifier
-                            .clip(shape = RoundedCornerShape(8.dp))
-                            .background(color = Black)
-                            .padding(all = 4.dp)
-                    ) {
-                        FloatingMapFilter(
-                            imageVector = Icons.Outlined.CreditCard,
-                            contentDescription = "Credit card",
-                            onTap = {
-                                viewModel.toggleAtms()
-                            },
-                            selected = viewModel.atmsToggle.value
-                        )
-                        Spacer(modifier = Modifier.height(height = 6.dp))
-                        FloatingMapFilter(
-                            imageVector = Icons.Outlined.AccountBalance,
-                            contentDescription = "Banks",
-                            onTap = {
-                                viewModel.toggleAgencies()
-                            },
-                            selected = viewModel.agenciesToggle.value
-                        )
-                    }
-                }
-            }
-        }
-        is PermissionStatus.Denied -> {
-            if((state.status as PermissionStatus.Denied).shouldShowRationale) {
-                LocationPermissionDialog(permissionState = state)
-            }
-            else {
-                LaunchedEffect(Unit) {
-                    state.launchPermissionRequest()
-                }
+                FloatingMapFilter(
+                    imageVector = Icons.Outlined.CreditCard,
+                    contentDescription = "Credit card",
+                    onTap = {
+                        viewModel.toggleAtms()
+                    },
+                    selected = viewModel.atmsToggle.value
+                )
+                Spacer(modifier = Modifier.height(height = 6.dp))
+                FloatingMapFilter(
+                    imageVector = Icons.Outlined.AccountBalance,
+                    contentDescription = "Banks",
+                    onTap = {
+                        viewModel.toggleAgencies()
+                    },
+                    selected = viewModel.agenciesToggle.value
+                )
             }
         }
     }
+
+
+
+//    when(state.status) {
+//        PermissionStatus.Granted -> {
+//            LaunchedEffect(Unit) {
+//                val fusedClient = LocationServices.getFusedLocationProviderClient(context)
+//                try {
+//                    fusedClient.lastLocation
+//                        .addOnSuccessListener {
+//                            if(it != null) {
+//                                viewModel.setCurrentPosition(latitude = it.latitude, longitude = it.longitude)
+//                                coroutineScope.launch {
+//                                    viewModel.getInitialBranches()
+//                                }
+//                            }
+//                        }
+//                }
+//                catch(e: SecurityException) {
+//
+//                }
+//            }
+//
+//
+//
+//        }
+//        is PermissionStatus.Denied -> {
+//            if((state.status as PermissionStatus.Denied).shouldShowRationale) {
+//                LocationPermissionDialog(permissionState = state)
+//            }
+//            else {
+//                LaunchedEffect(Unit) {
+//                    state.launchPermissionRequest()
+//                }
+//            }
+//        }
+//    }
 
 
 
@@ -167,7 +173,7 @@ fun rememberMapLifecycle(map: MapView) : LifecycleEventObserver {
 
 @ExperimentalPermissionsApi
 @Composable
-private fun LocationPermissionDialog(permissionState: PermissionState) {
+fun LocationPermissionDialog(permissionState: PermissionState) {
     val isVisible = remember {
         mutableStateOf(true)
     }
