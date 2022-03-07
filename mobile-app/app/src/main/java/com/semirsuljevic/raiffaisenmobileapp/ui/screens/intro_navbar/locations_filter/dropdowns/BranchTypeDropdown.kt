@@ -1,4 +1,4 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter
+package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.dropdowns
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.semirsuljevic.raiffaisenmobileapp.models.City
+import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchType
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBDropdown
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
@@ -18,21 +18,21 @@ import com.semirsuljevic.raiffaisenmobileapp.view_models.FilterViewModel
 
 @ExperimentalMaterialApi
 @Composable
-fun CitiesDropdown(filterViewModel: FilterViewModel) {
-    RMBDropdown<City>(
-        expanded = filterViewModel.citiesExpanded.value,
+fun BranchTypeDropdown(filterViewModel: FilterViewModel) {
+    RMBDropdown<BranchType>(
+        expanded = filterViewModel.branchTypeExpanded.value,
         onExpandedChange = {
-            filterViewModel.citiesExpanded.value = !filterViewModel.citiesExpanded.value
+            filterViewModel.branchTypeExpanded.value = !filterViewModel.branchTypeExpanded.value
         },
-        textFieldValue = filterViewModel.cityText.value,
+        textFieldValue = filterViewModel.branchTypeText.value,
         onDismissRequest = {
-            filterViewModel.citiesExpanded.value = false
+            filterViewModel.branchTypeExpanded.value = false
         },
         dropdownValues = {
-            filterViewModel.cities.value!!.forEach { selectionOption ->
+            filterViewModel.branchTypes.value!!.forEach { selectionOption ->
                 DropdownMenuItem(
                     onClick = {
-                        filterViewModel.selectCity(selectionOption)
+                        filterViewModel.selectBranchType(selectionOption)
                     },
                     modifier = Modifier
                         .background(color = Black)
@@ -47,5 +47,6 @@ fun CitiesDropdown(filterViewModel: FilterViewModel) {
                 }
             }
         }
+
     )
 }
