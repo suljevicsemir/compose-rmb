@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ExpandedButton
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBCheckbox
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
@@ -112,17 +113,17 @@ fun LocationsFilterScreen(
                         topContent = {
                             Column {
                                 RMBCheckbox(
-                                    checked = viewModel.insideAtm.value,
+                                    checked = filterViewModel.insideAtm.value,
                                     onCheckedChange = {
-                                        viewModel.insideAtm.value = it
+                                        filterViewModel.insideAtm.value = it
                                     },
                                     text = stringResource(id = R.string.locations_filter_atm_indoor)
                                 )
                                 Spacer(Modifier.height(10.dp))
                                 RMBCheckbox(
-                                    checked = viewModel.outsideAtm.value,
+                                    checked = filterViewModel.outsideAtm.value,
                                     onCheckedChange = {
-                                        viewModel.outsideAtm.value = it
+                                        filterViewModel.outsideAtm.value = it
                                     },
                                     text = stringResource(id = R.string.locations_filter_atm_outdoor)
                                 )
@@ -140,24 +141,13 @@ fun LocationsFilterScreen(
                         }
                     )
                     Spacer(modifier = Modifier.height(40.dp))
-                    Button(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 10.dp),
+                    ExpandedButton(
                         onClick = {
                             coroutineScope.launch {
                                 viewModel.applyFilters()
                             }
                         },
-                        content = {
-                            Text(
-                                stringResource(id = R.string.locations_filter_apply_filters)
-                            )
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            backgroundColor = Yellow400,
-                        ),
-                        contentPadding = PaddingValues(vertical = 15.dp)
+                        text = stringResource(id = R.string.locations_filter_apply_filters)
                     )
                     Spacer(modifier = Modifier.height(35.dp))
                 }
