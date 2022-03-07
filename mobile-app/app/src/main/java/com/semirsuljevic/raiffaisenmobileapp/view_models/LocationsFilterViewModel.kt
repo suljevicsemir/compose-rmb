@@ -18,6 +18,8 @@ import java.io.IOException
 
 class LocationsFilterViewModel: ViewModel() {
 
+    val filterViewModel = FilterViewModel()
+
     private var _selectedSearch = mutableStateOf(value = SearchBy.Closest)
 
     var currentLatitude = mutableStateOf(
