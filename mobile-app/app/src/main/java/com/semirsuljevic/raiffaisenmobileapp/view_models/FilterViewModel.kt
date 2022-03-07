@@ -18,12 +18,13 @@ class FilterViewModel:ViewModel() {
     val branchTypeText = mutableStateOf("")
     val branchServiceTypeText = mutableStateOf("")
     val atmFilterText = mutableStateOf("")
-    val _cityText = mutableStateOf("")
+    val cityText = mutableStateOf("")
 
     val selectedSearch = mutableStateOf(value = SearchBy.Closest)
     val branchTypeExpanded = mutableStateOf(false)
     val branchServiceTypeExpanded = mutableStateOf(false)
     val atmFilterExpanded = mutableStateOf(false)
+    val citiesExpanded = mutableStateOf(false)
 
     val insideAtm = mutableStateOf(true)
     val outsideAtm = mutableStateOf(true)
@@ -50,7 +51,6 @@ class FilterViewModel:ViewModel() {
         branchServiceType: String,
         atmFilter: String
     ) {
-        println("branch type text: $branchType")
         branchTypeText.value = branchType
         branchServiceTypeText.value = branchServiceType
         atmFilterText.value = atmFilter
@@ -76,7 +76,8 @@ class FilterViewModel:ViewModel() {
 
     fun selectCity(city: City) {
         _selectedCity.value = city
-
+        cityText.value = city.name
+        citiesExpanded.value = false
     }
 
 
@@ -114,6 +115,7 @@ class FilterViewModel:ViewModel() {
         if(response.isSuccessful && response.body() != null) {
             withContext(Dispatchers.Main) {
                 cities.value = response.body()!!
+                cityText.value = cities.value!![0].name
             }
         }
     }

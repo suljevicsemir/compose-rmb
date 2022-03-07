@@ -82,7 +82,7 @@ fun LocationsFilterScreen(
                         bottomContent = {
                             when(viewModel.selectedSearch.value) {
                                 SearchBy.Radius -> DistanceRadius(viewModel = viewModel)
-                                SearchBy.City -> DistanceCity(viewModel = viewModel)
+                                SearchBy.City -> CitiesDropdown(filterViewModel = filterViewModel)
                                 SearchBy.Closest -> null
                             }
                         }
@@ -91,20 +91,14 @@ fun LocationsFilterScreen(
                     FilterContainer(
                         title = stringResource(id = R.string.locations_filter_branch_search),
                         topContent = {
-                            BranchTypeDropdown(
-                                viewModel = viewModel,
-                                filterViewModel = filterViewModel
-                            )
+                            BranchTypeDropdown(filterViewModel = filterViewModel)
                         },
                     )
                     Spacer(modifier = Modifier.height(30.dp))
                     FilterContainer(
                         title = stringResource(id = R.string.locations_filter_service_search),
                         topContent = {
-                            BranchServiceTypeDropdown(
-                                filterViewModel = filterViewModel,
-                                viewModel =viewModel
-                            )
+                            BranchServiceTypeDropdown(filterViewModel = filterViewModel)
                         }
                     )
                     Spacer(modifier = Modifier.height(20.dp))

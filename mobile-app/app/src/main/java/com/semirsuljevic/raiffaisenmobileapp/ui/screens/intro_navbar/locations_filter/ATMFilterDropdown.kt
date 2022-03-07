@@ -11,17 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchType
+import com.semirsuljevic.raiffaisenmobileapp.models.locations.ATMFilter
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBDropdown
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.view_models.FilterViewModel
-import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 
 @ExperimentalMaterialApi
 @Composable
-fun ATMFilterDropdown(filterViewModel: FilterViewModel, viewModel: LocationsFilterViewModel) {
-    RMBDropdown<BranchType>(
+fun ATMFilterDropdown(filterViewModel: FilterViewModel) {
+    RMBDropdown<ATMFilter>(
         expanded = filterViewModel.atmFilterExpanded.value,
         onExpandedChange = {
             filterViewModel.atmFilterExpanded.value = !filterViewModel.atmFilterExpanded.value
@@ -31,7 +30,7 @@ fun ATMFilterDropdown(filterViewModel: FilterViewModel, viewModel: LocationsFilt
             filterViewModel.atmFilterExpanded.value = false
         },
         dropdownValues = {
-            viewModel.atmFilters.value!!.forEach { selectionOption ->
+            filterViewModel.atmFilters.value!!.forEach { selectionOption ->
                 DropdownMenuItem(
                     onClick = {
                         filterViewModel.selectAtmFilter(selectionOption)
@@ -49,6 +48,5 @@ fun ATMFilterDropdown(filterViewModel: FilterViewModel, viewModel: LocationsFilt
                 }
             }
         }
-
     )
 }
