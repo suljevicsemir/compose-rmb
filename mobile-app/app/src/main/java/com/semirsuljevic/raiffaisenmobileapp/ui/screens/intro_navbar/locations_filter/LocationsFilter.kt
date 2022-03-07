@@ -1,27 +1,25 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ExpandedButton
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBCheckbox
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.view_models.FilterViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
@@ -128,10 +126,7 @@ fun LocationsFilterScreen(
                     FilterContainer(
                         title = stringResource(id = R.string.locations_filter_atm_service_search),
                         topContent = {
-                            ATMFilterDropdown(
-                                filterViewModel = filterViewModel,
-                                viewModel = viewModel
-                            )
+                            ATMFilterDropdown(filterViewModel = filterViewModel)
                         }
                     )
                     Spacer(modifier = Modifier.height(40.dp))
@@ -144,80 +139,6 @@ fun LocationsFilterScreen(
                         text = stringResource(id = R.string.locations_filter_apply_filters)
                     )
                     Spacer(modifier = Modifier.height(35.dp))
-                }
-            }
-        }
-    }
-}
-
-
-
-@ExperimentalMaterialApi
-@Composable
-fun DistanceCity(viewModel: LocationsFilterViewModel) {
-
-
-    var selectedOptionText by remember {
-        mutableStateOf(viewModel.cities.value!![0].name)
-    }
-
-    ExposedDropdownMenuBox(
-        expanded = viewModel.dropdownExpanded.value,
-        onExpandedChange = {
-            viewModel.toggleDistanceDropdown()
-        },
-        modifier = Modifier
-            .fillMaxWidth(1f)
-            .padding(horizontal = 10.dp)
-
-    ) {
-        OutlinedTextField(
-            readOnly = true,
-            value = selectedOptionText,
-            onValueChange = { },
-            trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(
-                    expanded = viewModel.dropdownExpanded.value,
-                )
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                backgroundColor = Gray400,
-                trailingIconColor = Gray200,
-                focusedBorderColor = Yellow400,
-                unfocusedBorderColor = Yellow400
-
-            ),
-            textStyle = TextStyle(
-                color = Gray200
-            ),
-            modifier = Modifier.fillMaxWidth(1f)
-        )
-        ExposedDropdownMenu(
-            expanded = viewModel.dropdownExpanded.value,
-            onDismissRequest = {
-                viewModel.distanceDropdownOff()
-            },
-            modifier = Modifier
-                .padding(vertical = 0.dp, horizontal = 0.dp)
-                .background(color = Black)
-        ) {
-            viewModel.cities.value!!.forEach { selectionOption ->
-                DropdownMenuItem(
-                    onClick = {
-                        viewModel.selectCity(selectionOption.id!!)
-                        selectedOptionText = selectionOption.name
-                        viewModel.distanceDropdownOff()
-                    },
-                    modifier = Modifier
-                        .background(color = Black)
-                        .padding(horizontal = 10.dp)
-                ) {
-                    Text(
-                        text = selectionOption.name,
-                        color = Gray200,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.W600
-                    )
                 }
             }
         }
