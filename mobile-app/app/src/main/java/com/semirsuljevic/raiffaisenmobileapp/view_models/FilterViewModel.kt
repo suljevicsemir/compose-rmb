@@ -101,7 +101,7 @@ class FilterViewModel:ViewModel() {
             }
         }
         job.join()
-        if(branchTypes.value != null && branchServiceTypes.value != null && cities.value != null && atmFilters.value != null) {
+        if(branchTypes.value == null || branchServiceTypes.value == null || cities.value == null || atmFilters.value == null) {
             errorOnLoading.value = true
         }
         loadingFilters.value = false

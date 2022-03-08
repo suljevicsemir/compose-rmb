@@ -249,5 +249,6 @@
     <string name="branch_details_city_label">Grad</string>
     <string name="branch_details_contact_label">Kontakt</string>
     <string name="branch_details_working_hours_label">Radno vrijeme</string>
+    <string name="locations_filter_error_loading">Greška pri učitavanju filtera</string>
 
 </resources>
