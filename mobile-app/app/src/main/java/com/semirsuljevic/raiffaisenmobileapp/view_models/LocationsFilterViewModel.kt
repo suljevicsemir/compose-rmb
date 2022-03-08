@@ -68,14 +68,6 @@ class LocationsFilterViewModel: ViewModel() {
             if(filterViewModel.outsideAtm.value && !filterViewModel.insideAtm.value) "Vanjski"
             else "Unutrasnji"
         }
-        println("debug: filter values");
-        println("debug: Latitude: ${currentLatitude.value}")
-        println("debug: Latitude: ${currentLongitude.value}")
-        println("debug: Radius: $radius")
-        println("debug: atmType: $atmType")
-        println("debug: selectedBranchType: ${filterViewModel.selectedBranchType.value}")
-        println("debug: branchServiceType: ${filterViewModel.selectedBranchServiceType.value}")
-        println("debug: city: ${filterViewModel.selectedCity.value}")
 
         val response = try {
             RetrofitInstance.api.filterBranches(
@@ -92,11 +84,8 @@ class LocationsFilterViewModel: ViewModel() {
             return
         }
         if(response.isSuccessful && response.body() != null) {
-            filteredBranches.value = response.body()
-            filteredBranches.value!!.forEach {
-                println("debug: ${it.toString()}")
-            }
-
+            branches.value = response.body()
+            filterBranchTypes()
         }
         else {
             println("debug: " + response.message())
@@ -107,6 +96,7 @@ class LocationsFilterViewModel: ViewModel() {
 
 
     private suspend fun initCall() {
+        loading.value = true
         val response = try {
             RetrofitInstance.api.filterBranches(
                 latitude = currentLatitude.value,

@@ -152,7 +152,9 @@ fun LocationsFilterScreen(
                             onClick = {
                                 coroutineScope.launch {
                                     viewModel.applyFilters()
+                                    navController.popBackStack()
                                 }
+
                             },
                             text = stringResource(id = R.string.locations_filter_apply_filters)
                         )
