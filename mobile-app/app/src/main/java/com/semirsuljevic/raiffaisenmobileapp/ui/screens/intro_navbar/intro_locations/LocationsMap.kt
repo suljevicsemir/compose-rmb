@@ -23,17 +23,20 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.res.ResourcesCompat
+import androidx.navigation.NavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.rememberPermissionState
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.rememberCameraPositionState
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
@@ -44,7 +47,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun LocationsMap(viewModel: LocationsFilterViewModel) {
+fun LocationsMap(viewModel: LocationsFilterViewModel, navController: NavController) {
         val state : PermissionState = rememberPermissionState(
         Manifest.permission.ACCESS_FINE_LOCATION
     )
@@ -68,7 +71,7 @@ fun LocationsMap(viewModel: LocationsFilterViewModel) {
     var atmMarkerBitmap by remember {
         mutableStateOf<Bitmap?>(null)
     }
-
+    val cameraPositionState: CameraPositionState = rememberCameraPositionState()
     LaunchedEffect(Unit) {
 
         val job = coroutineScope.launch {
@@ -94,32 +97,55 @@ fun LocationsMap(viewModel: LocationsFilterViewModel) {
         ) {
             GoogleMap(
                 modifier = Modifier.height((LocalConfiguration.current.screenHeightDp - 160).dp),
-                cameraPositionState = CameraPositionState(
-                    position = CameraPosition(
-                        userLocation,
-                        11.7f,
-                        0f,
-                        0f
-                    )
-                ),
-                uiSettings = MapUiSettings(
-                    mapToolbarEnabled = false,
-                    zoomControlsEnabled = false
-                )
+                cameraPositionState = cameraPositionState,
+                onMapLoaded = {
+                    if(viewModel.isFirstMapsLoad.value) {
+                        viewModel.isFirstMapsLoad.value = false
+                        println("debug: animating camera")
+                        coroutineScope.launch {
+                            cameraPositionState.animate(
+                                update = CameraUpdateFactory.newCameraPosition(
+                                    CameraPosition(
+                                        userLocation,
+                                        11f,
+                                        0f,
+                                        0f
+                                    )
+                                )
+                            )
+                        }
+
+                    }
+                }
             ) {
-                viewModel.branches.value!!.forEach {
+                viewModel.branches.value!!.forEach { branch ->
                     Marker(
                         position = LatLng(
-                            it.location.latitude,
-                            it.location.longitude
+                            branch.location.latitude,
+                            branch.location.longitude
                         ),
                         icon = BitmapDescriptorFactory.fromBitmap(
-                            if(it.isAtm()) atmMarkerBitmap!! else bankMarkerBitmap!!
-                        )
+                            if(branch.isAtm()) atmMarkerBitmap!! else bankMarkerBitmap!!
+                        ),
+                        onClick = {marker ->
+                            marker.showInfoWindow()
+                            false
+                        },
+                        onInfoWindowClick = { _ ->
+                            viewModel.currentBranch.value = branch
+                            coroutineScope.launch {
+                                navController.navigate(Screen.BranchDetailsScreen.route)
+                            }
+
+                        },
+                        title = branch.name,
+                        snippet = stringResource(id = R.string.locations_filter_marker_tap)
                     )
                 }
             }
-            Box(modifier = Modifier.fillMaxSize().padding(bottom = 80.dp, end = 10.dp),
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 80.dp, end = 10.dp),
             contentAlignment = Alignment.BottomEnd) {
                 Column(
                     modifier = Modifier

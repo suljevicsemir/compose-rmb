@@ -28,6 +28,8 @@ class LocationsFilterViewModel: ViewModel() {
         currentLatitude.value = latitude
     }
 
+    val isFirstMapsLoad = mutableStateOf(true)
+
 
 
     val branches: MutableLiveData<List<BankBranch>> by lazy {

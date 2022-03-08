@@ -250,5 +250,6 @@
     <string name="branch_details_contact_label">Kontakt</string>
     <string name="branch_details_working_hours_label">Radno vrijeme</string>
     <string name="locations_filter_error_loading">Greška pri učitavanju filtera</string>
+    <string name="locations_filter_marker_tap">Klik za više detalja</string>
 
 </resources>

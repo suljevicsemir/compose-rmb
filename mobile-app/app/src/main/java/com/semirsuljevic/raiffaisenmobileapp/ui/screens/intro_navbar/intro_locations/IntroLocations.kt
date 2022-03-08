@@ -191,7 +191,7 @@ fun TabsContent(
     else {
         HorizontalPager(state = pagerState, dragEnabled = false,) { page ->
             when(page) {
-                0 -> LocationsMap(viewModel = viewModel)
+                0 -> LocationsMap(viewModel = viewModel, navController = navController)
                 1 -> LazyColumn (
                     verticalArrangement = Arrangement.Top,
                     modifier = Modifier

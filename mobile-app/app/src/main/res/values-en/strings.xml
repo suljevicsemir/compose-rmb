@@ -212,4 +212,5 @@
     <string name="branch_details_contact_label">Contact</string>
     <string name="branch_details_working_hours_label">Working hours</string>
     <string name="locations_filter_error_loading">Error loading filters</string>
+    <string name="locations_filter_marker_tap">Click to view</string>
 </resources>
