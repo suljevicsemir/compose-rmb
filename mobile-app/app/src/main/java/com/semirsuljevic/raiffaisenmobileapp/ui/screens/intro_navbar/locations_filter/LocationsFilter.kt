@@ -27,7 +27,6 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_f
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
-import com.semirsuljevic.raiffaisenmobileapp.view_models.FilterViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.SearchBy
 import kotlinx.coroutines.launch
@@ -38,14 +37,14 @@ import kotlinx.coroutines.launch
 fun LocationsFilterScreen(
     navController: NavController,
     viewModel: LocationsFilterViewModel,
-    filterViewModel: FilterViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
+    val repo = viewModel.filterViewModel
 
     LaunchedEffect(Unit) {
-        filterViewModel.getLocationsFilters()
-        filterViewModel.setInitialValues(
+        repo.getLocationsFilters()
+        repo.setInitialValues(
             branchServiceType = context.getString(R.string.locations_filter_branch_service_type_value),
             branchType = context.getString(R.string.locations_filter_branch_type_value),
             atmFilter = context.getString(R.string.locations_filter_atm_service)
@@ -65,12 +64,12 @@ fun LocationsFilterScreen(
         }
     ){
         when {
-            filterViewModel.loadingFilters.value -> {
+            repo.loadingFilters.value -> {
                 CircularProgressIndicator(color = Yellow400, modifier = Modifier
                     .fillMaxSize()
                     .wrapContentSize(align = Alignment.Center))
             }
-            filterViewModel.errorOnLoading.value -> {
+            repo.errorOnLoading.value -> {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -94,12 +93,12 @@ fun LocationsFilterScreen(
                         FilterContainer(
                             title = stringResource(id = R.string.locations_filter_distance_label),
                             topContent = {
-                                DistanceFilterRow(viewModel)
+                                DistanceFilterRow(filterViewModel = repo)
                             },
                             bottomContent = {
-                                when(viewModel.selectedSearch.value) {
-                                    SearchBy.Radius -> DistanceRadius(filterViewModel = filterViewModel)
-                                    SearchBy.City -> CitiesDropdown(filterViewModel = filterViewModel)
+                                when(repo.selectedSearch.value) {
+                                    SearchBy.Radius -> DistanceRadius(filterViewModel = repo)
+                                    SearchBy.City -> CitiesDropdown(filterViewModel = repo)
                                     SearchBy.Closest -> null
                                 }
                             }
@@ -108,14 +107,14 @@ fun LocationsFilterScreen(
                         FilterContainer(
                             title = stringResource(id = R.string.locations_filter_branch_search),
                             topContent = {
-                                BranchTypeDropdown(filterViewModel = filterViewModel)
+                                BranchTypeDropdown(filterViewModel = repo)
                             },
                         )
                         Spacer(modifier = Modifier.height(30.dp))
                         FilterContainer(
                             title = stringResource(id = R.string.locations_filter_service_search),
                             topContent = {
-                                BranchServiceTypeDropdown(filterViewModel = filterViewModel)
+                                BranchServiceTypeDropdown(filterViewModel = repo)
                             }
                         )
                         Spacer(modifier = Modifier.height(20.dp))
@@ -124,17 +123,17 @@ fun LocationsFilterScreen(
                             topContent = {
                                 Column {
                                     RMBCheckbox(
-                                        checked = filterViewModel.insideAtm.value,
+                                        checked = repo.insideAtm.value,
                                         onCheckedChange = {
-                                            filterViewModel.insideAtm.value = it
+                                            repo.insideAtm.value = it
                                         },
                                         text = stringResource(id = R.string.locations_filter_atm_indoor)
                                     )
                                     Spacer(Modifier.height(10.dp))
                                     RMBCheckbox(
-                                        checked = filterViewModel.outsideAtm.value,
+                                        checked = repo.outsideAtm.value,
                                         onCheckedChange = {
-                                            filterViewModel.outsideAtm.value = it
+                                            repo.outsideAtm.value = it
                                         },
                                         text = stringResource(id = R.string.locations_filter_atm_outdoor)
                                     )
@@ -145,7 +144,7 @@ fun LocationsFilterScreen(
                         FilterContainer(
                             title = stringResource(id = R.string.locations_filter_atm_service_search),
                             topContent = {
-                                ATMFilterDropdown(filterViewModel = filterViewModel)
+                                ATMFilterDropdown(filterViewModel = repo)
                             }
                         )
                         Spacer(modifier = Modifier.height(40.dp))

@@ -1,6 +1,5 @@
 package com.semirsuljevic.raiffaisenmobileapp.view_models
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +13,7 @@ class LocationsFilterViewModel: ViewModel() {
 
     val filterViewModel = FilterViewModel()
 
-    private var _selectedSearch = mutableStateOf(value = SearchBy.Closest)
+
 
     var currentLatitude = mutableStateOf(
         0.0
@@ -55,7 +54,7 @@ class LocationsFilterViewModel: ViewModel() {
     var didSendInit = false
 
     suspend fun applyFilters() {
-        val radius:Double? = when(_selectedSearch.value) {
+        val radius:Double? = when(filterViewModel.selectedSearch.value) {
             SearchBy.Closest -> 10.0
             SearchBy.Radius -> slideValue.value.toDouble()
             else -> {
@@ -154,11 +153,7 @@ class LocationsFilterViewModel: ViewModel() {
         atmsToggle.value = !atmsToggle.value
     }
 
-    fun setSearch(searchBy: SearchBy) {
-        _selectedSearch.value = searchBy
-    }
 
-    val selectedSearch: MutableState<SearchBy> = _selectedSearch
 }
 
 

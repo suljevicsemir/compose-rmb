@@ -113,7 +113,6 @@ fun IntroLocations(navController: NavController) {
         )
         Tabs(pagerState = pagerState)
         TabsContent(pagerState = pagerState, viewModel = locationsFilterViewModel, navController = navController)
-
 }
 
 
@@ -165,9 +164,6 @@ fun Tabs(pagerState: PagerState) {
             }
         }
     }
-
-
-
 }
 
 

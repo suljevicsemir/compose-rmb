@@ -60,9 +60,7 @@ fun LocationsMap(viewModel: LocationsFilterViewModel, navController: NavControll
         viewModel.currentLongitude.value
     )
 
-    var bankMarkerDrawable by remember {
-        mutableStateOf<Drawable?>(null)
-    }
+    var bankMarkerDrawable:Drawable
     var bankMarkerBitmap by remember {
         mutableStateOf<Bitmap?>(null)
     }
@@ -101,17 +99,9 @@ fun LocationsMap(viewModel: LocationsFilterViewModel, navController: NavControll
                 onMapLoaded = {
                     if(viewModel.isFirstMapsLoad.value) {
                         viewModel.isFirstMapsLoad.value = false
-                        println("debug: animating camera")
                         coroutineScope.launch {
                             cameraPositionState.animate(
-                                update = CameraUpdateFactory.newCameraPosition(
-                                    CameraPosition(
-                                        userLocation,
-                                        11f,
-                                        0f,
-                                        0f
-                                    )
-                                )
+                                update = CameraUpdateFactory.newCameraPosition(CameraPosition(userLocation, 11f, 0f, 0f))
                             )
                         }
 
@@ -143,9 +133,7 @@ fun LocationsMap(viewModel: LocationsFilterViewModel, navController: NavControll
                     )
                 }
             }
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 80.dp, end = 10.dp),
+            Box(modifier = Modifier.fillMaxSize().padding(bottom = 80.dp, end = 10.dp),
             contentAlignment = Alignment.BottomEnd) {
                 Column(
                     modifier = Modifier

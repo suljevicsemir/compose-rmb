@@ -21,11 +21,10 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.view_models.FilterViewModel
-import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.SearchBy
 
 @Composable
-fun DistanceFilterRow(viewModel: LocationsFilterViewModel) {
+fun DistanceFilterRow( filterViewModel: FilterViewModel) {
     Row (
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
@@ -34,23 +33,24 @@ fun DistanceFilterRow(viewModel: LocationsFilterViewModel) {
     ){
         DistanceFilterButton(
             title = stringResource(id = R.string.locations_filter_distance_closest),
-            selected = viewModel.selectedSearch.value == SearchBy.Closest,
+            selected = filterViewModel.selectedSearch.value == SearchBy.Closest,
             onClick = {
-                viewModel.setSearch(SearchBy.Closest)
+                filterViewModel.selectedSearch.value = SearchBy.Closest
             }
         )
         DistanceFilterButton(
             title = stringResource(id = R.string.locations_filter_distance_radius),
-            selected = viewModel.selectedSearch.value == SearchBy.Radius,
+            selected = filterViewModel.selectedSearch.value == SearchBy.Radius,
             onClick = {
-                viewModel.setSearch(SearchBy.Radius)
+                filterViewModel.selectedSearch.value = SearchBy.Radius
             }
         )
         DistanceFilterButton(
             title = stringResource(id = R.string.locations_filter_distance_city),
-            selected = viewModel.selectedSearch.value == SearchBy.City,
+            selected = filterViewModel.selectedSearch.value == SearchBy.City,
             onClick = {
-                viewModel.setSearch(SearchBy.City)
+                filterViewModel.selectedSearch.value = SearchBy.City
+
             }
         )
     }
