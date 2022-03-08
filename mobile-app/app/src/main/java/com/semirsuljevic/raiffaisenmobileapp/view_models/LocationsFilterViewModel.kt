@@ -6,14 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.semirsuljevic.raiffaisenmobileapp.RetrofitInstance
-import com.semirsuljevic.raiffaisenmobileapp.models.City
-import com.semirsuljevic.raiffaisenmobileapp.models.locations.ATMFilter
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BankBranch
-import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchServiceType
-import com.semirsuljevic.raiffaisenmobileapp.models.locations.BranchType
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.io.IOException
 
 class LocationsFilterViewModel: ViewModel() {
@@ -34,21 +28,7 @@ class LocationsFilterViewModel: ViewModel() {
         currentLatitude.value = latitude
     }
 
-    val cities:  MutableLiveData<List<City>> by lazy {
-        MutableLiveData<List<City>>()
-    }
 
-    val branchTypes : MutableLiveData<List<BranchType>> by lazy {
-        MutableLiveData<List<BranchType>>()
-    }
-
-    val branchServiceTypes: MutableLiveData<List<BranchServiceType>> by lazy {
-        MutableLiveData<List<BranchServiceType>>()
-    }
-
-    val atmFilters: MutableLiveData<List<ATMFilter>> by lazy {
-        MutableLiveData<List<ATMFilter>>()
-    }
 
     val branches: MutableLiveData<List<BankBranch>> by lazy {
         MutableLiveData<List<BankBranch>>()
@@ -123,7 +103,6 @@ class LocationsFilterViewModel: ViewModel() {
 
 
     private suspend fun initCall() {
-        println("debug: Sending init call")
         val response = try {
             RetrofitInstance.api.filterBranches(
                 latitude = currentLatitude.value,
@@ -142,17 +121,12 @@ class LocationsFilterViewModel: ViewModel() {
 
     var loading = mutableStateOf(true)
     var loadingFilters = mutableStateOf(false)
-    var errorOnLoading = mutableStateOf(false)
+
 
     var agenciesToggle = mutableStateOf(true)
     var atmsToggle = mutableStateOf(true)
 
     var slideValue = mutableStateOf(value = 10)
-
-    var dropdownExpanded = mutableStateOf(false)
-    var branchTypeExpanded = mutableStateOf(false)
-    var branchServiceTypeExpanded = mutableStateOf(false)
-    var atmFilterExpanded = mutableStateOf(false)
 
     private val selectedCity: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
@@ -165,144 +139,10 @@ class LocationsFilterViewModel: ViewModel() {
     private val selectedBranchService: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
-    val selectedATMFilter: MutableLiveData<ATMFilter> by lazy {
-        MutableLiveData<ATMFilter>()
-    }
+
 
     var insideAtm = mutableStateOf(true)
     var outsideAtm = mutableStateOf(true)
-
-
-    suspend fun getLocationsFilter() {
-        loadingFilters.value = true
-        val job = viewModelScope.launch {
-            launch {
-                getBranchServiceTypes()
-            }
-            launch {
-                getBranchTypes()
-            }
-            launch {
-                getCities()
-            }
-            launch {
-                getATMFilters()
-            }
-        }
-        job.join()
-        if(branchTypes.value != null && branchServiceTypes.value != null && cities.value != null) {
-            loadingFilters.value = false
-            errorOnLoading.value = false
-        }
-        else {
-            errorOnLoading.value = true
-        }
-    }
-
-    private suspend fun getCities() {
-        val response = try {
-            RetrofitInstance.api.getCities()
-        }
-        catch (e: IOException) {
-            return
-        }
-        if(response.isSuccessful && response.body() != null) {
-            println("debug: Cities not null")
-            withContext(Dispatchers.Main) {
-                cities.value = response.body()
-            }
-        }
-    }
-
-    private suspend fun getBranchTypes() {
-        val response = try {
-            RetrofitInstance.api.getBranchTypes()
-        }
-        catch (e: IOException) {
-            return
-        }
-        if(response.isSuccessful && response.body() != null) {
-            println("debug: Branch types not null")
-            withContext(Dispatchers.Main) {
-                branchTypes.value = response.body()
-            }
-        }
-    }
-
-    private suspend fun getBranchServiceTypes() {
-        val response = try {
-            RetrofitInstance.api.getBranchServiceTypes()
-        }
-        catch (e: IOException) {
-            return
-        }
-        if(response.isSuccessful && response.body() != null) {
-            println("debug: Branch service types not null")
-            withContext(Dispatchers.Main) {
-                branchServiceTypes.value = response.body()
-            }
-        }
-    }
-
-    private suspend fun getATMFilters() {
-        val response = try {
-            RetrofitInstance.api.getATMFilters()
-        }
-        catch (e: IOException) {
-            return
-        }
-        if(response.isSuccessful && response.body() != null) {
-            println("debug: ATM Filters not null")
-            withContext(Dispatchers.Main) {
-                atmFilters.value = response.body()
-            }
-        }
-    }
-
-    fun selectBranchType(branchType: String) {
-        selectedBranchType.value = branchType
-    }
-    fun toggleBranchTypeDropdown() {
-        branchTypeExpanded.value = !branchTypeExpanded.value
-    }
-    fun branchTypeDropdownOff() {
-        branchTypeExpanded.value = false
-    }
-
-    // branch service methods
-    fun selectBranchService(branchService: String) {
-        selectedBranchService.value = branchService
-    }
-    fun toggleBranchServiceDropdown() {
-        branchServiceTypeExpanded.value = !branchServiceTypeExpanded.value
-    }
-    fun branchServiceDropdownOff() {
-        branchServiceTypeExpanded.value = false
-    }
-
-    //atm filter method
-    fun toggleATMFilterDropdown() {
-        atmFilterExpanded.value = !atmFilterExpanded.value
-    }
-    fun atmFilterDropdownOff() {
-        atmFilterExpanded.value = false
-    }
-    fun selectATMFilter(atmFilter: ATMFilter) {
-
-    }
-
-
-    fun selectCity(city: String) {
-        selectedCity.value = city
-    }
-
-    fun toggleDistanceDropdown() {
-        dropdownExpanded.value = !dropdownExpanded.value
-    }
-
-    fun distanceDropdownOff() {
-        dropdownExpanded.value = false
-    }
 
     fun toggleAgencies() {
         agenciesToggle.value = !agenciesToggle.value

@@ -43,6 +43,8 @@ class FilterViewModel:ViewModel() {
     val loadingFilters = mutableStateOf(false)
     val errorOnLoading = mutableStateOf(false)
 
+    val slideValue = mutableStateOf(value = 10)
+
 
 
 

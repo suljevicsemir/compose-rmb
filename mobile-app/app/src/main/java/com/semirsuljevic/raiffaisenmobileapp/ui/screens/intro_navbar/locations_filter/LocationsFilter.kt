@@ -41,7 +41,6 @@ fun LocationsFilterScreen(
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        viewModel.getLocationsFilter()
         filterViewModel.getLocationsFilters()
         filterViewModel.setInitialValues(
             branchServiceType = context.getString(R.string.locations_filter_branch_service_type_value),
@@ -82,7 +81,7 @@ fun LocationsFilterScreen(
                         },
                         bottomContent = {
                             when(viewModel.selectedSearch.value) {
-                                SearchBy.Radius -> DistanceRadius(viewModel = viewModel)
+                                SearchBy.Radius -> DistanceRadius(filterViewModel = filterViewModel)
                                 SearchBy.City -> CitiesDropdown(filterViewModel = filterViewModel)
                                 SearchBy.Closest -> null
                             }

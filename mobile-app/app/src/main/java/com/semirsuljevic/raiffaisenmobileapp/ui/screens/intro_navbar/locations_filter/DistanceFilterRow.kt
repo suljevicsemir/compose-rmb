@@ -20,6 +20,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
+import com.semirsuljevic.raiffaisenmobileapp.view_models.FilterViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.SearchBy
 
@@ -79,7 +80,7 @@ fun DistanceFilterButton(title: String, selected: Boolean, onClick: () -> Unit) 
 }
 
 @Composable
-fun DistanceRadius(viewModel: LocationsFilterViewModel) {
+fun DistanceRadius(filterViewModel: FilterViewModel) {
     Column (
         Modifier.padding(horizontal = 10.dp)
     )
@@ -93,11 +94,11 @@ fun DistanceRadius(viewModel: LocationsFilterViewModel) {
             )
             Spacer(modifier = Modifier.weight(1f))
             BasicTextField(
-                value = viewModel.slideValue.value.toString(),
+                value = filterViewModel.slideValue.value.toString(),
                 onValueChange = {
                     if (it.toFloatOrNull() != null) {
                         if (it.toFloat() <= 100) {
-                            viewModel.slideValue.value = it.toInt()
+                            filterViewModel.slideValue.value = it.toInt()
                         }
                     }
                 },
@@ -120,9 +121,9 @@ fun DistanceRadius(viewModel: LocationsFilterViewModel) {
         }
         Slider(
             onValueChange = {
-                viewModel.slideValue.value = it.toInt()
+                filterViewModel.slideValue.value = it.toInt()
             },
-            value = viewModel.slideValue.value.toFloat(),
+            value = filterViewModel.slideValue.value.toFloat(),
             valueRange = 1f..100f,
             steps = 100,
             colors = SliderDefaults.colors(

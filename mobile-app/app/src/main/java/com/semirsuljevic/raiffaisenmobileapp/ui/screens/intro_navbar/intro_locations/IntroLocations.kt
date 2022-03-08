@@ -55,8 +55,6 @@ fun IntroLocations(navController: NavController) {
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
 
-
-
     when(state.status) {
         PermissionStatus.Granted -> {
             LaunchedEffect(Unit) {
@@ -90,33 +88,33 @@ fun IntroLocations(navController: NavController) {
     }
 
 
-        Column (
-            modifier = Modifier
-                .background(color = Black)
-                .fillMaxSize()
-        ){
-            CenteredTitleAppBar(
-                implyLeading = false,
-                title = stringResource(id = R.string.locations_title),
-                navController = navController,
-                actions = {
-                    IconButton(
-                        onClick = {
-                            navController.navigate(Screen.LocationsSearchScreen.route)
-                        }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Tune,
-                            contentDescription = "Filter",
-                            tint = Gray200
-                        )
+    Column (
+        modifier = Modifier
+            .background(color = Black)
+            .fillMaxSize()
+    ){
+        CenteredTitleAppBar(
+            implyLeading = false,
+            title = stringResource(id = R.string.locations_title),
+            navController = navController,
+            actions = {
+                IconButton(
+                    onClick = {
+                        navController.navigate(Screen.LocationsSearchScreen.route)
                     }
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Tune,
+                        contentDescription = "Filter",
+                        tint = Gray200
+                    )
                 }
-            )
-            Tabs(pagerState = pagerState)
-            TabsContent(pagerState = pagerState, viewModel = locationsFilterViewModel, navController = navController)
+            }
+        )
+        Tabs(pagerState = pagerState)
+        TabsContent(pagerState = pagerState, viewModel = locationsFilterViewModel, navController = navController)
 
-    }
+}
 
 
 
