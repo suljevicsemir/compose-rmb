@@ -195,7 +195,7 @@ fun TabsContent(
                         .padding(horizontal = 20.dp)
                 ){
 
-                    itemsIndexed(viewModel.branches.value!!) { index, item ->
+                    itemsIndexed(viewModel.filteredBranches.value!!) { index, item ->
                         BranchListItem(branch = item, navController = navController)
                     }
                 }

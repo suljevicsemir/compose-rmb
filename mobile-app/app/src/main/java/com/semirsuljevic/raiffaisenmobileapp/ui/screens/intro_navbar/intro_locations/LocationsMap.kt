@@ -108,7 +108,7 @@ fun LocationsMap(viewModel: LocationsFilterViewModel, navController: NavControll
                     }
                 }
             ) {
-                viewModel.branches.value!!.forEach { branch ->
+                viewModel.filteredBranches.value!!.forEach { branch ->
                     Marker(
                         position = LatLng(
                             branch.location.latitude,

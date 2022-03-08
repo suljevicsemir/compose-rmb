@@ -31,6 +31,9 @@ class LocationsFilterViewModel: ViewModel() {
 
 
 
+    val filteredBranches: MutableLiveData<List<BankBranch>> by lazy {
+        MutableLiveData<List<BankBranch>>()
+    }
     val branches: MutableLiveData<List<BankBranch>> by lazy {
         MutableLiveData<List<BankBranch>>()
     }
@@ -56,13 +59,13 @@ class LocationsFilterViewModel: ViewModel() {
     suspend fun applyFilters() {
         val radius:Double? = when(filterViewModel.selectedSearch.value) {
             SearchBy.Closest -> 10.0
-            SearchBy.Radius -> slideValue.value.toDouble()
+            SearchBy.Radius -> filterViewModel.slideValue.value.toDouble()
             else -> {
                 null
             }
         }
-        val atmType: String? = if(outsideAtm.value && insideAtm.value || (!outsideAtm.value && !insideAtm.value)) null else {
-            if(outsideAtm.value && !insideAtm.value) "Vanjski"
+        val atmType: String? = if(filterViewModel.outsideAtm.value && filterViewModel.insideAtm.value || (!filterViewModel.outsideAtm.value && !filterViewModel.insideAtm.value)) null else {
+            if(filterViewModel.outsideAtm.value && !filterViewModel.insideAtm.value) "Vanjski"
             else "Unutrasnji"
         }
         println("debug: filter values");
@@ -70,9 +73,9 @@ class LocationsFilterViewModel: ViewModel() {
         println("debug: Latitude: ${currentLongitude.value}")
         println("debug: Radius: $radius")
         println("debug: atmType: $atmType")
-        println("debug: selectedBranchType: ${selectedBranchType.value}")
-        println("debug: branchServiceType: ${selectedBranchService.value}")
-        println("debug: city: ${selectedCity.value}")
+        println("debug: selectedBranchType: ${filterViewModel.selectedBranchType.value}")
+        println("debug: branchServiceType: ${filterViewModel.selectedBranchServiceType.value}")
+        println("debug: city: ${filterViewModel.selectedCity.value}")
 
         val response = try {
             RetrofitInstance.api.filterBranches(
@@ -89,8 +92,8 @@ class LocationsFilterViewModel: ViewModel() {
             return
         }
         if(response.isSuccessful && response.body() != null) {
-            branches.value = response.body()
-            branches.value!!.forEach {
+            filteredBranches.value = response.body()
+            filteredBranches.value!!.forEach {
                 println("debug: ${it.toString()}")
             }
 
@@ -116,18 +119,19 @@ class LocationsFilterViewModel: ViewModel() {
         }
         if(response.isSuccessful && response.body() != null) {
             branches.value = response.body()
+            filteredBranches.value = response.body()
             loading.value = false
         }
     }
 
     var loading = mutableStateOf(true)
-    var loadingFilters = mutableStateOf(false)
+
 
 
     var agenciesToggle = mutableStateOf(true)
     var atmsToggle = mutableStateOf(true)
 
-    var slideValue = mutableStateOf(value = 10)
+
 
     private val selectedCity: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
@@ -142,15 +146,21 @@ class LocationsFilterViewModel: ViewModel() {
     }
 
 
-    var insideAtm = mutableStateOf(true)
-    var outsideAtm = mutableStateOf(true)
 
     fun toggleAgencies() {
         agenciesToggle.value = !agenciesToggle.value
+        filterBranchTypes()
     }
 
     fun toggleAtms() {
         atmsToggle.value = !atmsToggle.value
+        filterBranchTypes()
+    }
+
+    private fun filterBranchTypes() {
+        filteredBranches.value = branches.value!!.filter {
+            agenciesToggle.value && !it.isAtm() || atmsToggle.value && it.isAtm()
+        }.toList()
     }
 
 

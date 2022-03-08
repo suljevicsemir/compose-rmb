@@ -121,6 +121,7 @@ fun DistanceRadius(filterViewModel: FilterViewModel) {
         }
         Slider(
             onValueChange = {
+                println("setting slide value ${it}")
                 filterViewModel.slideValue.value = it.toInt()
             },
             value = filterViewModel.slideValue.value.toFloat(),

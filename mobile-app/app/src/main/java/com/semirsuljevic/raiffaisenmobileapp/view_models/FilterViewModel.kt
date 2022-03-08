@@ -45,6 +45,10 @@ class FilterViewModel:ViewModel() {
 
     val slideValue = mutableStateOf(value = 10)
 
+    val selectedCity = _selectedCity
+    val selectedBranchType = _selectedBranchType
+    val selectedBranchServiceType = _selectedBranchServiceType
+    val selectedATMFilter = _selectedATMFilter
 
 
 
