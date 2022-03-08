@@ -109,6 +109,9 @@
     <string name="locations_filter_distance_closest">NEAREST</string>
     <string name="locations_filter_distance_radius">RADIUS</string>
     <string name="locations_filter_distance_city">TOWN</string>
+    <string name="locations_filter_branch_type_value">All branch types</string>
+    <string name="locations_filter_branch_service_type_value">All service types</string>
+    <string name="locations_filter_atm_service">All service types</string>
     <string name="intro_home_button">Login</string>
     <string name="login_screen_headline">Login</string>
     <string name="locations_title">Locations</string>
@@ -208,4 +211,6 @@
     <string name="branch_details_city_label">City</string>
     <string name="branch_details_contact_label">Contact</string>
     <string name="branch_details_working_hours_label">Working hours</string>
+    <string name="locations_filter_error_loading">Error loading filters</string>
+    <string name="locations_filter_marker_tap">Click to view</string>
 </resources>

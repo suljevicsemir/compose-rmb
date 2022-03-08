@@ -1,3 +1,6 @@
 Koin, https://blog.mindorks.com/kotlin-koin-tutorial
 
 Make reusable dropdown based on locations filter dropdown
+makse reusable text field with placeholder, outlines etc
+make reusable max width button
+

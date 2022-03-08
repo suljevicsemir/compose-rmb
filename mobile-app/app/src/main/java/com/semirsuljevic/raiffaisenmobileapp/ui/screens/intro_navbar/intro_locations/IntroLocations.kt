@@ -55,8 +55,6 @@ fun IntroLocations(navController: NavController) {
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
 
-
-
     when(state.status) {
         PermissionStatus.Granted -> {
             LaunchedEffect(Unit) {
@@ -90,33 +88,32 @@ fun IntroLocations(navController: NavController) {
     }
 
 
-        Column (
-            modifier = Modifier
-                .background(color = Black)
-                .fillMaxSize()
-        ){
-            CenteredTitleAppBar(
-                implyLeading = false,
-                title = stringResource(id = R.string.locations_title),
-                navController = navController,
-                actions = {
-                    IconButton(
-                        onClick = {
-                            navController.navigate(Screen.LocationsSearchScreen.route)
-                        }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Tune,
-                            contentDescription = "Filter",
-                            tint = Gray200
-                        )
+    Column (
+        modifier = Modifier
+            .background(color = Black)
+            .fillMaxSize()
+    ){
+        CenteredTitleAppBar(
+            implyLeading = false,
+            title = stringResource(id = R.string.locations_title),
+            navController = navController,
+            actions = {
+                IconButton(
+                    onClick = {
+                        navController.navigate(Screen.LocationsSearchScreen.route)
                     }
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Tune,
+                        contentDescription = "Filter",
+                        tint = Gray200
+                    )
                 }
-            )
-            Tabs(pagerState = pagerState)
-            TabsContent(pagerState = pagerState, viewModel = locationsFilterViewModel, navController = navController)
-
-    }
+            }
+        )
+        Tabs(pagerState = pagerState)
+        TabsContent(pagerState = pagerState, viewModel = locationsFilterViewModel, navController = navController)
+}
 
 
 
@@ -124,7 +121,7 @@ fun IntroLocations(navController: NavController) {
 @ExperimentalPagerApi
 @Composable
 fun Tabs(pagerState: PagerState) {
-    var scope = rememberCoroutineScope()
+    val scope = rememberCoroutineScope()
     Box(modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp)) {
         Surface(
             color = Black,
@@ -167,9 +164,6 @@ fun Tabs(pagerState: PagerState) {
             }
         }
     }
-
-
-
 }
 
 
@@ -193,7 +187,7 @@ fun TabsContent(
     else {
         HorizontalPager(state = pagerState, dragEnabled = false,) { page ->
             when(page) {
-                0 -> LocationsMap(viewModel = viewModel)
+                0 -> LocationsMap(viewModel = viewModel, navController = navController)
                 1 -> LazyColumn (
                     verticalArrangement = Arrangement.Top,
                     modifier = Modifier
@@ -201,7 +195,7 @@ fun TabsContent(
                         .padding(horizontal = 20.dp)
                 ){
 
-                    itemsIndexed(viewModel.branches.value!!) { index, item ->
+                    itemsIndexed(viewModel.filteredBranches.value!!) { index, item ->
                         BranchListItem(branch = item, navController = navController)
                     }
                 }

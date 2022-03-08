@@ -20,11 +20,11 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
-import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
+import com.semirsuljevic.raiffaisenmobileapp.view_models.FilterViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.SearchBy
 
 @Composable
-fun DistanceFilterRow(viewModel: LocationsFilterViewModel) {
+fun DistanceFilterRow( filterViewModel: FilterViewModel) {
     Row (
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
@@ -33,23 +33,24 @@ fun DistanceFilterRow(viewModel: LocationsFilterViewModel) {
     ){
         DistanceFilterButton(
             title = stringResource(id = R.string.locations_filter_distance_closest),
-            selected = viewModel.selectedSearch.value == SearchBy.Closest,
+            selected = filterViewModel.selectedSearch.value == SearchBy.Closest,
             onClick = {
-                viewModel.setSearch(SearchBy.Closest)
+                filterViewModel.selectedSearch.value = SearchBy.Closest
             }
         )
         DistanceFilterButton(
             title = stringResource(id = R.string.locations_filter_distance_radius),
-            selected = viewModel.selectedSearch.value == SearchBy.Radius,
+            selected = filterViewModel.selectedSearch.value == SearchBy.Radius,
             onClick = {
-                viewModel.setSearch(SearchBy.Radius)
+                filterViewModel.selectedSearch.value = SearchBy.Radius
             }
         )
         DistanceFilterButton(
             title = stringResource(id = R.string.locations_filter_distance_city),
-            selected = viewModel.selectedSearch.value == SearchBy.City,
+            selected = filterViewModel.selectedSearch.value == SearchBy.City,
             onClick = {
-                viewModel.setSearch(SearchBy.City)
+                filterViewModel.selectedSearch.value = SearchBy.City
+
             }
         )
     }
@@ -79,7 +80,7 @@ fun DistanceFilterButton(title: String, selected: Boolean, onClick: () -> Unit) 
 }
 
 @Composable
-fun DistanceRadius(viewModel: LocationsFilterViewModel) {
+fun DistanceRadius(filterViewModel: FilterViewModel) {
     Column (
         Modifier.padding(horizontal = 10.dp)
     )
@@ -93,11 +94,11 @@ fun DistanceRadius(viewModel: LocationsFilterViewModel) {
             )
             Spacer(modifier = Modifier.weight(1f))
             BasicTextField(
-                value = viewModel.slideValue.value.toString(),
+                value = filterViewModel.slideValue.value.toString(),
                 onValueChange = {
                     if (it.toFloatOrNull() != null) {
                         if (it.toFloat() <= 100) {
-                            viewModel.slideValue.value = it.toInt()
+                            filterViewModel.slideValue.value = it.toInt()
                         }
                     }
                 },
@@ -120,9 +121,10 @@ fun DistanceRadius(viewModel: LocationsFilterViewModel) {
         }
         Slider(
             onValueChange = {
-                viewModel.slideValue.value = it.toInt()
+                println("setting slide value ${it}")
+                filterViewModel.slideValue.value = it.toInt()
             },
-            value = viewModel.slideValue.value.toFloat(),
+            value = filterViewModel.slideValue.value.toFloat(),
             valueRange = 1f..100f,
             steps = 100,
             colors = SliderDefaults.colors(

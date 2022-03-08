@@ -60,7 +60,7 @@ fun Navigator(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = if(x) Screen.UserHome.route else Screen.IntroHome.route
+        startDestination = Screen.IntroHome.route
     ) {
         composable(Screen.IntroHome.route) {
             IntroNavbar(
