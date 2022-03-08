@@ -1,41 +1,45 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_locations
 
 import android.Manifest
-import android.os.Bundle
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountBalance
 import androidx.compose.material.icons.outlined.CreditCard
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
+import androidx.core.content.res.ResourcesCompat
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.rememberPermissionState
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.CameraPositionState
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.Marker
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -48,126 +52,104 @@ fun LocationsMap(viewModel: LocationsFilterViewModel) {
 
     val coroutineScope = rememberCoroutineScope()
 
-
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.BottomEnd
-    ) {
-        GoogleMap(modifier = Modifier.fillMaxSize()) {}
-        Box(modifier = Modifier.padding(bottom = 80.dp, end = 10.dp)) {
-            Column(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(8.dp))
-                    .background(color = Black)
-                    .padding(all = 4.dp)
-            ) {
-                FloatingMapFilter(
-                    imageVector = Icons.Outlined.CreditCard,
-                    contentDescription = "Credit card",
-                    onTap = {
-                        viewModel.toggleAtms()
-                    },
-                    selected = viewModel.atmsToggle.value
-                )
-                Spacer(modifier = Modifier.height(height = 6.dp))
-                FloatingMapFilter(
-                    imageVector = Icons.Outlined.AccountBalance,
-                    contentDescription = "Banks",
-                    onTap = {
-                        viewModel.toggleAgencies()
-                    },
-                    selected = viewModel.agenciesToggle.value
-                )
-            }
-        }
-    }
-
-
-
-//    when(state.status) {
-//        PermissionStatus.Granted -> {
-//            LaunchedEffect(Unit) {
-//                val fusedClient = LocationServices.getFusedLocationProviderClient(context)
-//                try {
-//                    fusedClient.lastLocation
-//                        .addOnSuccessListener {
-//                            if(it != null) {
-//                                viewModel.setCurrentPosition(latitude = it.latitude, longitude = it.longitude)
-//                                coroutineScope.launch {
-//                                    viewModel.getInitialBranches()
-//                                }
-//                            }
-//                        }
-//                }
-//                catch(e: SecurityException) {
-//
-//                }
-//            }
-//
-//
-//
-//        }
-//        is PermissionStatus.Denied -> {
-//            if((state.status as PermissionStatus.Denied).shouldShowRationale) {
-//                LocationPermissionDialog(permissionState = state)
-//            }
-//            else {
-//                LaunchedEffect(Unit) {
-//                    state.launchPermissionRequest()
-//                }
-//            }
-//        }
-//    }
-
-
-
-
-}
-
-@Composable
-private fun GoogleMap(
-    modifier: Modifier = Modifier,
-    onReady: (GoogleMap) -> Unit
-) {
-    val context = LocalContext.current
-
-    val mapView = remember {
-        MapView(context)
-    }
-
-    val lifecycle = LocalLifecycleOwner.current.lifecycle
-
-    lifecycle.addObserver(rememberMapLifecycle(map = mapView))
-
-    AndroidView(
-        factory = {
-            mapView.apply {
-                mapView.getMapAsync {
-                    onReady(it)
-                }
-            }
-        },
-        modifier = modifier
+    val userLocation = LatLng(
+        viewModel.currentLatitude.value,
+        viewModel.currentLongitude.value
     )
 
+    var bankMarkerDrawable by remember {
+        mutableStateOf<Drawable?>(null)
+    }
+    var bankMarkerBitmap by remember {
+        mutableStateOf<Bitmap?>(null)
+    }
 
-}
+    var atmMarkerDrawable: Drawable
+    var atmMarkerBitmap by remember {
+        mutableStateOf<Bitmap?>(null)
+    }
 
-@Composable
-fun rememberMapLifecycle(map: MapView) : LifecycleEventObserver {
-    return remember {
-        LifecycleEventObserver { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_CREATE -> map.onCreate(Bundle())
-                Lifecycle.Event.ON_START -> map.onStart()
-                Lifecycle.Event.ON_RESUME -> map.onResume()
-                Lifecycle.Event.ON_PAUSE -> map.onPause()
-                Lifecycle.Event.ON_STOP -> map.onStop()
-                Lifecycle.Event.ON_DESTROY -> map.onDestroy()
-                Lifecycle.Event.ON_ANY -> throw IllegalStateException()
+    LaunchedEffect(Unit) {
+
+        val job = coroutineScope.launch {
+            launch {
+                bankMarkerDrawable = ResourcesCompat.getDrawable(context.resources, R.drawable.bank_marker, null)!!
+                bankMarkerBitmap = (bankMarkerDrawable as BitmapDrawable).bitmap
+            }
+            launch {
+                atmMarkerDrawable = ResourcesCompat.getDrawable(context.resources, R.drawable.atm_marker, null)!!
+                atmMarkerBitmap = (atmMarkerDrawable as BitmapDrawable).bitmap
+            }
+        }
+        job.join()
+    }
+
+    if(atmMarkerBitmap == null || bankMarkerBitmap == null) {
+        CircularProgressIndicator(color = Yellow400)
+    }
+    else {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            GoogleMap(
+                modifier = Modifier.height((LocalConfiguration.current.screenHeightDp - 160).dp),
+                cameraPositionState = CameraPositionState(
+                    position = CameraPosition(
+                        userLocation,
+                        11.7f,
+                        0f,
+                        0f
+                    )
+                ),
+                uiSettings = MapUiSettings(
+                    mapToolbarEnabled = false,
+                    zoomControlsEnabled = false
+                )
+            ) {
+                viewModel.branches.value!!.forEach {
+                    Marker(
+                        position = LatLng(
+                            it.location.latitude,
+                            it.location.longitude
+                        ),
+                        icon = BitmapDescriptorFactory.fromBitmap(
+                            if(it.isAtm()) atmMarkerBitmap!! else bankMarkerBitmap!!
+                        )
+                    )
+                }
+            }
+            Box(modifier = Modifier.fillMaxSize().padding(bottom = 80.dp, end = 10.dp),
+            contentAlignment = Alignment.BottomEnd) {
+                Column(
+                    modifier = Modifier
+                        .clip(shape = RoundedCornerShape(8.dp))
+                        .background(color = Black)
+                        .padding(all = 4.dp)
+                ) {
+                    FloatingMapFilter(
+                        imageVector = Icons.Outlined.CreditCard,
+                        contentDescription = "Credit card",
+                        onTap = {
+                            viewModel.toggleAtms()
+                        },
+                        selected = viewModel.atmsToggle.value
+                    )
+                    Spacer(modifier = Modifier.height(height = 6.dp))
+                    FloatingMapFilter(
+                        imageVector = Icons.Outlined.AccountBalance,
+                        contentDescription = "Banks",
+                        onTap = {
+                            viewModel.toggleAgencies()
+                        },
+                        selected = viewModel.agenciesToggle.value
+                    )
+                }
             }
         }
     }
+
+
 }
 
 

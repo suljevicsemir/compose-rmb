@@ -122,7 +122,7 @@ fun IntroLocations(navController: NavController) {
 @ExperimentalPagerApi
 @Composable
 fun Tabs(pagerState: PagerState) {
-    var scope = rememberCoroutineScope()
+    val scope = rememberCoroutineScope()
     Box(modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp)) {
         Surface(
             color = Black,
