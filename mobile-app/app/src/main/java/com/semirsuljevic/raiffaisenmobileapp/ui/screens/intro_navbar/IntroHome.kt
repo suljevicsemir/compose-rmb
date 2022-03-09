@@ -28,6 +28,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -39,15 +40,18 @@ fun IntroHome(navController: NavController) {
     var imageLoader by remember {
         mutableStateOf<ImageLoader?>(value = null)
     }
+    val coroutineScope = rememberCoroutineScope()
     LaunchedEffect(Unit) {
-        imageLoader = ImageLoader.Builder(context = context).componentRegistry {
-            if(Build.VERSION.SDK_INT >= 28) {
-                add(ImageDecoderDecoder(context = context))
-            }
-            else {
-                add(GifDecoder())
-            }
-        }.build()
+        coroutineScope.launch {
+            imageLoader = ImageLoader.Builder(context = context).componentRegistry {
+                if(Build.VERSION.SDK_INT >= 28) {
+                    add(ImageDecoderDecoder(context = context))
+                }
+                else {
+                    add(GifDecoder())
+                }
+            }.build()
+        }
     }
 
     if(imageLoader == null) {
