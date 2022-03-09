@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.semirsuljevic.raiffaisenmobileapp.RetrofitInstance
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BankBranch
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import java.io.IOException
 
 class LocationsFilterViewModel: ViewModel() {
@@ -97,6 +98,8 @@ class LocationsFilterViewModel: ViewModel() {
 
     private suspend fun initCall() {
         loading.value = true
+        error.value = false
+        requestSent.value = true
         val response = try {
             RetrofitInstance.api.filterBranches(
                 latitude = currentLatitude.value,
@@ -111,10 +114,36 @@ class LocationsFilterViewModel: ViewModel() {
             branches.value = response.body()
             filteredBranches.value = response.body()
             loading.value = false
+            error.value = false
+        }
+        else {
+            loading.value = false
+            error.value = true
+            statusCode.value = response.code()
+            message.value = response.message()
+            body.value = giveBody(response = response)
         }
     }
 
+    private fun giveBody(response: Response<List<BankBranch>>): String {
+        if(response.body() != null) {
+            var string = ""
+            response.body()!!.forEach {
+                string += it.name
+            }
+        }
+        return "Body is null"
+    }
+
+    val body = mutableStateOf("")
+    val statusCode = mutableStateOf(0)
+    val message = mutableStateOf("")
+    val requestSent = mutableStateOf(false)
+    val gotLocation = mutableStateOf(false)
+    val locationNull = mutableStateOf(false)
+    val locationString = mutableStateOf("")
     var loading = mutableStateOf(true)
+    val error = mutableStateOf(false)
 
 
 

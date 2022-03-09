@@ -37,6 +37,7 @@ import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import kotlinx.coroutines.launch
@@ -62,11 +63,17 @@ fun IntroLocations(navController: NavController) {
                 try {
                     fusedClient.lastLocation
                         .addOnSuccessListener {
+                            locationsFilterViewModel.gotLocation.value = true
                             if(it != null) {
+                                locationsFilterViewModel.locationNull.value = false
+                                locationsFilterViewModel.locationString.value = it.latitude.toString() + " " + it.longitude.toString()
                                 locationsFilterViewModel.setCurrentPosition(latitude = it.latitude, longitude = it.longitude)
                                 coroutineScope.launch {
                                     locationsFilterViewModel.getInitialBranches()
                                 }
+                            }
+                            else {
+                                locationsFilterViewModel.locationNull.value = true
                             }
                         }
                 }
@@ -182,6 +189,104 @@ fun TabsContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             CircularProgressIndicator(color = Yellow400)
+        }
+//        Column (
+//            modifier = Modifier.fillMaxSize(),
+//            verticalArrangement = Arrangement.Center,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ){
+//            Column (
+//                modifier = Modifier.fillMaxSize(),
+//                verticalArrangement = Arrangement.Center,
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ){
+//                Text(
+//                    "got error " + viewModel.error.value,
+//                    color = White
+//                )
+//                Text(
+//                    "Body: " + viewModel.body.value,
+//                    color = White
+//                )
+//                Spacer(modifier = Modifier.height(20.dp))
+//                Text(
+//                    "Status code: " + viewModel.statusCode.value,
+//                    color = White
+//                )
+//                Spacer(modifier = Modifier.height(20.dp))
+//                Text(
+//                    "Message: " + viewModel.message.value,
+//                    color = White
+//                )
+//                Spacer(modifier = Modifier.height(20.dp))
+//                Text(
+//                    "Request sent: " + viewModel.requestSent.value,
+//                    color = White
+//                )
+//                Spacer(modifier = Modifier.height(20.dp))
+//                Text(
+//                    "Got location: " + viewModel.gotLocation.value,
+//                    color = White
+//                )
+//                Spacer(modifier = Modifier.height(20.dp))
+//                Text(
+//                    "Location null: " + viewModel.locationNull.value
+//                )
+//                Spacer(modifier = Modifier.height(20.dp))
+//                Text(
+//                    "Location string: " + viewModel.locationString.value,
+//                    color = White
+//                )
+//                Spacer(modifier = Modifier.height(20.dp))
+//
+//            }
+//        }
+    }
+    else if(viewModel.error.value) {
+        Column (
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            Text(
+                "got error " + viewModel.error.value,
+                color = White
+            )
+            Text(
+                "Body: " + viewModel.body.value,
+                color = White
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                "Status code: " + viewModel.statusCode.value,
+                color = White
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                "Message: " + viewModel.message.value,
+                color = White
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                "Request sent: " + viewModel.requestSent.value,
+                color = White
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                "Got location: " + viewModel.gotLocation.value,
+                color = White
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                "Location null: " + viewModel.locationNull.value
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                "Location string: " + viewModel.locationString.value,
+                color = White
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+
         }
     }
     else {
