@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -23,6 +24,7 @@ import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.BulletListItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import java.text.SimpleDateFormat
 import java.util.*
@@ -51,34 +53,40 @@ fun IntroHelpDetails(navController: NavController) {
     }
 
     val scrollState = rememberScrollState()
-    Column(Modifier.verticalScroll(scrollState)) {
-        CenteredTitleAppBar(
-            title = stringResource(id = R.string.intro_help_details_title),
-            navController = navController
-        )
-        ListItemSeparator()
-        Column(Modifier.padding(horizontal = 20.dp, vertical = 10.dp)) {
-
-            Text(
-                stringResource(id = R.string.intro_help_details_headline),
-                color = White,
-                textAlign = TextAlign.Justify,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            DetailsList()
-            Spacer(modifier = Modifier.height(30.dp))
-            Text(
-                stringResource(id = R.string.intro_help_details_version) + " "  + versionName,
-                color = White
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                stringResource(id = R.string.intro_help_details_version_date) + " "+ versionDate,
-                color = White
+    Scaffold (
+        backgroundColor = Black,
+        topBar = {
+            CenteredTitleAppBar(
+                title = stringResource(id = R.string.intro_help_details_title),
+                navController = navController
             )
         }
+    )
+    {
+        Column(Modifier.verticalScroll(scrollState)) {
+            ListItemSeparator()
+            Column(Modifier.padding(horizontal = 20.dp, vertical = 10.dp)) {
+                Text(
+                    stringResource(id = R.string.intro_help_details_headline),
+                    color = White,
+                    textAlign = TextAlign.Justify,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                DetailsList()
+                Spacer(modifier = Modifier.height(30.dp))
+                Text(
+                    stringResource(id = R.string.intro_help_details_version) + " "  + versionName,
+                    color = White
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    stringResource(id = R.string.intro_help_details_version_date) + " "+ versionDate,
+                    color = White
+                )
+            }
 
+        }
     }
 }
 

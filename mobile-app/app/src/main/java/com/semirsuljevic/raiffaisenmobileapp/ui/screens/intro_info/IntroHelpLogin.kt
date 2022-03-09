@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,22 +15,29 @@ import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 
 @Composable
 fun IntroHelpLogin(navController: NavController) {
-    Column {
-        CenteredTitleAppBar(
-            title = stringResource(id = R.string.intro_help_login_title),
-            navController = navController
-        )
-        ListItemSeparator()
-        Spacer(modifier = Modifier.height(15.dp))
-        Text(
-            text = stringResource(id = R.string.intro_help_login_desc),
-            color = Gray200,
-            textAlign = TextAlign.Justify,
-            modifier = Modifier.padding(horizontal = 20.dp)
-        )
+    Scaffold (
+        backgroundColor = Black,
+        topBar = {
+            CenteredTitleAppBar(
+                title = stringResource(id = R.string.intro_help_login_title),
+                navController = navController
+            )
+        }
+    ){
+        Column {
+            ListItemSeparator()
+            Spacer(modifier = Modifier.height(15.dp))
+            Text(
+                text = stringResource(id = R.string.intro_help_login_desc),
+                color = Gray200,
+                textAlign = TextAlign.Justify,
+                modifier = Modifier.padding(horizontal = 20.dp)
+            )
+        }
     }
 }

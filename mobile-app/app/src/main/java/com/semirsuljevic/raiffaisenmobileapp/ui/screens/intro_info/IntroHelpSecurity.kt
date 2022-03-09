@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,29 +19,37 @@ import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.BulletListItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 
 @Composable
 fun IntroHelpSecurity(navController: NavController) {
     val scrollState = rememberScrollState()
-    Column(Modifier.verticalScroll(scrollState)) {
-        CenteredTitleAppBar(
-            title = stringResource(id = R.string.intro_help_security_title),
-            navController = navController
-        )
-        ListItemSeparator()
-        Column(Modifier.padding(horizontal = 20.dp)) {
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = stringResource(id = R.string.intro_help_settings_desc1),
-                color = White,
-                textAlign = TextAlign.Justify,
-                fontWeight = FontWeight.Bold
+    Scaffold (
+        backgroundColor = Black,
+        topBar = {
+            CenteredTitleAppBar(
+                title = stringResource(id = R.string.intro_help_security_title),
+                navController = navController
             )
-            Spacer(modifier = Modifier.height(10.dp))
-            SecurityList()
+        }
+    ){
+        Column(Modifier.verticalScroll(scrollState)) {
+            ListItemSeparator()
+            Column(Modifier.padding(horizontal = 20.dp)) {
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = stringResource(id = R.string.intro_help_settings_desc1),
+                    color = White,
+                    textAlign = TextAlign.Justify,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                SecurityList()
+            }
         }
     }
+
 }
 
 @Composable

@@ -39,7 +39,7 @@ fun IntroHome(navController: NavController) {
     var imageLoader by remember {
         mutableStateOf<ImageLoader?>(value = null)
     }
-    LaunchedEffect(key1 = "semir", block = {
+    LaunchedEffect(Unit) {
         imageLoader = ImageLoader.Builder(context = context).componentRegistry {
             if(Build.VERSION.SDK_INT >= 28) {
                 add(ImageDecoderDecoder(context = context))
@@ -48,7 +48,7 @@ fun IntroHome(navController: NavController) {
                 add(GifDecoder())
             }
         }.build()
-    })
+    }
 
     if(imageLoader == null) {
         CircularProgressIndicator(
