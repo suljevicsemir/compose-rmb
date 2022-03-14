@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -26,7 +25,6 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.semirsuljevic.raiffaisenmobileapp.R
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
@@ -63,54 +61,50 @@ fun OnBoardingTabs(
             }
         }
     }
-    Scaffold (
-        backgroundColor = Black
+    Column (
+        modifier = Modifier.fillMaxHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Column (
-            modifier = Modifier.fillMaxHeight(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ){
-            HorizontalPager(
-                state = pagerState,
-                dragEnabled = true
-            ) {
-                    page ->
-                when(page) {
-                    0 -> OnBoardingTabItem(
-                        title = stringResource(id = R.string.onboarding_item1_title),
-                        description = stringResource(id = R.string.onboarding_item1_desc),
-                        navController = navController,
-                        image = R.drawable.onboarding_item1
-                    )
-                    1 -> OnBoardingTabItem(
-                        title = stringResource(id = R.string.onboarding_item2_title),
-                        description = stringResource(id = R.string.onboarding_item2_desc),
-                        navController = navController,
-                        image = R.drawable.onboarding_item2
-                    )
-                    2 -> OnBoardingTabItem(
-                        title = stringResource(id = R.string.onboarding_item3_title),
-                        description = stringResource(id = R.string.onboarding_item3_desc),
-                        navController = navController,
-                        image = R.drawable.onboarding_item3
-                    )
-                    3 -> OnBoardingTabItem(
-                        title = stringResource(id = R.string.onboarding_item4_title),
-                        description = stringResource(id = R.string.onboarding_item4_desc),
-                        navController = navController,
-                        image = R.drawable.onboarding_item4
-                    )
-                    4 -> OnBoardingTabItem(
-                        title = stringResource(id = R.string.onboarding_item5_title),
-                        description = stringResource(id = R.string.onboarding_item5_desc),
-                        navController = navController,
-                        image = R.drawable.onboarding_item5
-                    )
-                }
+        HorizontalPager(
+            state = pagerState,
+            dragEnabled = true
+        ) {
+                page ->
+            when(page) {
+                0 -> OnBoardingTabItem(
+                    title = stringResource(id = R.string.onboarding_item1_title),
+                    description = stringResource(id = R.string.onboarding_item1_desc),
+                    navController = navController,
+                    image = R.drawable.onboarding_item1
+                )
+                1 -> OnBoardingTabItem(
+                    title = stringResource(id = R.string.onboarding_item2_title),
+                    description = stringResource(id = R.string.onboarding_item2_desc),
+                    navController = navController,
+                    image = R.drawable.onboarding_item2
+                )
+                2 -> OnBoardingTabItem(
+                    title = stringResource(id = R.string.onboarding_item3_title),
+                    description = stringResource(id = R.string.onboarding_item3_desc),
+                    navController = navController,
+                    image = R.drawable.onboarding_item3
+                )
+                3 -> OnBoardingTabItem(
+                    title = stringResource(id = R.string.onboarding_item4_title),
+                    description = stringResource(id = R.string.onboarding_item4_desc),
+                    navController = navController,
+                    image = R.drawable.onboarding_item4
+                )
+                4 -> OnBoardingTabItem(
+                    title = stringResource(id = R.string.onboarding_item5_title),
+                    description = stringResource(id = R.string.onboarding_item5_desc),
+                    navController = navController,
+                    image = R.drawable.onboarding_item5
+                )
             }
-            Spacer(modifier = Modifier.height(12.dp))
-            IndexList(viewModel = viewModel)
         }
+        Spacer(modifier = Modifier.height(12.dp))
+        IndexList(viewModel = viewModel)
     }
 }
 
@@ -136,7 +130,7 @@ fun OnBoardingTabItem(
             modifier = Modifier
                 .padding(top = 15.dp)
                 .clip(RoundedCornerShape(size = 12.dp))
-                .height((screenHeight - 50).dp)
+                .height((screenHeight - 110).dp)
                 .width((screenWidth - 42).dp)
                 .background(color = Gray400)) {
             Image(
@@ -207,7 +201,7 @@ fun PageIndexIndicator(selected: Boolean) {
 @Composable
 fun IndexList(viewModel: OnBoardingViewModel) {
     Row(
-      horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.Center
     ){
         PageIndexIndicator(selected = viewModel.selectedIndex.value == 0)
         PageIndexIndicator(selected = viewModel.selectedIndex.value == 1)

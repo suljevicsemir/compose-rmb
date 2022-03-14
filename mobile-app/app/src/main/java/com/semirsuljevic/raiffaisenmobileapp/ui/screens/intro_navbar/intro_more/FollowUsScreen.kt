@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,64 +20,59 @@ import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 
 @Composable
 fun FollowUsScreen(navController: NavController) {
     val scrollState = rememberScrollState()
-    Scaffold (
-        backgroundColor = Black,
-        topBar = {
-            CenteredTitleAppBar(
-                title = stringResource(id = R.string.follow_us_screen_title),
-                navController = navController
+
+    Column {
+        CenteredTitleAppBar(
+            title = stringResource(id = R.string.follow_us_screen_title),
+            navController = navController
+        )
+        ListItemSeparator()
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 30.dp)
+                .verticalScroll(scrollState)
+        ) {
+            Spacer(modifier = Modifier.height(20.dp))
+            BigText(text = stringResource(id = R.string.follow_us_screen_raiffaisen))
+            BigText(text = stringResource(id = R.string.follow_us_screen_social))
+            BigText(text = stringResource(id = R.string.follow_us_screen_media))
+            Text(
+                text = stringResource(id = R.string.follow_us_screen_list_title),
+                color = White,
+                modifier = Modifier.padding(bottom = 10.dp)
             )
-        }
-    ){
-        Column {
-            ListItemSeparator()
-            Column(
-                modifier = Modifier
-                    .padding(horizontal = 30.dp)
-                    .verticalScroll(scrollState)
-            ) {
-                Spacer(modifier = Modifier.height(20.dp))
-                BigText(text = stringResource(id = R.string.follow_us_screen_raiffaisen))
-                BigText(text = stringResource(id = R.string.follow_us_screen_social))
-                BigText(text = stringResource(id = R.string.follow_us_screen_media))
-                Text(
-                    text = stringResource(id = R.string.follow_us_screen_list_title),
-                    color = White,
-                    modifier = Modifier.padding(bottom = 10.dp)
-                )
-                TappableSocialMedia(
-                    text = stringResource(id = R.string.follow_us_screen_facebook),
-                    icon = painterResource(id = R.drawable.ic_facebook),
-                    link = stringResource(id = R.string.follow_us_screen_facebook_url)
-                )
-                TappableSocialMedia(
-                    text = stringResource(id = R.string.follow_us_screen_youtube),
-                    icon = painterResource(id = R.drawable.ic_youtube),
-                    link = stringResource(id = R.string.follow_us_screen_youtube_url),
-                )
-                TappableSocialMedia(
-                    text = stringResource(id = R.string.follow_us_screen_viber),
-                    icon = painterResource(id = R.drawable.ic_viber),
-                    link = stringResource(id = R.string.follow_us_screen_viber_url),
-                )
-                TappableSocialMedia(
-                    text = stringResource(id = R.string.follow_us_screen_linkedin),
-                    icon = painterResource(id = R.drawable.ic_linkedin),
-                    link = stringResource(id = R.string.follow_us_screen_linkedin_url)
-                )
-                TappableSocialMedia(
-                    text = stringResource(id = R.string.follow_us_screen_instagram),
-                    icon = painterResource(id = R.drawable.ic_instagram),
-                    link = stringResource(id = R.string.follow_us_screen_instagram_url)
-                )
-            }
+            TappableSocialMedia(
+                text = stringResource(id = R.string.follow_us_screen_facebook),
+                icon = painterResource(id = R.drawable.ic_facebook),
+                link = stringResource(id = R.string.follow_us_screen_facebook_url)
+            )
+            TappableSocialMedia(
+                text = stringResource(id = R.string.follow_us_screen_youtube),
+                icon = painterResource(id = R.drawable.ic_youtube),
+                link = stringResource(id = R.string.follow_us_screen_youtube_url),
+            )
+            TappableSocialMedia(
+                text = stringResource(id = R.string.follow_us_screen_viber),
+                icon = painterResource(id = R.drawable.ic_viber),
+                link = stringResource(id = R.string.follow_us_screen_viber_url),
+            )
+            TappableSocialMedia(
+                text = stringResource(id = R.string.follow_us_screen_linkedin),
+                icon = painterResource(id = R.drawable.ic_linkedin),
+                link = stringResource(id = R.string.follow_us_screen_linkedin_url)
+            )
+            TappableSocialMedia(
+                text = stringResource(id = R.string.follow_us_screen_instagram),
+                icon = painterResource(id = R.drawable.ic_instagram),
+                link = stringResource(id = R.string.follow_us_screen_instagram_url)
+            )
+            Spacer(modifier = Modifier.height(60.dp))
         }
     }
 }

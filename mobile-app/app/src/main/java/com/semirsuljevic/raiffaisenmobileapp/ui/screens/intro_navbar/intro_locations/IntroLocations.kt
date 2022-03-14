@@ -63,8 +63,10 @@ fun IntroLocations(navController: NavController) {
                 try {
                     fusedClient.lastLocation
                         .addOnSuccessListener {
+                            println("debug: Got location")
                             locationsFilterViewModel.gotLocation.value = true
                             if(it != null) {
+                                println("debug: Location not null")
                                 locationsFilterViewModel.locationNull.value = false
                                 locationsFilterViewModel.locationString.value = it.latitude.toString() + " " + it.longitude.toString()
                                 locationsFilterViewModel.setCurrentPosition(latitude = it.latitude, longitude = it.longitude)

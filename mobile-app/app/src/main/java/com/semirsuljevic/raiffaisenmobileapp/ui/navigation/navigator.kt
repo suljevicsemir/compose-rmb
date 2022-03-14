@@ -21,14 +21,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.HomeNavBar
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.IntroProductsScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.WidgetManager
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.HomeNavBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments.DomesticPaymentCreateScreen
-//import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments.PaymentCreateScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroHome
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroMore
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_locations.BranchDetails
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_locations.IntroLocations
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
@@ -63,13 +65,24 @@ fun Navigator(navController: NavHostController) {
         startDestination = Screen.IntroHome.route
     ) {
         composable(Screen.IntroHome.route) {
-            IntroNavbar(
-                navController = navController,
-                locationsFilterViewModel = locationsFilterViewModel
-            )
+            IntroHome(navController = navController)
         }
 
+        composable(Screen.IntroLocations.route) {
+            IntroLocations(navController = navController)
+        }
+
+        composable(Screen.IntroProducts.route) {
+            IntroProductsScreen(navController = navController)
+        }
+
+        composable(Screen.IntroMore.route) {
+            IntroMore(navController = navController)
+        }
+
+
         composable(Screen.UserHome.route) {
+
             HomeNavBar(navController = navController)
         }
 
