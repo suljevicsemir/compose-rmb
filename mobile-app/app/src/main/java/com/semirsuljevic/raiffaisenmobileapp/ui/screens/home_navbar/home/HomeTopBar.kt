@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
+import com.semirsuljevic.raiffaisenmobileapp.navigation.AppScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 
 @Composable
@@ -36,7 +36,7 @@ fun HomeTopBar(navController: NavController) {
         )
         IconButton(
             onClick = {
-                navController.navigate(Screen.WidgetManager.route)
+                navController.navigate(AppScreen.WidgetManager.route)
             }
         ) {
             Icon(

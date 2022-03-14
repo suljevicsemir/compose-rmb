@@ -11,11 +11,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.navigation.AppScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListSectionSeparator
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBListItem
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 
 @Composable
 fun PaymentsScreen(navController: NavController) {
@@ -37,7 +37,7 @@ fun PaymentsScreen(navController: NavController) {
             title = stringResource(id = R.string.payments_screen_item_country),
             icon = Icons.Outlined.CreditCard,
             onPressed = {
-                navController.navigate(Screen.PaymentCreateScreen.route)
+                navController.navigate(AppScreen.PaymentCreateScreen.route)
             }
         )
         ListItemSeparator()
@@ -45,7 +45,7 @@ fun PaymentsScreen(navController: NavController) {
             title = stringResource(id = R.string.payments_screen_item_public),
             icon = Icons.Outlined.Article,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListItemSeparator()
@@ -53,7 +53,7 @@ fun PaymentsScreen(navController: NavController) {
             title = stringResource(id = R.string.payments_screen_item_new_template),
             icon = Icons.Outlined.ReceiptLong,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListSectionSeparator(text = stringResource(id = R.string.payments_screen_section_fast_payments))
@@ -61,7 +61,7 @@ fun PaymentsScreen(navController: NavController) {
             title = stringResource(id = R.string.my_profile_screen_item_pay_contact),
             icon = Icons.Outlined.MobileScreenShare,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListSectionSeparator(text = stringResource(id = R.string.payments_screen_section_my_payments))
@@ -69,7 +69,7 @@ fun PaymentsScreen(navController: NavController) {
             title = stringResource(id = R.string.payments_screen_item_my_templates),
             icon = Icons.Outlined.Feed,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListItemSeparator()
@@ -77,7 +77,7 @@ fun PaymentsScreen(navController: NavController) {
             title = stringResource(id = R.string.payments_screen_section_my_payments),
             icon = Icons.Outlined.Feed,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListItemSeparator()
@@ -85,7 +85,7 @@ fun PaymentsScreen(navController: NavController) {
             title = stringResource(id = R.string.payments_screen_item_long_templates),
             icon = Icons.Outlined.Feed,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListItemSeparator()
