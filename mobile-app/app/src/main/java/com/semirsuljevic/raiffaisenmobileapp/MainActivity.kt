@@ -14,17 +14,18 @@ import androidx.compose.material.*
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.semirsuljevic.raiffaisenmobileapp.navigation.Navigator
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.IntroNavBar
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Navigator
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.AppTheme
 import kotlinx.coroutines.InternalCoroutinesApi
+import java.util.*
 import java.util.concurrent.Executor
 
 
@@ -148,14 +149,14 @@ class MainActivity : FragmentActivity() {
             val navController = rememberNavController()
 
 
-            MaterialTheme(
-
+            AppTheme(
+                darkTheme = true
             ) {
                 CompositionLocalProvider(
                     LocalRippleTheme provides JetNewsRippleTheme
                 ) {
                     Scaffold (
-                        backgroundColor = Color.Black,
+                        backgroundColor = MaterialTheme.colors.background,
                         bottomBar = {
                             IntroNavBar(navController = navController)
                         }

@@ -33,8 +33,8 @@ import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.gms.location.LocationServices
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.navigation.AppScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
@@ -109,7 +109,7 @@ fun IntroLocations(navController: NavController) {
             actions = {
                 IconButton(
                     onClick = {
-                        navController.navigate(Screen.LocationsSearchScreen.route)
+                        navController.navigate(AppScreen.LocationsSearchScreen.route)
                     }
                 ) {
                     Icon(

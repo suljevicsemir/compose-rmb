@@ -3,6 +3,7 @@ package com.semirsuljevic.raiffaisenmobileapp.ui.composables
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
@@ -14,11 +15,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
+import com.semirsuljevic.raiffaisenmobileapp.navigation.AppScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
-import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
 
 
@@ -27,21 +26,21 @@ fun IntroNavBar(navController: NavController) {
 
     val items = listOf(
         RMBBottomBarItem(
-            route = Screen.IntroHome.route,
+            route = AppScreen.IntroHome.route,
             icon = Icons.Default.Home,
         ),
         RMBBottomBarItem(
-            route = Screen.IntroLocations.route,
+            route = AppScreen.IntroLocations.route,
             icon = Icons.Filled.LocationOn,
 
         ),
         RMBBottomBarItem(
-            route = Screen.IntroProducts.route,
+            route = AppScreen.IntroProducts.route,
             icon = Icons.Outlined.Inventory2,
 
         ),
         RMBBottomBarItem(
-            route = Screen.IntroMore.route,
+            route = AppScreen.IntroMore.route,
             icon = Icons.Outlined.More,
 
         )
@@ -55,21 +54,21 @@ fun IntroNavBar(navController: NavController) {
 fun HomeNavBar(navController: NavController) {
     val items = listOf(
         RMBBottomBarItem(
-            route = Screen.IntroHome.route,
+            route = AppScreen.IntroHome.route,
             icon = Icons.Default.Home,
         ),
         RMBBottomBarItem(
-            route = Screen.IntroLocations.route,
+            route = AppScreen.IntroLocations.route,
             icon = Icons.Outlined.Payments,
 
         ),
         RMBBottomBarItem(
-            route = Screen.IntroProducts.route,
+            route = AppScreen.IntroProducts.route,
             icon = Icons.Default.Person,
 
         ),
         RMBBottomBarItem(
-            route = Screen.IntroMore.route,
+            route = AppScreen.IntroMore.route,
             icon = Icons.Outlined.More,
 
         )
@@ -84,17 +83,12 @@ private fun RMBNavBar(
     items: List<RMBBottomBarItem>,
     navController: NavController
 ) {
-
     var selectedIndex by remember {
         mutableStateOf(0)
     }
 
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    //val currentDestination = navBackStackEntry?.destination
-
-
     BottomNavigation (
-        backgroundColor = Gray400,
+        backgroundColor = MaterialTheme.colors.primary,
     ){
         items.forEachIndexed { index, introBottomBarItem ->
             BottomNavigationItem(
@@ -121,8 +115,7 @@ private fun RMBNavBar(
 
 data class RMBBottomBarItem(
     val route: String,
-    val icon: ImageVector,
-    //val index: Int
+    val icon: ImageVector
 )
 
 

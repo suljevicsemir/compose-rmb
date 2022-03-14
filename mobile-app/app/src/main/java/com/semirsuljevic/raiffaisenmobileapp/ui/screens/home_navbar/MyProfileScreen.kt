@@ -11,8 +11,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.navigation.AppScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.*
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.my_profile.ProfileInfo
 
 @Composable
@@ -30,7 +30,7 @@ fun MyProfileScreen(navController: NavController) {
             title = stringResource(id = R.string.my_profile_screen_item_communications),
             icon = Icons.Outlined.ConnectWithoutContact,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListSectionSeparator(text = stringResource(id = R.string.my_profile_screen_section_account_package))
@@ -38,7 +38,7 @@ fun MyProfileScreen(navController: NavController) {
             title = stringResource(id = R.string.my_profile_screen_item_earned_points),
             icon = Icons.Outlined.Inventory,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListItemSeparator()
@@ -46,7 +46,7 @@ fun MyProfileScreen(navController: NavController) {
             title = stringResource(id = R.string.my_profile_screen_item_products),
             icon = Icons.Outlined.Ballot,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListItemSeparator()
@@ -54,7 +54,7 @@ fun MyProfileScreen(navController: NavController) {
             title = stringResource(id = R.string.my_profile_screen_item_pay_contact),
             icon = Icons.Outlined.MobileScreenShare,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListSectionSeparator(text = stringResource(id = R.string.my_profile_screen_section_settings))
@@ -82,7 +82,7 @@ fun MyProfileScreen(navController: NavController) {
             title = stringResource(id = R.string.my_profile_screen_item_pin),
             icon = Icons.Outlined.FiberPin,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListSectionSeparator(text = stringResource(id = R.string.my_profile_screen_section_log_out))
@@ -90,7 +90,7 @@ fun MyProfileScreen(navController: NavController) {
             title = stringResource(id = R.string.my_profile_screen_item_log_out),
             icon = Icons.Outlined.Logout,
             onPressed = {
-                navController.navigate(Screen.ErrorScreen.route)
+                navController.navigate(AppScreen.ErrorScreen.route)
             }
         )
         ListItemSeparator()
