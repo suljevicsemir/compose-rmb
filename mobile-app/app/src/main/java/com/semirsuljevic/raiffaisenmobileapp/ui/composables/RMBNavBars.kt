@@ -94,13 +94,12 @@ private fun RMBNavBar(
             BottomNavigationItem(
                 selected = index == selectedIndex,
                 onClick = {
-                    selectedIndex = index
-                    navController.navigate(introBottomBarItem.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+                    if(selectedIndex != index) {
+                        selectedIndex = index
+                        navController.navigate(introBottomBarItem.route) {
+                            popUpTo(navController.graph.findStartDestination().id)
+                            launchSingleTop = true
                         }
-                        launchSingleTop = true
-                        restoreState = true
                     }
                 },
                 selectedContentColor = Yellow400,

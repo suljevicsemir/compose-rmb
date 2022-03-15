@@ -3,9 +3,6 @@ package com.semirsuljevic.raiffaisenmobileapp
 import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
 import android.os.Bundle
-import android.os.StrictMode
-import android.os.StrictMode.ThreadPolicy
-import android.os.StrictMode.VmPolicy
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
@@ -102,21 +99,6 @@ class MainActivity : FragmentActivity() {
     @RequiresApi(Build.VERSION_CODES.P)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        StrictMode.setThreadPolicy(
-            ThreadPolicy.Builder()
-                .detectDiskReads()
-                .detectDiskWrites()
-                .detectAll() // or .detectAll() for all detectable problems
-                .penaltyLog()
-                .build()
-        )
-        StrictMode.setVmPolicy(
-            VmPolicy.Builder()
-                .detectLeakedSqlLiteObjects()
-                .detectLeakedClosableObjects()
-                .penaltyLog()
-                .build()
-        )
         super.onCreate(savedInstanceState)
 
         val executor: Executor = ContextCompat.getMainExecutor(this)
