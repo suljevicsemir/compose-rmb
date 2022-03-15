@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.models.locations.BankBranch
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
+import com.semirsuljevic.raiffaisenmobileapp.navigation.AppScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
@@ -33,7 +33,7 @@ fun BranchListItem(branch: BankBranch, navController: NavController) {
             .padding(vertical = 4.dp)
             .clickable {
                 viewModel.currentBranch.value = branch
-                navController.navigate(Screen.BranchDetailsScreen.route)
+                navController.navigate(AppScreen.BranchDetailsScreen.route)
             }
             .padding(horizontal = 10.dp, vertical = 6.dp)
     ){

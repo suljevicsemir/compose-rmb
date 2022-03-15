@@ -158,7 +158,7 @@ fun LocationsFilterScreen(
                             },
                             text = stringResource(id = R.string.locations_filter_apply_filters)
                         )
-                        Spacer(modifier = Modifier.height(35.dp))
+                        Spacer(modifier = Modifier.height(75.dp))
                     }
                 }
             }

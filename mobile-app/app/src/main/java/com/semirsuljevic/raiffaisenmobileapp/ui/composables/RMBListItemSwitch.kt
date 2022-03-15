@@ -1,6 +1,5 @@
 package com.semirsuljevic.raiffaisenmobileapp.ui.composables
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.Switch
@@ -26,43 +25,42 @@ fun RMBListItemSwitch(
     var checked by remember {
         mutableStateOf(false)
     }
-    Box(modifier = Modifier.clickable { }) {
-        Row (
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = 12.dp)
-        ){
-            if(icon != null)
+    Row (
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 12.dp)
+    ){
+        if(icon != null)
             Icon(
                 imageVector = icon,
                 contentDescription = title,
                 tint = Gray200,
                 modifier = Modifier.size(26.dp)
             )
-            Spacer(modifier = Modifier.width(10.dp))
-            Text(
-                text = title,
-                color = White,
-                fontSize = 17.sp,
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Box(modifier = Modifier.height(25.dp)) {
-                Switch(
-                    checked = checked,
-                    onCheckedChange = {
-                        checked = it
-                    },
-                    modifier = Modifier.padding(all = 0.dp),
-                    colors = SwitchDefaults.colors(
-                        checkedThumbColor = Yellow400,
-                        checkedTrackColor = Yellow200,
-                        uncheckedTrackColor = Gray200,
-                        uncheckedThumbColor = White,
-                    )
+        Spacer(modifier = Modifier.width(10.dp))
+        Text(
+            text = title,
+            color = White,
+            fontSize = 17.sp,
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        Box(modifier = Modifier.height(25.dp)) {
+            Switch(
+                checked = checked,
+                onCheckedChange = {
+                    onChanged()
+                    checked = it
+                },
+                modifier = Modifier.padding(all = 0.dp),
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = Yellow400,
+                    checkedTrackColor = Yellow200,
+                    uncheckedTrackColor = Gray200,
+                    uncheckedThumbColor = White,
                 )
-            }
-
+            )
         }
+
     }
 }

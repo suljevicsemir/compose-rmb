@@ -1,4 +1,4 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.navigation
+package com.semirsuljevic.raiffaisenmobileapp.navigation
 
 import android.app.Application
 import android.os.Build
@@ -21,21 +21,23 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.HomeNavBar
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.IntroProductsScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.WidgetManager
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.HomeNavBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments.DomesticPaymentCreateScreen
-//import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments.PaymentCreateScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
-import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroNavbar
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroHome
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroMore
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.LoginScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_locations.BranchDetails
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_locations.IntroLocations
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_more.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.intro_products.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.locations_filter.LocationsFilterScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
-import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.SecureSharedPref
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LocationsFilterViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.LoginViewModel
+import com.semirsuljevic.raiffaisenmobileapp.view_models.SecureSharedPref
 import kotlinx.coroutines.InternalCoroutinesApi
 
 
@@ -60,103 +62,114 @@ fun Navigator(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.IntroHome.route
+        startDestination = AppScreen.IntroHome.route
     ) {
-        composable(Screen.IntroHome.route) {
-            IntroNavbar(
-                navController = navController,
-                locationsFilterViewModel = locationsFilterViewModel
-            )
+        composable(AppScreen.IntroHome.route) {
+            IntroHome(navController = navController)
         }
 
-        composable(Screen.UserHome.route) {
+        composable(AppScreen.IntroLocations.route) {
+            IntroLocations(navController = navController)
+        }
+
+        composable(AppScreen.IntroProducts.route) {
+            IntroProductsScreen(navController = navController)
+        }
+
+        composable(AppScreen.IntroMore.route) {
+            IntroMore(navController = navController)
+        }
+
+
+        composable(AppScreen.UserHome.route) {
+
             HomeNavBar(navController = navController)
         }
 
-        composable(Screen.CurrentAccountScreen.route) {
+        composable(AppScreen.CurrentAccountScreen.route) {
             CurrentAccountScreen(navController = navController)
         }
-        composable(Screen.CreditCardsScreen.route) {
+        composable(AppScreen.CreditCardsScreen.route) {
             CreditCardsScreen(navController = navController)
         }
-        composable(Screen.LoansScreen.route) {
+        composable(AppScreen.LoansScreen.route) {
             LoansScreen(navController = navController)
         }
-        composable(Screen.AccountSetsScreen.route) {
+        composable(AppScreen.AccountSetsScreen.route) {
             AccountSetsScreen(navController = navController)
         }
-        composable(Screen.DigitalServicesScreen.route) {
+        composable(AppScreen.DigitalServicesScreen.route) {
             DigitalScreensScreen(navController = navController)
         }
-        composable(Screen.SavingsScreen.route) {
+        composable(AppScreen.SavingsScreen.route) {
             SavingsScreen(navController = navController)
         }
-        composable(Screen.BasicInformationScreen.route) {
+        composable(AppScreen.BasicInformationScreen.route) {
             BasicInformationScreen(navController = navController)
         }
-        composable(Screen.ContactUsScreen.route) {
+        composable(AppScreen.ContactUsScreen.route) {
             ContactUsScreen(navController = navController)
         }
-        composable(Screen.FollowUsScreen.route) {
+        composable(AppScreen.FollowUsScreen.route) {
             FollowUsScreen(navController = navController)
         }
 
-        composable(Screen.HomeScreen.route) {
+        composable(AppScreen.HomeScreen.route) {
             LoansScreen(navController = navController)
         }
 
-        composable(Screen.IntroFAQScreen.route) {
+        composable(AppScreen.IntroFAQScreen.route) {
             IntroFAQScreen(navController = navController)
         }
 
-        composable(Screen.LocationsSearchScreen.route) {
+        composable(AppScreen.LocationsSearchScreen.route) {
             LocationsFilterScreen(navController = navController, viewModel = locationsFilterViewModel)
         }
 
-        composable(Screen.LoginScreen.route) {
+        composable(AppScreen.LoginScreen.route) {
             LoginScreen(navController = navController, loginViewModel = loginViewModel)
         }
 
-        composable(Screen.InfoHelp.route) {
+        composable(AppScreen.InfoHelp.route) {
             IntroHelpScreen(navController = navController)
         }
 
         //Home - IntroHelp - screens
-        composable(Screen.InfoHelpLogin.route) {
+        composable(AppScreen.InfoHelpLogin.route) {
             IntroHelpLogin(navController = navController)
         }
-        composable(Screen.InfoHelpSettings.route) {
+        composable(AppScreen.InfoHelpSettings.route) {
             IntroHelpSettings(navController = navController)
         }
-        composable(Screen.InfoHelpLanguage.route) {
+        composable(AppScreen.InfoHelpLanguage.route) {
             IntroHelpLanguage(navController = navController)
         }
-        composable(Screen.InfoHelpSecurity.route) {
+        composable(AppScreen.InfoHelpSecurity.route) {
             IntroHelpSecurity(navController = navController)
         }
-        composable(Screen.InfoHelpDetails.route) {
+        composable(AppScreen.InfoHelpDetails.route) {
             IntroHelpDetails(navController = navController)
         }
 
-        composable(Screen.OnBoardingScreen.route) {
+        composable(AppScreen.OnBoardingScreen.route) {
             OnBoardingScreen(navController = navController)
         }
 
         //User home screens
 
-        composable(Screen.WidgetManager.route) {
+        composable(AppScreen.WidgetManager.route) {
             WidgetManager(navController = navController)
         }
 
-        composable(Screen.PaymentCreateScreen.route) {
+        composable(AppScreen.PaymentCreateScreen.route) {
            DomesticPaymentCreateScreen(navController = navController)
         }
 
-        composable(Screen.BranchDetailsScreen.route) {
+        composable(AppScreen.BranchDetailsScreen.route) {
             BranchDetails(navController = navController)
         }
 
-        composable(Screen.ErrorScreen.route) {
+        composable(AppScreen.ErrorScreen.route) {
             val scrollState = rememberScrollState()
 
             Column (

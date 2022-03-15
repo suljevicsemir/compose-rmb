@@ -12,10 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.navigation.AppScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBListItem
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ScreenTitle
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 
 @Composable
 fun IntroProductsScreen(navController: NavController) {
@@ -30,7 +30,7 @@ fun IntroProductsScreen(navController: NavController) {
             title = stringResource(id = R.string.products_screen_item_pick_account),
             icon = Icons.Outlined.AccountBalance,
             onPressed = {
-                navController.navigate(Screen.CurrentAccountScreen.route)
+                navController.navigate(AppScreen.CurrentAccountScreen.route)
             }
         )
         ListItemSeparator()
@@ -38,7 +38,7 @@ fun IntroProductsScreen(navController: NavController) {
             title = stringResource(id = R.string.products_screen_item_credit_cards),
             icon = Icons.Outlined.CreditCard,
             onPressed = {
-                navController.navigate(Screen.CreditCardsScreen.route)
+                navController.navigate(AppScreen.CreditCardsScreen.route)
             }
         )
         ListItemSeparator()
@@ -46,7 +46,7 @@ fun IntroProductsScreen(navController: NavController) {
             title = stringResource(id = R.string.products_screen_item_credits),
             icon = Icons.Outlined.Receipt,
             onPressed = {
-                navController.navigate(Screen.LoansScreen.route)
+                navController.navigate(AppScreen.LoansScreen.route)
             }
         )
         ListItemSeparator()
@@ -54,7 +54,7 @@ fun IntroProductsScreen(navController: NavController) {
             title = stringResource(id = R.string.products_screen_item_packages),
             icon = Icons.Outlined.Inventory2,
             onPressed = {
-                navController.navigate(Screen.AccountSetsScreen.route)
+                navController.navigate(AppScreen.AccountSetsScreen.route)
             }
         )
         ListItemSeparator()
@@ -62,7 +62,7 @@ fun IntroProductsScreen(navController: NavController) {
             title = stringResource(id = R.string.products_screen_item_digital_services),
             icon = Icons.Outlined.LeakRemove,
             onPressed = {
-                navController.navigate(Screen.DigitalServicesScreen.route)
+                navController.navigate(AppScreen.DigitalServicesScreen.route)
             }
         )
         ListItemSeparator()
@@ -70,7 +70,7 @@ fun IntroProductsScreen(navController: NavController) {
             title = stringResource(id = R.string.products_screen_item_savings),
             icon = Icons.Outlined.Savings,
             onPressed = {
-                navController.navigate(Screen.SavingsScreen.route)
+                navController.navigate(AppScreen.SavingsScreen.route)
             }
         )
         ListItemSeparator()

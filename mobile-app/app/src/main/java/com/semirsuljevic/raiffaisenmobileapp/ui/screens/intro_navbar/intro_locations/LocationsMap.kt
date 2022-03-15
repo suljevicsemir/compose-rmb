@@ -36,7 +36,7 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.semirsuljevic.raiffaisenmobileapp.R
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
+import com.semirsuljevic.raiffaisenmobileapp.navigation.AppScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
@@ -124,7 +124,7 @@ fun LocationsMap(viewModel: LocationsFilterViewModel, navController: NavControll
                         onInfoWindowClick = { _ ->
                             viewModel.currentBranch.value = branch
                             coroutineScope.launch {
-                                navController.navigate(Screen.BranchDetailsScreen.route)
+                                navController.navigate(AppScreen.BranchDetailsScreen.route)
                             }
 
                         },

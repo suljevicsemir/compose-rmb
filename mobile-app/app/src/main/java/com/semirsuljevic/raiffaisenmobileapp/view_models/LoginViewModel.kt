@@ -6,7 +6,6 @@ import androidx.navigation.NavController
 import com.auth0.android.jwt.JWT
 import com.semirsuljevic.raiffaisenmobileapp.RetrofitInstance
 import com.semirsuljevic.raiffaisenmobileapp.models.user.LoginCredentials
-import com.semirsuljevic.raiffaisenmobileapp.ui.view_models.SecureSharedPref
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -17,7 +16,7 @@ class LoginViewModel(
 ): AndroidViewModel(application) {
     private val _email: MutableLiveData<String> = MutableLiveData<String>("")
     private val _password: MutableLiveData<String> = MutableLiveData<String>("")
-    private val _sharedPref:SecureSharedPref = SecureSharedPref(application.applicationContext)
+    private val _sharedPref: SecureSharedPref = SecureSharedPref(application.applicationContext)
 
 
 

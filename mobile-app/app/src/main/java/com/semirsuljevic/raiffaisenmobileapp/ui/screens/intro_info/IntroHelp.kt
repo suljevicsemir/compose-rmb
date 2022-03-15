@@ -17,10 +17,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.semirsuljevic.raiffaisenmobileapp.R
+import com.semirsuljevic.raiffaisenmobileapp.navigation.AppScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.ListItemSeparator
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.RMBListItem
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Black
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray200
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
@@ -60,7 +60,7 @@ fun IntroHelpScreen(navController: NavController) {
                 title = stringResource(id = R.string.intro_help_screen_login),
                 icon = Icons.Outlined.Login,
                 onPressed = {
-                    navController.navigate(Screen.InfoHelpLogin.route)
+                    navController.navigate(AppScreen.InfoHelpLogin.route)
                 }
             )
             ListItemSeparator()
@@ -68,7 +68,7 @@ fun IntroHelpScreen(navController: NavController) {
                 title = stringResource(id = R.string.intro_help_screen_settings),
                 icon = Icons.Outlined.Settings,
                 onPressed = {
-                    navController.navigate(Screen.InfoHelpSettings.route)
+                    navController.navigate(AppScreen.InfoHelpSettings.route)
                 }
             )
             ListItemSeparator()
@@ -76,7 +76,7 @@ fun IntroHelpScreen(navController: NavController) {
                 title = stringResource(id = R.string.intro_help_screen_lang),
                 icon = Icons.Outlined.Translate,
                 onPressed = {
-                    navController.navigate(Screen.InfoHelpLanguage.route)
+                    navController.navigate(AppScreen.InfoHelpLanguage.route)
                 }
             )
             ListItemSeparator()
@@ -84,7 +84,7 @@ fun IntroHelpScreen(navController: NavController) {
                 title = stringResource(id = R.string.intro_help_screen_security),
                 icon = Icons.Outlined.Security,
                 onPressed = {
-                    navController.navigate(Screen.InfoHelpSecurity.route)
+                    navController.navigate(AppScreen.InfoHelpSecurity.route)
                 }
             )
             ListItemSeparator()
@@ -92,7 +92,7 @@ fun IntroHelpScreen(navController: NavController) {
                 title = stringResource(id = R.string.intro_help_screen_tehnical),
                 icon = Icons.Outlined.Description,
                 onPressed = {
-                    navController.navigate(Screen.InfoHelpDetails.route)
+                    navController.navigate(AppScreen.InfoHelpDetails.route)
                 }
             )
             ListItemSeparator()

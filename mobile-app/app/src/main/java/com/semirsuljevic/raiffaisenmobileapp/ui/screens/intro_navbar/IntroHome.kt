@@ -23,7 +23,7 @@ import coil.compose.rememberImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.semirsuljevic.raiffaisenmobileapp.R
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Screen
+import com.semirsuljevic.raiffaisenmobileapp.navigation.AppScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
@@ -87,7 +87,7 @@ fun IntroHome(navController: NavController) {
                         .fillMaxWidth()
                         .wrapContentSize(align = Alignment.TopEnd),
                     onClick = {
-                        navController.navigate(Screen.InfoHelp.route)
+                        navController.navigate(AppScreen.InfoHelp.route)
                     },
                     enabled = true,
                 ) {
@@ -113,7 +113,7 @@ fun IntroHome(navController: NavController) {
             Column (Modifier.align(alignment = Alignment.BottomCenter)){
                 Button(
                     onClick = {
-                        navController.navigate(Screen.LoginScreen.route)
+                        navController.navigate(AppScreen.LoginScreen.route)
                     },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Yellow400

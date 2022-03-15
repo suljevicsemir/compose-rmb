@@ -1,4 +1,4 @@
-package com.semirsuljevic.raiffaisenmobileapp.ui.view_models
+package com.semirsuljevic.raiffaisenmobileapp.view_models
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf

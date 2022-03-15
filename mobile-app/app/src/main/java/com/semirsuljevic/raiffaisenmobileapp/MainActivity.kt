@@ -10,20 +10,22 @@ import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.*
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.semirsuljevic.raiffaisenmobileapp.ui.navigation.Navigator
+import com.semirsuljevic.raiffaisenmobileapp.navigation.Navigator
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.IntroNavBar
+import com.semirsuljevic.raiffaisenmobileapp.ui.theme.AppTheme
 import kotlinx.coroutines.InternalCoroutinesApi
+import java.util.*
 import java.util.concurrent.Executor
 
 
@@ -147,16 +149,80 @@ class MainActivity : FragmentActivity() {
             val navController = rememberNavController()
 
 
-            MaterialTheme(
-
+            AppTheme(
+                darkTheme = true
             ) {
                 CompositionLocalProvider(
                     LocalRippleTheme provides JetNewsRippleTheme
                 ) {
-                    Navigator(navController = navController)
+                    Scaffold (
+                        backgroundColor = MaterialTheme.colors.background,
+                        bottomBar = {
+                            IntroNavBar(navController = navController)
+                        }
+                    ){
+                        Navigator(navController = navController)
+                    }
+                    //Navigator(navController = navController)
                 }
             }
         }
 
     }
 }
+//
+//@Composable
+//fun BottomBar(navController: NavController) {
+//    val navBackStackEntry by navController.currentBackStackEntryAsState()
+//    val currentDestination = navBackStackEntry?.destination
+//
+//    val screens = listOf(
+//        RMBBottomBarItem(
+//            route = Screen.IntroHome.route,
+//            icon = Icons.Default.Home,
+//            index = 0
+//        ),
+//        RMBBottomBarItem(
+//            route = Screen.IntroLocations.route,
+//            icon = Icons.Filled.LocationOn,
+//            index = 1
+//        ),
+//        RMBBottomBarItem(
+//            route = Screen.IntroProducts.route,
+//            icon = Icons.Outlined.Inventory2,
+//            index = 2
+//        ),
+//        RMBBottomBarItem(
+//            route = Screen.IntroMore.route,
+//            icon = Icons.Outlined.More,
+//            index = 3
+//        )
+//    )
+//
+//    BottomNavigation (
+//        backgroundColor = Gray400
+//    ){
+//        screens.forEach { introBottomBarItem ->
+//            BottomNavigationItem(
+//                selected = currentDestination?.hierarchy?.any {
+//                    it.route == introBottomBarItem.route
+//                } == true,
+//                onClick = {
+//                    navController.navigate(introBottomBarItem.route) {
+//                        popUpTo(navController.graph.findStartDestination().id) {
+//                            saveState = true
+//                        }
+//                        launchSingleTop = true
+//                        restoreState = true
+//                    }
+//                },
+//                selectedContentColor = Yellow400,
+//                unselectedContentColor = Gray200,
+//                icon = {
+//                    Icon(imageVector = introBottomBarItem.icon, contentDescription = introBottomBarItem.route)
+//                }
+//            )
+//        }
+//    }
+//
+//}
