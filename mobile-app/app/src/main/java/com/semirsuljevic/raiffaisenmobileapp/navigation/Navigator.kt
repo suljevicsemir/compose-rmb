@@ -21,9 +21,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.CenteredTitleAppBar
-import com.semirsuljevic.raiffaisenmobileapp.ui.composables.HomeNavBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.IntroProductsScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.WidgetManager
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.MoreScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.MyProfileScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.PaymentsScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.home.Home
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.home_navbar.payments.domestic_payments.DomesticPaymentCreateScreen
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_info.*
 import com.semirsuljevic.raiffaisenmobileapp.ui.screens.intro_navbar.IntroHome
@@ -80,36 +83,55 @@ fun Navigator(navController: NavHostController) {
             IntroMore(navController = navController)
         }
 
-
+        //Home navbar
         composable(AppScreen.UserHome.route) {
+            Home(navController = navController)
+        }
 
-            HomeNavBar(navController = navController)
+        composable(AppScreen.PaymentsScreen.route) {
+            PaymentsScreen(navController = navController)
+        }
+
+        composable(AppScreen.MyProfileScreen.route) {
+            MyProfileScreen(navController = navController)
+        }
+
+        composable(AppScreen.MoreScreen.route) {
+            MoreScreen(navController = navController)
         }
 
         composable(AppScreen.CurrentAccountScreen.route) {
             CurrentAccountScreen(navController = navController)
         }
+
         composable(AppScreen.CreditCardsScreen.route) {
             CreditCardsScreen(navController = navController)
         }
+
         composable(AppScreen.LoansScreen.route) {
             LoansScreen(navController = navController)
         }
+
         composable(AppScreen.AccountSetsScreen.route) {
             AccountSetsScreen(navController = navController)
         }
+
         composable(AppScreen.DigitalServicesScreen.route) {
             DigitalScreensScreen(navController = navController)
         }
+
         composable(AppScreen.SavingsScreen.route) {
             SavingsScreen(navController = navController)
         }
+
         composable(AppScreen.BasicInformationScreen.route) {
             BasicInformationScreen(navController = navController)
         }
+
         composable(AppScreen.ContactUsScreen.route) {
             ContactUsScreen(navController = navController)
         }
+
         composable(AppScreen.FollowUsScreen.route) {
             FollowUsScreen(navController = navController)
         }

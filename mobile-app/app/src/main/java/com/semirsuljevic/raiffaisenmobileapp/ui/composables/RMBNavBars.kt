@@ -54,21 +54,21 @@ fun IntroNavBar(navController: NavController) {
 fun HomeNavBar(navController: NavController) {
     val items = listOf(
         RMBBottomBarItem(
-            route = AppScreen.IntroHome.route,
+            route = AppScreen.UserHome.route,
             icon = Icons.Default.Home,
         ),
         RMBBottomBarItem(
-            route = AppScreen.IntroLocations.route,
+            route = AppScreen.PaymentsScreen.route,
             icon = Icons.Outlined.Payments,
 
         ),
         RMBBottomBarItem(
-            route = AppScreen.IntroProducts.route,
+            route = AppScreen.MyProfileScreen.route,
             icon = Icons.Default.Person,
 
         ),
         RMBBottomBarItem(
-            route = AppScreen.IntroMore.route,
+            route = AppScreen.MoreScreen.route,
             icon = Icons.Outlined.More,
 
         )

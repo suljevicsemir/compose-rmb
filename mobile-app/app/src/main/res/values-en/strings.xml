@@ -213,4 +213,7 @@
     <string name="branch_details_working_hours_label">Working hours</string>
     <string name="locations_filter_error_loading">Error loading filters</string>
     <string name="locations_filter_marker_tap">Click to view</string>
+    <string name="login_biometrics_negative_button">CANCEL</string>
+    <string name="login_biometrics_title">Biometrics authentication</string>
+    <string name="login_biometrics_subtitle">Touthe the fingerprint sensor zone below to verify your fingerprint</string>
 </resources>

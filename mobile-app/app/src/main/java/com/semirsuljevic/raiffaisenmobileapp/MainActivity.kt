@@ -14,22 +14,31 @@ import androidx.annotation.RequiresApi
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.semirsuljevic.raiffaisenmobileapp.navigation.Navigator
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.HomeNavBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.IntroNavBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.AppTheme
+import com.semirsuljevic.raiffaisenmobileapp.view_models.AppHelperViewModel
 import com.semirsuljevic.raiffaisenmobileapp.view_models.SecureSharedPref
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.util.*
@@ -148,6 +157,7 @@ class MainActivity : FragmentActivity() {
 
 
 
+
         setContent {
 
             val systemUiController = rememberSystemUiController()
@@ -175,6 +185,7 @@ class MainActivity : FragmentActivity() {
             val navController = rememberNavController()
             val context = LocalContext.current
             val configuration = LocalConfiguration.current
+            val appStateViewModel : AppHelperViewModel = viewModel(LocalContext.current as FragmentActivity)
             x.value
             AppTheme(
                 darkTheme = true
@@ -195,12 +206,16 @@ class MainActivity : FragmentActivity() {
                         },
                         backgroundColor = MaterialTheme.colors.background,
                         bottomBar = {
-                            IntroNavBar(navController = navController)
+                            if(appStateViewModel.isIntroNavBar.value) {
+                                IntroNavBar(navController = navController)
+                            }
+                            else {
+                                HomeNavBar(navController = navController)
+                            }
                         }
                     ){
                         Navigator(navController = navController)
                     }
-                    //Navigator(navController = navController)
                 }
             }
         }

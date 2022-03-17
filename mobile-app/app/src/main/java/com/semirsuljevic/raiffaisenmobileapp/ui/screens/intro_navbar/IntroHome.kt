@@ -17,6 +17,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.compose.rememberImagePainter
@@ -24,9 +26,12 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.semirsuljevic.raiffaisenmobileapp.R
 import com.semirsuljevic.raiffaisenmobileapp.navigation.AppScreen
+import com.semirsuljevic.raiffaisenmobileapp.ui.composables.BiometricsWrapper
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Gray400
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.White
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.Yellow400
+import com.semirsuljevic.raiffaisenmobileapp.view_models.AppHelperViewModel
+import com.semirsuljevic.raiffaisenmobileapp.view_models.SecureSharedPref
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
 import java.util.*
@@ -40,7 +45,12 @@ fun IntroHome(navController: NavController) {
     var imageLoader by remember {
         mutableStateOf<ImageLoader?>(value = null)
     }
+    val securePref : SecureSharedPref = SecureSharedPref(LocalContext.current)
+    val appHelperViewModel: AppHelperViewModel = viewModel(LocalContext.current as FragmentActivity)
     val coroutineScope = rememberCoroutineScope()
+    var shouldAuthenticate by remember {
+        mutableStateOf(false)
+    }
     LaunchedEffect(Unit) {
         coroutineScope.launch {
             imageLoader = ImageLoader.Builder(context = context).componentRegistry {
@@ -60,78 +70,104 @@ fun IntroHome(navController: NavController) {
         )
     }
     else {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            Image(
-                painter = rememberImagePainter(
-                    data = getGifPath(),
-                    imageLoader = imageLoader!!
-                ),
-                "",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.FillHeight
+        if(shouldAuthenticate) {
+            BiometricsWrapper(
+                title = stringResource(id = R.string.login_biometrics_title),
+                subtitle = stringResource(id = R.string.login_biometrics_subtitle),
+                negativeButtonText = stringResource(id = R.string.login_biometrics_negative_button),
+                onSuccess = {
+                    appHelperViewModel.isIntroNavBar.value = false
+                    navController.navigate(AppScreen.UserHome.route)
+                },
+                onError = {
+
+                },
+                onFailed = {
+
+                },
             )
-
+        }
+        else {
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .wrapContentSize(align = Alignment.TopEnd)
-                    .align(Alignment.Center)
-                    .padding(end = 5.dp, top = 10.dp)
-
+                modifier = Modifier.fillMaxSize(),
             ) {
-
-                IconButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentSize(align = Alignment.TopEnd),
-                    onClick = {
-                        navController.navigate(AppScreen.InfoHelp.route)
-                    },
-                    enabled = true,
-                ) {
-                    Box(
-                        Modifier
-                            .align(Alignment.TopEnd)
-                            .clip(RoundedCornerShape(48.dp))
-                            .size(48.dp)
-                            .background(White))
-                    Icon(
-                        imageVector = Icons.Outlined.Info,
-                        contentDescription = "Home Info",
-                        tint = Gray400,
-                        modifier = Modifier
-                            .background(color = White)
-                            .size(36.dp)
-                    )
-
-                }
-
-            }
-
-            Column (Modifier.align(alignment = Alignment.BottomCenter)){
-                Button(
-                    onClick = {
-                        navController.navigate(AppScreen.LoginScreen.route)
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Yellow400
+                Image(
+                    painter = rememberImagePainter(
+                        data = getGifPath(),
+                        imageLoader = imageLoader!!
                     ),
+                    "",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.FillHeight
+                )
+
+                Box(
                     modifier = Modifier
-                        .padding(horizontal = 20.dp)
-                        .wrapContentSize(align = Alignment.BottomCenter)
-                        .fillMaxWidth(),
-                    contentPadding = PaddingValues(vertical = 14.dp)
+                        .fillMaxSize()
+                        .wrapContentSize(align = Alignment.TopEnd)
+                        .align(Alignment.Center)
+                        .padding(end = 5.dp, top = 10.dp)
+
                 ) {
-                    Text(
-                        stringResource(id = R.string.intro_home_button),
-                        fontWeight = FontWeight.W600
-                    )
+
+                    IconButton(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentSize(align = Alignment.TopEnd),
+                        onClick = {
+                            navController.navigate(AppScreen.InfoHelp.route)
+                        },
+                        enabled = true,
+                    ) {
+                        Box(
+                            Modifier
+                                .align(Alignment.TopEnd)
+                                .clip(RoundedCornerShape(48.dp))
+                                .size(48.dp)
+                                .background(White))
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = "Home Info",
+                            tint = Gray400,
+                            modifier = Modifier
+                                .background(color = White)
+                                .size(36.dp)
+                        )
+
+                    }
+
                 }
-                Spacer(modifier = Modifier.height(80.dp))
+
+                Column (Modifier.align(alignment = Alignment.BottomCenter)){
+                    Button(
+                        onClick = {
+                            if(securePref.getBooleanValue(key = SecureSharedPref.isLoggedInKey)) {
+                                shouldAuthenticate = true
+                            }
+                            else {
+                                navController.navigate(AppScreen.LoginScreen.route)
+                            }
+
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = Yellow400
+                        ),
+                        modifier = Modifier
+                            .padding(horizontal = 20.dp)
+                            .wrapContentSize(align = Alignment.BottomCenter)
+                            .fillMaxWidth(),
+                        contentPadding = PaddingValues(vertical = 14.dp)
+                    ) {
+                        Text(
+                            stringResource(id = R.string.intro_home_button),
+                            fontWeight = FontWeight.W600
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(80.dp))
+                }
             }
         }
+
     }
 
 
