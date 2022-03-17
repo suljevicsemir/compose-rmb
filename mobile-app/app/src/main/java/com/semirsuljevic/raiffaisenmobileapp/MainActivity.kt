@@ -1,11 +1,18 @@
 package com.semirsuljevic.raiffaisenmobileapp
 
+import android.annotation.TargetApi
+import android.content.Context
+import android.content.res.Configuration
+import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
+import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.*
 import androidx.compose.material.ripple.LocalRippleTheme
@@ -13,6 +20,8 @@ import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.compose.rememberNavController
@@ -21,6 +30,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.semirsuljevic.raiffaisenmobileapp.navigation.Navigator
 import com.semirsuljevic.raiffaisenmobileapp.ui.composables.IntroNavBar
 import com.semirsuljevic.raiffaisenmobileapp.ui.theme.AppTheme
+import com.semirsuljevic.raiffaisenmobileapp.view_models.SecureSharedPref
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.util.*
 import java.util.concurrent.Executor
@@ -42,34 +52,36 @@ private object JetNewsRippleTheme : RippleTheme {
 }
 @ExperimentalPagerApi
 class MainActivity : FragmentActivity() {
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase?.let { updateBaseContextLocale(
+            context = it
+        ) })
+    }
 
+    private fun updateBaseContextLocale(context: Context): Context? {
+        val lang = SecureSharedPref(context = context).getStringValue("lang")
+        val language: String = lang ?: "en"
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        return if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+            updateResourcesLocale(context, locale)
+        } else updateResourcesLocaleLegacy(context, locale)
+    }
 
+    @TargetApi(Build.VERSION_CODES.N_MR1)
+    private fun updateResourcesLocale(context: Context, locale: Locale): Context? {
+        val configuration = Configuration(context.resources.configuration)
+        configuration.setLocale(locale)
+        return context.createConfigurationContext(configuration)
+    }
 
-//    @SuppressLint("NewApi")
-//    fun checkForBiometrics() : Boolean{
-//        Log.d(TAG, "checkForBiometrics started")
-//        var canAuthenticate = true
-//        if (Build.VERSION.SDK_INT < 29) {
-//            val keyguardManager : KeyguardManager = applicationContext.getSystemService(KEYGUARD_SERVICE) as KeyguardManager
-//            val packageManager : PackageManager = applicationContext.packageManager
-//            if(!packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-//                Log.w(TAG, "checkForBiometrics, Fingerprint Sensor not supported")
-//                canAuthenticate = false
-//            }
-//            if (!keyguardManager.isKeyguardSecure) {
-//                Log.w(TAG, "checkForBiometrics, Lock screen security not enabled in Settings")
-//                canAuthenticate = false
-//            }
-//        } else {
-//            val biometricManager : BiometricManager = this.getSystemService(BiometricManager::class.java)
-//            if(biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) != BiometricManager.BIOMETRIC_SUCCESS){
-//                Log.w(TAG, "checkForBiometrics, biometrics not supported")
-//                canAuthenticate = false
-//            }
-//        }
-//        Log.d(TAG, "checkForBiometrics ended, canAuthenticate=$canAuthenticate ")
-//        return canAuthenticate
-//    }
+    private fun updateResourcesLocaleLegacy(context: Context, locale: Locale): Context? {
+        val resources = context.resources
+        val configuration = resources.configuration
+        configuration.locale = locale
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+        return context
+    }
 
 
 
@@ -112,10 +124,12 @@ class MainActivity : FragmentActivity() {
                 }
 
                 override fun onAuthenticationFailed() {
+                    println("debug: Authentication failed")
                     super.onAuthenticationFailed()
                 }
 
                 override fun onAuthenticationSucceeded(result: androidx.biometric.BiometricPrompt.AuthenticationResult) {
+                    println("debug: Biometrija uspjela ćitaba mi")
                     super.onAuthenticationSucceeded(result)
                 }
 
@@ -124,13 +138,44 @@ class MainActivity : FragmentActivity() {
 
         )
 
+        val promptInfo = androidx.biometric.BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Biometric login for my app")
+            .setSubtitle("Log in using your biometric credential")
+            .setNegativeButtonText("Use account password")
+            .build()
+
+
+
+
+
         setContent {
+
             val systemUiController = rememberSystemUiController()
             systemUiController.setStatusBarColor(color = Color.Black)
+            val x = remember {
+                mutableStateOf(false)
+            }
 
+            val biometricManager = androidx.biometric.BiometricManager.from(LocalContext.current)
+            when(biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)) {
+                BiometricManager.BIOMETRIC_SUCCESS ->
+                    Log.d("MY_APP_TAG", "App can authenticate using biometrics.")
+                BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE ->
+                    Log.e("MY_APP_TAG", "No biometric features available on this device.")
+                BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE ->
+                    Log.e("MY_APP_TAG", "Biometric features are currently unavailable.")
+                BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
+                    Log.e("MY_APP_TAG", "NOT ENROLLED")
+                    // Prompts the user to create credentials that your app accepts.
+                }
+            }
+
+            x.value
+            //updateBaseContextLocale(LocalContext.current)
             val navController = rememberNavController()
-
-
+            val context = LocalContext.current
+            val configuration = LocalConfiguration.current
+            x.value
             AppTheme(
                 darkTheme = true
             ) {
@@ -138,6 +183,16 @@ class MainActivity : FragmentActivity() {
                     LocalRippleTheme provides JetNewsRippleTheme
                 ) {
                     Scaffold (
+                        floatingActionButton = {
+                            Button(onClick = {
+//                                SecureSharedPref(context = context).storeStringValue("lang", "bs")
+//                                recreate()
+                                prompt.authenticate(promptInfo)
+                                x.value = true
+                            }) {
+                                Text(text = "click me")
+                            }
+                        },
                         backgroundColor = MaterialTheme.colors.background,
                         bottomBar = {
                             IntroNavBar(navController = navController)
@@ -152,59 +207,31 @@ class MainActivity : FragmentActivity() {
 
     }
 }
-//
-//@Composable
-//fun BottomBar(navController: NavController) {
-//    val navBackStackEntry by navController.currentBackStackEntryAsState()
-//    val currentDestination = navBackStackEntry?.destination
-//
-//    val screens = listOf(
-//        RMBBottomBarItem(
-//            route = Screen.IntroHome.route,
-//            icon = Icons.Default.Home,
-//            index = 0
-//        ),
-//        RMBBottomBarItem(
-//            route = Screen.IntroLocations.route,
-//            icon = Icons.Filled.LocationOn,
-//            index = 1
-//        ),
-//        RMBBottomBarItem(
-//            route = Screen.IntroProducts.route,
-//            icon = Icons.Outlined.Inventory2,
-//            index = 2
-//        ),
-//        RMBBottomBarItem(
-//            route = Screen.IntroMore.route,
-//            icon = Icons.Outlined.More,
-//            index = 3
-//        )
-//    )
-//
-//    BottomNavigation (
-//        backgroundColor = Gray400
-//    ){
-//        screens.forEach { introBottomBarItem ->
-//            BottomNavigationItem(
-//                selected = currentDestination?.hierarchy?.any {
-//                    it.route == introBottomBarItem.route
-//                } == true,
-//                onClick = {
-//                    navController.navigate(introBottomBarItem.route) {
-//                        popUpTo(navController.graph.findStartDestination().id) {
-//                            saveState = true
-//                        }
-//                        launchSingleTop = true
-//                        restoreState = true
-//                    }
-//                },
-//                selectedContentColor = Yellow400,
-//                unselectedContentColor = Gray200,
-//                icon = {
-//                    Icon(imageVector = introBottomBarItem.icon, contentDescription = introBottomBarItem.route)
-//                }
-//            )
+
+//    @SuppressLint("NewApi")
+//    fun checkForBiometrics() : Boolean{
+//        Log.d(TAG, "checkForBiometrics started")
+//        var canAuthenticate = true
+//        if (Build.VERSION.SDK_INT < 29) {
+//            val keyguardManager : KeyguardManager = applicationContext.getSystemService(KEYGUARD_SERVICE) as KeyguardManager
+//            val packageManager : PackageManager = applicationContext.packageManager
+//            if(!packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
+//                Log.w(TAG, "checkForBiometrics, Fingerprint Sensor not supported")
+//                canAuthenticate = false
+//            }
+//            if (!keyguardManager.isKeyguardSecure) {
+//                Log.w(TAG, "checkForBiometrics, Lock screen security not enabled in Settings")
+//                canAuthenticate = false
+//            }
+//        } else {
+//            val biometricManager : BiometricManager = this.getSystemService(BiometricManager::class.java)
+//            if(biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) != BiometricManager.BIOMETRIC_SUCCESS){
+//                Log.w(TAG, "checkForBiometrics, biometrics not supported")
+//                canAuthenticate = false
+//            }
 //        }
+//        Log.d(TAG, "checkForBiometrics ended, canAuthenticate=$canAuthenticate ")
+//        return canAuthenticate
 //    }
-//
-//}
+
+
