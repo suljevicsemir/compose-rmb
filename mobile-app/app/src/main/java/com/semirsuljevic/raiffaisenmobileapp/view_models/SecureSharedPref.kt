@@ -16,6 +16,7 @@ class SecureSharedPref(context: Context):ViewModel() {
         val accessTokenKey = "accessToken"
         val isLoggedInKey = "isLoggedIn"
         val userId = "userId"
+        val isBiometricsSet = "isBiometricsSet"
     }
 
     init {
